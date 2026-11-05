@@ -133,6 +133,8 @@
         new IntersectionObserver(es => es.forEach(e => naTelaMapa.set(e.target, e.isIntersecting)), { rootMargin: "120px" }).observe(alvo);
     };
     const naTela = alvo => naTelaMapa.get(alvo) !== false;
+    // o motor também é usado pela página do Eciton (cena dos turnos)
+    window.Motor3D = { TILT, GIRO, el, px, caixa3d, rotulo, criarAGVE4M, posicionarAGV, sinalAGV, criarKit, posicionarKit, fita };
 
     /* ============================================================
        VITRINE (topo): o AGV girando devagar sobre a fita

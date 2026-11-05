@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611052220">
+<link rel="stylesheet" href="assets/estilo.css?v=202611052309">
 </head>
 <body data-pagina="eciton">
 
@@ -103,21 +103,41 @@
     </section>
 
     <section class="secao faixa" id="turnos" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
-        <div class="caixa turnos">
-            <div class="relogio-caixa">
-                <svg class="relogio" id="tRelogio" viewBox="0 0 300 300" aria-label="Relógio de 24 horas com os turnos de cada veículo"></svg>
-            </div>
-            <div>
+        <div class="caixa">
+            <div class="cabeca">
                 <span class="olho">Turnos e horários</span>
-                <h2 style="margin-top:14px">Cada veículo com o seu horário. Sem ninguém lembrar de nada.</h2>
-                <p class="texto" style="margin-top:16px">Você define o turno de cada Atta e os dias da semana. Na hora certa ele começa sozinho; perto do fim, termina a missão que está fazendo e volta para o berço carregar.</p>
-                <ul class="turno-lista" id="tLista"></ul>
-                <ul class="turno-regras">
-                    <li>Turno com início, fim e dias da semana, por veículo</li>
-                    <li>No fim do turno, termina a missão antes de voltar</li>
-                    <li>Parado sem missão, volta sozinho para o berço</li>
-                    <li>Dois veículos no mesmo berço? Um espera no ponto de espera</li>
-                </ul>
+                <h2>Você define o turno. O Atta obedece.</h2>
+                <p class="texto">Cada veículo tem o seu horário e os dias da semana em que trabalha. Na hora certa ele sai sozinho; perto do fim, termina a entrega que está fazendo e só depois volta para o berço.</p>
+            </div>
+            <div class="turno-cena">
+                <aside class="rotina-card" aria-label="Configuração de rotina do Atta 01">
+                    <div class="rc-topo"><b>Rotina</b><span>Atta 01</span></div>
+                    <div class="rc-linha"><span>Berço</span><b>B1</b></div>
+                    <div class="rc-linha rc-check-linha"><span class="rc-check">✓</span><b>Turno por horário</b></div>
+                    <div class="rc-horas">
+                        <div class="rc-campo" id="rcInicio"><span>Início</span><b>07:00</b></div>
+                        <div class="rc-campo" id="rcFim"><span>Fim</span><b>17:00</b></div>
+                    </div>
+                    <div class="rc-dias" id="rcDias" aria-label="Dias do turno: segunda a sexta">
+                        <i class="on">S</i><i class="on">T</i><i class="on">Q</i><i class="on">Q</i><i class="on">S</i><i>S</i><i>D</i>
+                    </div>
+                    <div class="rc-linha rc-volta"><span>Parado sem missão, volta ao berço em</span><b>60 s</b></div>
+                    <p class="rc-agora" id="rcAgora">regra valendo agora</p>
+                </aside>
+                <div class="turno-palco-caixa">
+                    <div class="turno-palco" id="turnoPalco" role="img" aria-label="Atta 01 cumprindo o turno: sai às 07:00, termina a entrega antes das 17:00 e não sai no sábado">
+                        <div class="camera" id="cameraTurno"></div>
+                        <div class="balao-turno" id="balaoTurno" aria-hidden="true">
+                            <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#0A0F17" stroke="currentColor" stroke-width="2"/><g stroke="#4A5B70" stroke-width="1.6" stroke-linecap="round"><path d="M20 5v3M20 32v3M5 20h3M32 20h3"/></g><line id="btHora" x1="20" y1="20" x2="20" y2="11" stroke="#E9EEF5" stroke-width="2.4" stroke-linecap="round"/><line id="btMin" x1="20" y1="20" x2="20" y2="7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="20" cy="20" r="2" fill="#E9EEF5"/></svg>
+                            <div><b id="btTexto">seg 06:56</b><span id="btEstado">fora do turno</span></div>
+                        </div>
+                    </div>
+                    <div class="capitulos" id="turnoCapitulos" role="group" aria-label="Momentos da animação">
+                        <button type="button" data-cap="0"><span>Início do turno</span><i></i></button>
+                        <button type="button" data-cap="1"><span>Fim do turno</span><i></i></button>
+                        <button type="button" data-cap="2"><span>Fim de semana</span><i></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -184,36 +204,125 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="recursos" style="padding-top:24px">
+    <section class="secao faixa" id="dia-a-dia">
         <div class="caixa">
             <div class="cabeca">
-                <span class="olho">E vem junto</span>
-                <h2>Tudo o que a operação precisa no dia a dia.</h2>
+                <span class="olho">No dia a dia</span>
+                <h2>Para quem opera, para quem mantém e para quem gerencia.</h2>
+                <p class="texto">Além de despachar e organizar a frota, o Eciton é onde a equipe acompanha, resolve e confere. Escolha uma opção para ver.</p>
             </div>
-            <div class="seguranca">
-                <div class="item-seg">
-                    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M4 9l8-3 10 3 8-3v19l-8 3-10-3-8 3z M12 6v19M22 9v19" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linejoin="round"/></svg>
-                    <h3>Mapa ao vivo</h3><p>A posição e o estado de cada Atta na planta, atualizados na hora.</p>
+            <div class="explorador">
+                <div class="seletores">
+                    <div class="grupo">
+                        <h3>Ferramentas</h3>
+                        <div class="opcoes" id="abasDia">
+                            <button type="button" class="opcao" data-aba="mapa" aria-pressed="true">Mapa ao vivo</button>
+                            <button type="button" class="opcao" data-aba="controle" aria-pressed="false">Controle manual</button>
+                            <button type="button" class="opcao" data-aba="diagnostico" aria-pressed="false">Diagnóstico</button>
+                            <button type="button" class="opcao" data-aba="historico" aria-pressed="false">Histórico</button>
+                            <button type="button" class="opcao" data-aba="papeis" aria-pressed="false">Usuários e papéis</button>
+                            <button type="button" class="opcao" data-aba="ota" aria-pressed="false">Atualização pelo Wi-Fi</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="item-seg">
-                    <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="12" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M17 9v8l5 3" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round"/></svg>
-                    <h3>Histórico</h3><p>Cada missão, pedido e alerta registrado, para medir e melhorar o fluxo.</p>
-                </div>
-                <div class="item-seg">
-                    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M6 24l6-6 5 4 10-11" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6v22h22" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round"/></svg>
-                    <h3>Diagnóstico</h3><p>Sinal, sensores e falhas de cada veículo, com autoteste à distância.</p>
-                </div>
-                <div class="item-seg">
-                    <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="5" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M17 4v6M17 24v6M4 17h6M24 17h6" stroke="#63AEFF" stroke-width="2" stroke-linecap="round"/></svg>
-                    <h3>Controle manual</h3><p>Para manobrar um veículo na mão quando for preciso, com as mesmas travas de segurança.</p>
-                </div>
-                <div class="item-seg">
-                    <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="13" cy="12" r="5" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M4 28c1-5 5-8 9-8s8 3 9 8M23 10h7M23 15h7M23 20h5" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round"/></svg>
-                    <h3>Cada um vê o que deve</h3><p>Papéis de administrador, líder, operador, posto e visualizador, por empresa.</p>
-                </div>
-                <div class="item-seg">
-                    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 5v16m-6-6 6 6 6-6M7 27h20" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <h3>Atualização pelo Wi-Fi</h3><p>Melhorias chegam aos veículos sem parar a operação para trocar nada.</p>
+                <div>
+                    <div class="aba-palco" id="abaPalco">
+                        <div class="aba-tela" data-tela="mapa">
+                            <svg class="aba-mapa" viewBox="0 0 520 320" aria-hidden="true">
+                                <defs><pattern id="gDia" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(99,174,255,.06)"/></pattern></defs>
+                                <rect width="520" height="320" fill="url(#gDia)"/>
+                                <g fill="none" stroke="#1E7BFF" stroke-width="3" opacity=".85" stroke-linecap="round">
+                                    <path id="mdA" d="M60 60 H460 V260 H60 Z"/><path id="mdB" d="M260 60 V260"/><path d="M60 160 H460"/>
+                                </g>
+                                <rect x="244" y="144" width="32" height="32" rx="5" fill="rgba(30,123,255,.12)" stroke="#63AEFF" stroke-dasharray="4 3"/>
+                                <g font-family="JetBrains Mono, monospace" font-size="10" fill="#8E9BAE"><text x="52" y="46">ALMOX.</text><text x="430" y="46">M1</text><text x="430" y="285">M2</text><text x="40" y="285">BERÇO</text></g>
+                                <g><animateMotion dur="14s" repeatCount="indefinite"><mpath href="#mdA"/></animateMotion><circle r="13" fill="#63AEFF" opacity=".2"/><rect x="-9" y="-7" width="18" height="14" rx="3" fill="#0B0F15" stroke="#63AEFF" stroke-width="2"/><text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#63AEFF">01</text></g>
+                                <g><animateMotion dur="14s" begin="-7s" repeatCount="indefinite"><mpath href="#mdA"/></animateMotion><circle r="13" fill="#2BD46A" opacity=".2"/><rect x="-9" y="-7" width="18" height="14" rx="3" fill="#0B0F15" stroke="#2BD46A" stroke-width="2"/><text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#2BD46A">02</text></g>
+                                <g><animateMotion dur="9s" repeatCount="indefinite" keyPoints="0;1;0" keyTimes="0;.5;1" calcMode="linear"><mpath href="#mdB"/></animateMotion><circle r="13" fill="#FF8A3D" opacity=".2"/><rect x="-9" y="-7" width="18" height="14" rx="3" fill="#0B0F15" stroke="#FF8A3D" stroke-width="2"/><text y="-14" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#FF8A3D">03</text></g>
+                            </svg>
+                            <div class="mapa-ficha"><b>Atta 02</b><span class="pil" style="--c:#2BD46A">em missão</span><dl><dt>Missão</dt><dd>K-205 → M2</dd><dt>Sinal</dt><dd>-58 dBm</dd><dt>Turno</dt><dd>07:00–17:00</dd></dl></div>
+                        </div>
+
+                        <div class="aba-tela" data-tela="controle">
+                            <div class="ctrl">
+                                <div class="ctrl-esq">
+                                    <svg class="joy" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="70" fill="#0A0F17" stroke="#1B2533" stroke-width="2"/><path d="M80 18v10M80 132v10M18 80h10M132 80h10" stroke="#2A3646" stroke-width="2"/><line id="joyLinha" x1="80" y1="80" x2="80" y2="80" stroke="#63AEFF" stroke-width="4" stroke-linecap="round"/><circle id="joyKnob" cx="80" cy="80" r="22" fill="#1E7BFF" stroke="#63AEFF" stroke-width="2"/></svg>
+                                    <div class="ctrl-bts"><span class="ctrl-bt" id="ctrlGiro">↻ Girar no lugar</span><span class="ctrl-vel">Velocidade <b>50%</b></span></div>
+                                </div>
+                                <div class="ctrl-dir">
+                                    <svg class="ctrl-arena" viewBox="0 0 260 200" aria-hidden="true"><defs><pattern id="gCtrl" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(99,174,255,.07)"/></pattern></defs><rect width="260" height="200" fill="url(#gCtrl)"/><rect id="ctrlObst" x="112" y="14" width="36" height="22" rx="4" fill="#FF8A3D" opacity="0"/><g id="ctrlAgv"><path id="ctrlFeixe" d="M-14 -22 L-26 -70 L26 -70 L14 -22 Z" fill="rgba(44,224,255,.12)"/><rect x="-20" y="-20" width="40" height="40" rx="6" fill="#0B0F15" stroke="#3A6DFF" stroke-width="2.5"/><path d="M-8 -12 L0 -20 L8 -12" fill="none" stroke="#63AEFF" stroke-width="2.5" stroke-linecap="round"/></g></svg>
+                                    <dl class="ctrl-leit"><dt>vx · frente</dt><dd id="ctrlVx">0,00 m/s</dd><dt>vy · lado</dt><dd id="ctrlVy">0,00 m/s</dd><dt>giro</dt><dd id="ctrlW">0,0 rad/s</dd><dt>À frente</dt><dd id="ctrlFrente" class="livre">Livre</dd></dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="aba-tela" data-tela="diagnostico">
+                            <div class="diag">
+                                <div class="diag-topo"><div><b>Autoteste · Atta 01</b><span>firmware 0.12.0 · ligado há 3 h 12 min</span></div><span class="ctrl-bt" id="diagBt">Rodar autoteste</span></div>
+                                <ul class="diag-lista" id="diagLista">
+                                    <li data-n="ok" data-d="respondendo">Entradas do painel</li>
+                                    <li data-n="ok" data-d="STOP e emergência coerentes">Botões e emergência</li>
+                                    <li data-n="ok" data-d="esquerdo 1,84 m · direito 1,79 m">Sensores de distância</li>
+                                    <li data-n="ok" data-d="8 sensores lendo a linha">Seguidor de linha</li>
+                                    <li data-n="aviso" data-d="calibração antiga: refaça quando puder">Calibração da linha</li>
+                                    <li data-n="ok" data-d="marcador lido, sem ruído">Leitor de marcadores (RFID)</li>
+                                    <li data-n="ok" data-d="motor respondendo">Garra</li>
+                                    <li data-n="ok" data-d="-58 dBm">Wi-Fi</li>
+                                </ul>
+                                <div class="diag-fim" id="diagFim">7 OK · 1 aviso · <u>Copiar relatório</u></div>
+                            </div>
+                        </div>
+
+                        <div class="aba-tela" data-tela="historico">
+                            <div class="hist">
+                                <div class="hist-filtros" id="histFiltros"><i data-f="todos" class="on">Todos</i><i data-f="seg">Segurança</i><i data-f="mis">Missão</i><i data-f="sis">Sistema</i><i data-f="cfg">Configuração</i><i data-f="site">Ações do site</i><span>Exportar CSV</span></div>
+                                <ul class="hist-lista" id="histLista">
+                                    <li data-c="sis"><time>07:00</time><em>Sistema</em>Turno iniciado · Atta 01</li>
+                                    <li data-c="mis"><time>07:02</time><em>Missão</em>K-204 iniciada · Almox. → Montagem 2</li>
+                                    <li data-c="seg"><time>07:06</time><em>Segurança</em>Obstáculo à frente · parou 4 s e seguiu</li>
+                                    <li data-c="mis"><time>07:09</time><em>Missão</em>K-204 entregue · confirmada no posto</li>
+                                    <li data-c="site"><time>07:15</time><em>Site</em>Pedido urgente U-012 · liberado com PIN de líder</li>
+                                    <li data-c="cfg"><time>07:21</time><em>Config.</em>Rotina do Atta 02 alterada</li>
+                                    <li data-c="seg"><time>07:30</time><em>Segurança</em>Emergência acionada · Atta 03</li>
+                                    <li data-c="sis"><time>07:31</time><em>Sistema</em>Emergência liberada no local</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="aba-tela" data-tela="papeis">
+                            <table class="papeis" id="tabPapeis">
+                                <thead><tr><th></th><th>Admin.</th><th>Operador</th><th>Líder</th><th>Visual.</th><th>Posto</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Ver frota, mapa, histórico e despacho</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr>
+                                    <tr><td>Comandar veículos e rodar missões</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+                                    <tr><td>Criar e editar missões</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr>
+                                    <tr><td>Pedir missões</td><td>✓</td><td>✓</td><td>—</td><td>—</td><td>do seu posto</td></tr>
+                                    <tr><td>Marcar pedido urgente</td><td>✓</td><td>✓</td><td>✓</td><td>—</td><td>com PIN</td></tr>
+                                    <tr><td>Planta, veículos, postos e atualização</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                                    <tr><td>Usuários</td><td>✓</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+                                </tbody>
+                            </table>
+                            <p class="papeis-nota" id="papeisNota"></p>
+                        </div>
+
+                        <div class="aba-tela" data-tela="ota">
+                            <div class="ota">
+                                <div class="ota-topo"><b>Atta 01</b><span id="otaVersao">0.12.0 → 0.12.1</span></div>
+                                <ol class="ota-passos" id="otaPassos">
+                                    <li>Conferir se está parado e sem missão</li>
+                                    <li>Baixar a versão nova pelo Wi-Fi<span class="barra"><i id="otaBarra"></i></span></li>
+                                    <li>Gravar e reiniciar</li>
+                                    <li>Conferir se a versão nova ligou bem</li>
+                                </ol>
+                                <div class="ota-fim" id="otaFim">0.12.1 rodando ✓</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cena-info" aria-live="polite">
+                        <h3 id="diaTitulo">Mapa ao vivo</h3>
+                        <p id="diaTexto"></p>
+                        <ul id="diaPontos"></ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -251,7 +360,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611052220" defer></script>
-<script src="assets/eciton.js?v=202611052220" defer></script>
+<script src="assets/site.js?v=202611052309" defer></script>
+<script src="assets/eciton.js?v=202611052309" defer></script>
 </body>
 </html>

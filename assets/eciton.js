@@ -197,69 +197,122 @@
     })();
 
     /* ---------------------------------------------------------
-       3) TURNOS: relógio de 24 h, cada Atta com o seu horário
+       3) TURNOS (3D): o Atta 01 cumprindo a rotina configurada.
+          Três momentos (~15 s): início do turno, fim do turno
+          com a entrega terminada antes, e o sábado fora da escala.
        --------------------------------------------------------- */
     (() => {
-        const svg = $("tRelogio"); if (!svg) return;
-        const C = 150, R = 118;
-        const ang = h => (h / 24) * Math.PI * 2 - Math.PI / 2;
-        const pt = (h, r) => [C + Math.cos(ang(h)) * r, C + Math.sin(ang(h)) * r];
-        S("circle", { cx: C, cy: C, r: R + 16, fill: "#070B11", stroke: COR.linha }, svg);
-        S("circle", { cx: C, cy: C, r: R, fill: "none", stroke: "#22303F", "stroke-width": 1 }, svg);
-        for (let h = 0; h < 24; h++) {
-            const [x1, y1] = pt(h, R - (h % 3 ? 5 : 10)), [x2, y2] = pt(h, R);
-            S("line", { x1, y1, x2, y2, stroke: h % 3 ? "#2A3646" : "#4A5B70", "stroke-width": h % 3 ? 1 : 2 }, svg);
-            if (h % 3 === 0) { const [x, y] = pt(h, R - 22); T(String(h).padStart(2, "0"), { x, y: y + 3.5, "text-anchor": "middle", "font-family": MONO, "font-size": 10, fill: COR.texto2 }, svg); }
+        const M = window.Motor3D, cam = $("cameraTurno"), palco = $("turnoPalco");
+        if (!M || !cam) return;
+        const { el, caixa3d, rotulo, fita, TILT, GIRO } = M;
+        const mundo = el("div", "obj", cam);
+        el("div", "piso", mundo, { width: "920px", height: "560px", transform: "translate3d(0px,0px,0)" });
+        const B = [130, 430], A = [340, 250], P = [740, 250];
+        fita(mundo, 130, 430, 130, 250); fita(mundo, 130, 250, 800, 250);
+        [B, A, P, [130, 250]].forEach(([x, y]) => el("div", "tag-chao", mundo, { transform: `translate3d(${x}px,${y}px,1px)` }));
+        el("div", "marcacao", mundo, { width: "96px", height: "100px", transform: "translate3d(82px,382px,0.6px)" });
+        const cinza = { topo: "linear-gradient(135deg,#2b3542,#1a222c)", lado: "#121922", s: "#18212b", l: "#1d2733" };
+        caixa3d(mundo, 260, 110, 170, 54, 86, cinza);
+        for (let k = 0; k < 3; k++) caixa3d(mundo, 272 + k * 52, 118, 40, 38, 22, { topo: k % 2 ? "#4c7dbf" : "#d9822b", lado: k % 2 ? "#2e5288" : "#9a5718" }, 86);
+        caixa3d(mundo, 310, 172, 60, 40, 26, { topo: "#3a4654", lado: "#202933", s: "#27313c" });
+        caixa3d(mundo, 680, 150, 120, 50, 30, { topo: "#3a4654", lado: "#202933", s: "#27313c" });
+        caixa3d(mundo, 610, 60, 110, 70, 60, cinza);
+        caixa3d(mundo, 82, 486, 96, 18, 34, { topo: "#2b3542", lado: "#121922", n: "linear-gradient(#A57BFF,#4b2f99)" });
+        rotulo(mundo, "Almoxarifado", 345, 110, 110);
+        rotulo(mundo, "Montagem", 740, 150, 70);
+        rotulo(mundo, "Berço B1", 40, 470, 10);
+        const agv = M.criarAGVE4M(mundo, "Atta 01");
+        const kit = M.criarKit(mundo);
+        const balao = $("balaoTurno");
+        mundo.appendChild(balao);
+        const btTexto = $("btTexto"), btEstado = $("btEstado"), btHora = $("btHora"), btMin = $("btMin");
+        const rcInicio = $("rcInicio"), rcFim = $("rcFim"), rcAgora = $("rcAgora");
+        const dias = [...document.querySelectorAll("#rcDias i")];
+        const caps = [...document.querySelectorAll("#turnoCapitulos button")];
+        const INI = [0, 5, 10.5], DUR = 15;
+
+        const caminho = pts => { const r = trilha(pts); return u => r.em(r.tot * Math.max(0, Math.min(1, u))); };
+        const ida = caminho([B, [130, 250], A]), entrega = caminho([A, P]), volta = caminho([P, [130, 250], B]);
+        const lerp = (a, b, u) => a + (b - a) * Math.max(0, Math.min(1, u));
+        const linear = (t, pts) => { // pts: [[t, v], ...]
+            if (t <= pts[0][0]) return pts[0][1];
+            for (let k = 1; k < pts.length; k++) if (t <= pts[k][0]) return lerp(pts[k - 1][1], pts[k][1], (t - pts[k - 1][0]) / (pts[k][0] - pts[k - 1][0]));
+            return pts[pts.length - 1][1];
+        };
+        const MESA = [340, 192, 26], BANC = [740, 175, 30], TOPO = 36;
+        const ROXO = "#A57BFF", VERDE = "#2BD46A", AMBAR = "#FFB020", CIANO = "#2CE0FF";
+
+        function estadoEm(t) {
+            if (t < 5) {   // segunda, início do turno
+                const min = linear(t, [[0, 416], [1.2, 420], [5, 446]]);
+                let pos = B, kitP = MESA, garra = 0, st = ["fora do turno", ROXO, "respira"], regra = "antes das 07:00 ele espera no berço";
+                if (t >= 1.2) { st = ["turno iniciado", VERDE, "fixo"]; regra = "07:00: começa o turno e ele sai sozinho"; }
+                if (t >= 1.6) { pos = ida(fase(t, 1.6, 3.4)); st = ["em missão · K-204", VERDE, "corre"]; }
+                if (t >= 3.4) {
+                    pos = A; const u = fase(t, 3.4, 4.1);
+                    kitP = [lerp(MESA[0], A[0], u), lerp(MESA[1], A[1], u), lerp(MESA[2], TOPO, u) + Math.sin(u * Math.PI) * 16];
+                    garra = Math.sin(u * Math.PI) * 6; st = ["prendendo o kit", VERDE, "respira"];
+                }
+                if (t >= 4.2) { pos = entrega(fase(t, 4.2, 5.6) * 0.9); kitP = null; st = ["em missão · K-204", VERDE, "corre"]; }
+                return { dia: 0, min, pos, kitP, garra, st, regra, cap: 0, inicio: t >= 1.2 };
+            }
+            if (t < 10.5) {   // segunda, fim do turno
+                const min = linear(t, [[5, 1010], [6.6, 1018], [7.4, 1019.5], [10.5, 1033]]);
+                let pos, kitP = null, garra = 0, st, regra = "perto das 17:00: termina a entrega antes de voltar";
+                if (t < 6.6) { pos = entrega(lerp(0.3, 1, fase(t, 5, 6.6))); st = min >= 1015 ? ["finalizando a missão", AMBAR, "corre"] : ["em missão · K-204", VERDE, "corre"]; }
+                else if (t < 7.4) {
+                    pos = P; const u = fase(t, 6.6, 7.3);
+                    kitP = [lerp(P[0], BANC[0], u), lerp(P[1], BANC[1], u), lerp(TOPO, BANC[2], u) + Math.sin(u * Math.PI) * 16];
+                    garra = Math.sin(u * Math.PI) * 6; st = ["entregando o kit", AMBAR, "respira"];
+                }
+                else if (t < 10) { pos = volta(fase(t, 7.4, 10)); kitP = BANC; st = ["indo para o berço", ROXO, "corre"]; regra = "17:00: fim do turno, volta para o berço"; }
+                else { pos = B; kitP = BANC; st = ["no berço · carregando", ROXO, "respira"]; regra = "17:00: fim do turno, volta para o berço"; }
+                return { dia: 0, min, pos, kitP, garra, st, regra, cap: 1, fim: min >= 1015 ? (min >= 1020 ? "ok" : "alerta") : "" };
+            }
+            const min = linear(t, [[10.5, 538], [15, 602]]);   // sábado
+            return { dia: 5, min, pos: B, kitP: MESA, garra: 0, st: ["sábado · fora da escala", ROXO, "respira"], regra: "sábado não está marcado: ele fica no berço", cap: 2 };
         }
-        const frota = [
-            { id: "Atta 01", cor: COR.azul, ini: 6 * 60, fim: 14 * 60, r: 84 },
-            { id: "Atta 02", cor: COR.ciano, ini: 14 * 60, fim: 22 * 60, r: 74 },
-            { id: "Atta 03", cor: COR.prata, ini: 8 * 60, fim: 18 * 60, r: 64 }
-        ];
-        const arco = (h1, h2, r) => {
-            const [x1, y1] = pt(h1, r), [x2, y2] = pt(h2, r);
-            return `M${x1.toFixed(2)} ${y1.toFixed(2)} A${r} ${r} 0 ${h2 - h1 > 12 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
-        };
-        frota.forEach(v => {
-            S("circle", { cx: C, cy: C, r: v.r, fill: "none", stroke: "#141C27", "stroke-width": 7 }, svg);
-            v.arco = S("path", { d: arco(v.ini / 60, v.fim / 60, v.r), fill: "none", stroke: v.cor, "stroke-width": 7, "stroke-linecap": "round", opacity: .45 }, svg);
-        });
-        const ponteiro = S("line", { x1: C, y1: C, x2: C, y2: C - R + 4, stroke: "#fff", "stroke-width": 2.2, "stroke-linecap": "round" }, svg);
-        const ponta = S("circle", { cx: C, cy: C - R + 4, r: 4.5, fill: COR.azulC }, svg);
-        ponta.style.filter = "drop-shadow(0 0 6px #63AEFF)";
-        S("circle", { cx: C, cy: C, r: 34, fill: "#0A0F17", stroke: COR.linha }, svg);
-        const hora = T("07:00", { x: C, y: C + 6, "text-anchor": "middle", "font-family": MONO, "font-size": 18, "font-weight": 500, fill: "#E9EEF5" }, svg);
-        T("seg a sex", { x: C, y: C + 20, "text-anchor": "middle", "font-family": MONO, "font-size": 8, fill: COR.texto2 }, svg);
-        const lista = $("tLista");
-        frota.forEach(v => {
-            const li = document.createElement("li");
-            li.innerHTML = `<i class="cor" style="--c:${v.cor}"></i><b>${v.id}</b><span class="hor">${hhmm(v.ini)}–${hhmm(v.fim)} · seg a sex</span><span class="pil"></span>`;
-            lista.appendChild(li); v.pil = li.querySelector(".pil");
-        });
-        const status = (v, m) => {
-            if (m < v.ini) return ["no berço · fora do turno", COR.roxo];
-            if (m < v.ini + 6) return ["turno iniciado", COR.verde];
-            if (m < v.fim - 25) return ["em missão", COR.azulC];
-            if (m < v.fim) return ["finalizando a missão", COR.laranja];
-            if (m < v.fim + 22) return ["indo para o berço", COR.roxo];
-            return ["no berço · carregando", COR.roxo];
-        };
-        const INI = 4 * 60, FIM = 24 * 60, DUR = 22, ANDA = 20;
-        let t = 0;
-        const desenhar = tt => {
-            const m = INI + (FIM - 1 - INI) * Math.min(1, tt / ANDA);
-            const [x, y] = pt(m / 60, R - 4);
-            ponteiro.setAttribute("x2", x.toFixed(1)); ponteiro.setAttribute("y2", y.toFixed(1));
-            ponta.setAttribute("cx", x.toFixed(1)); ponta.setAttribute("cy", y.toFixed(1));
-            hora.textContent = hhmm(m);
-            frota.forEach(v => {
-                const [txt, cor] = status(v, m);
-                if (v.pil.textContent !== txt) { v.pil.textContent = txt; v.pil.style.setProperty("--k", cor); }
-                v.arco.setAttribute("opacity", m >= v.ini && m < v.fim ? 1 : .35);
+
+        const NOMES = ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"];
+        let ultimoSinal = "";
+        const desenhar = t => {
+            const e = estadoEm(t);
+            M.posicionarAGV(agv, e.pos[0], e.pos[1], 0);
+            agv.garra.style.transform = `translateZ(${e.garra}px)`;
+            const k = e.kitP || [e.pos[0], e.pos[1], TOPO];
+            M.posicionarKit(kit, k[0], k[1], k[2], 0);
+            const sinal = e.st[1] + e.st[2];
+            if (sinal !== ultimoSinal) { ultimoSinal = sinal; M.sinalAGV(agv, e.st[1], e.st[2]); }
+            balao.style.transform = `translate3d(${e.pos[0]}px,${e.pos[1]}px,92px) rotateZ(${-GIRO}deg) rotateX(${-TILT}deg) scale(${escBalao}) translate(-50%,-100%)`;
+            balao.style.setProperty("--c", e.st[1]);
+            btTexto.textContent = NOMES[e.dia] + " " + hhmm(e.min);
+            if (btEstado.textContent !== e.st[0]) btEstado.textContent = e.st[0];
+            const h = (e.min / 60) % 12, mi = e.min % 60;
+            btHora.setAttribute("transform", `rotate(${h * 30} 20 20)`);
+            btMin.setAttribute("transform", `rotate(${mi * 6} 20 20)`);
+            rcInicio.classList.toggle("acende", e.cap === 0 && e.inicio);
+            rcFim.classList.toggle("alerta", e.fim === "alerta");
+            rcFim.classList.toggle("acende", e.fim === "ok");
+            dias.forEach((d, i) => { d.classList.toggle("hoje", i === e.dia); d.classList.toggle("fora", i === e.dia && e.dia >= 5); });
+            if (rcAgora.textContent !== e.regra) rcAgora.textContent = e.regra;
+            caps.forEach((c, i) => {
+                const fim = i + 1 < INI.length ? INI[i + 1] : DUR;
+                c.classList.toggle("ativo", i === e.cap);
+                c.querySelector("i").style.width = (i < e.cap ? 100 : i > e.cap ? 0 : (t - INI[i]) / (fim - INI[i]) * 100).toFixed(1) + "%";
             });
         };
-        desenhar(reduzir ? ANDA * (10.5 * 60 - INI) / (FIM - INI) : 0);
-        if (!reduzir) registrar(svg, { passo: dt => { t = (t + dt) % DUR; desenhar(t); } });
+        let escBalao = 1;
+        const CX = Number(palco.dataset.cx || 450), CY = Number(palco.dataset.cy || 312);
+        const enquadrar = () => {
+            const z = Math.max(0.36, Math.min(1, Math.min(palco.clientWidth / 960, palco.clientHeight / 500)));
+            escBalao = Math.max(1, Math.min(1.9, 0.68 / z));
+            cam.style.transform = `scale(${z}) rotateX(${TILT}deg) rotateZ(${GIRO}deg) translate3d(-${CX}px,-${CY}px,0)`;
+        };
+        enquadrar(); addEventListener("resize", enquadrar);
+        let t = 0;
+        caps.forEach((c, i) => c.addEventListener("click", () => { t = INI[i]; desenhar(t); }));
+        desenhar(reduzir ? 7 : 0);
+        if (!reduzir) registrar(palco, { passo: dt => { t = (t + dt) % DUR; desenhar(t); } });
     })();
 
     /* ---------------------------------------------------------
@@ -388,6 +441,96 @@
         };
         desenhar(reduzir ? 15 : 0);
         if (!reduzir) registrar(svg.closest(".planta-tela"), { passo: dt => { t = (t + dt) % DUR; desenhar(t); } });
+    })();
+
+    /* ---------------------------------------------------------
+       6) NO DIA A DIA: abas com uma animação cada
+       --------------------------------------------------------- */
+    (() => {
+        const palco = $("abaPalco"); if (!palco) return;
+        const botoes = [...document.querySelectorAll("#abasDia .opcao")];
+        const telas = Object.fromEntries([...palco.querySelectorAll(".aba-tela")].map(t => [t.dataset.tela, t]));
+        const virg = (v, c = 3) => v.toFixed(c).replace(".", ",");
+        const INFO = {
+            mapa: ["Mapa ao vivo", "A planta da sua fábrica com cada Atta no lugar onde está agora. Um clique no veículo mostra a missão, o sinal e o turno dele.", ["posição em tempo real", "estado de cada veículo", "cruzamentos ocupados"]],
+            controle: ["Controle manual", "Para manobrar um veículo na mão, pelo navegador: frente, ré, para os lados e girar no lugar. As travas continuam valendo: com alguém na frente, ele não anda.", ["lateral e ré a 50%", "para se perder o sinal por 0,3 s", "garra sobe e desce"]],
+            diagnostico: ["Diagnóstico", "Um autoteste que confere o veículo item por item, à distância: entradas, sensores, seguidor de linha, garra e Wi-Fi. O relatório sai pronto para mandar para a manutenção.", ["autoteste remoto", "teste das luzes", "erros desde que ligou"]],
+            historico: ["Histórico", "Tudo o que aconteceu fica registrado: missões, paradas de segurança, mudanças de configuração e ações no site. Dá para filtrar e exportar para planilha.", ["filtros por tipo", "exportar CSV", "quem fez e quando"]],
+            papeis: ["Usuários e papéis", "Cada pessoa entra com o próprio login e vê só o que o papel dela permite. O tablet do posto só pede material; o pedido urgente pede o PIN de um líder. Parar o veículo é permitido para todos.", ["administrador", "operador", "líder", "visualizador", "posto"]],
+            ota: ["Atualização pelo Wi-Fi", "Melhorias chegam ao veículo pelo Wi-Fi, sem abrir nada. Ele só atualiza parado e sem missão, e se a versão nova não ligar bem, volta sozinho para a anterior.", ["sem parar a operação", "só com o veículo parado", "volta à versão anterior se falhar"]]
+        };
+        // --- controle manual
+        const joy = $("joyKnob"), joyL = $("joyLinha"), agvC = $("ctrlAgv"), obst = $("ctrlObst"), feixe = $("ctrlFeixe"), giroBt = $("ctrlGiro");
+        const leit = { vx: $("ctrlVx"), vy: $("ctrlVy"), w: $("ctrlW"), f: $("ctrlFrente") };
+        const controle = t => {
+            let jx = 0, jy = 0, x = 130, y = 150, ang = 0, vx = 0, vy = 0, w = 0, bloqueado = false;
+            if (t < 2.4) { jy = -1; y = 150 - 40 * fase(t, .3, 2.4); vx = .05; }
+            else if (t < 4.6) { jx = -1; y = 110; x = 130 - 50 * fase(t, 2.6, 4.6); vy = .025; }
+            else if (t < 6.4) { x = 80; y = 110; ang = 90 * fase(t, 4.8, 6.2); w = t < 6.2 ? .3 : 0; }
+            else if (t < 7.2) { x = 80; y = 110; ang = 90 * (1 - fase(t, 6.4, 7.2)); }
+            else if (t < 8.6) { jx = 1; x = 80 + 50 * fase(t, 7.3, 8.6); y = 110; vy = .025; }
+            else if (t < 11.5) { jy = -1; x = 130; y = 110 - 40 * fase(t, 8.7, 9.6); bloqueado = t > 9.6; vx = bloqueado ? 0 : .05; }
+            else { x = 130; y = 70; }
+            const reset = t > 11.5;
+            joy.setAttribute("cx", 80 + jx * 38); joy.setAttribute("cy", 80 + jy * 38);
+            joyL.setAttribute("x2", 80 + jx * 38); joyL.setAttribute("y2", 80 + jy * 38);
+            agvC.setAttribute("transform", `translate(${x} ${reset ? 150 - 80 * (1 - fase(t, 11.5, 12)) : y}) rotate(${ang})`);
+            giroBt.classList.toggle("on", w > 0);
+            obst.setAttribute("opacity", t > 8.8 && t < 11.5 ? 1 : 0);
+            feixe.setAttribute("fill", bloqueado ? "rgba(255,138,61,.28)" : "rgba(44,224,255,.12)");
+            leit.vx.textContent = virg(jy < 0 && !bloqueado ? vx : 0) + " m/s";
+            leit.vy.textContent = virg(jx !== 0 ? vy : 0) + " m/s";
+            leit.w.textContent = virg(w, 2) + " rad/s";
+            leit.f.textContent = bloqueado ? "Bloqueado" : "Livre"; leit.f.className = bloqueado ? "bloq" : "livre";
+        };
+        // --- diagnóstico
+        const itens = [...document.querySelectorAll("#diagLista li")], diagFim = $("diagFim"), diagBt = $("diagBt");
+        itens.forEach(li => { const s = document.createElement("span"); s.className = "dg-det"; li.appendChild(s); });
+        const diagnostico = t => {
+            diagBt.classList.toggle("on", t < .6);
+            itens.forEach((li, k) => {
+                const ini = .8 + k * .75, st = t < ini ? "" : t < ini + .55 ? "rodando" : li.dataset.n;
+                if (li.dataset.st !== st) { li.dataset.st = st; li.querySelector(".dg-det").textContent = st === "ok" || st === "aviso" ? li.dataset.d : st === "rodando" ? "testando…" : ""; }
+            });
+            diagFim.classList.toggle("on", t > .8 + itens.length * .75 + .3);
+        };
+        // --- histórico
+        const linhas = [...document.querySelectorAll("#histLista li")], filtros = [...document.querySelectorAll("#histFiltros i")];
+        const historico = t => {
+            const f = t > 6.5 && t < 10 ? "seg" : "todos";
+            filtros.forEach(x => x.classList.toggle("on", x.dataset.f === f));
+            linhas.forEach((li, k) => li.classList.toggle("on", t > .3 + k * .5 && (f === "todos" || li.dataset.c === f)));
+        };
+        // --- papéis
+        const tab = $("tabPapeis"), nota = $("papeisNota");
+        const NOTAS = ["Administrador: configura tudo, inclusive usuários e atualização dos veículos.", "Operador: comanda os veículos e monta as missões.", "Líder: acompanha tudo e libera pedido urgente com o PIN.", "Visualizador: só acompanha, sem mexer em nada.", "Posto: o tablet do posto, que só pede material para o próprio posto."];
+        const papeis = t => {
+            const c = Math.floor(t / 2.2) % 5;
+            tab.querySelectorAll("tr").forEach(tr => [...tr.children].forEach((td, k) => td.classList.toggle("col", k === c + 1)));
+            if (nota.textContent !== NOTAS[c]) nota.textContent = NOTAS[c];
+        };
+        // --- atualização
+        const otaP = [...document.querySelectorAll("#otaPassos li")], otaBarra = $("otaBarra"), otaFim = $("otaFim");
+        const ota = t => {
+            const lim = [.4, 1.2, 5.2, 6.6, 7.8];
+            otaP.forEach((li, k) => { li.classList.toggle("feito", t >= lim[k + 1]); li.classList.toggle("agora", t >= lim[k] && t < lim[k + 1]); });
+            otaBarra.style.width = (fase(t, 1.2, 5.2) * 100).toFixed(1) + "%";
+            otaFim.classList.toggle("on", t >= 7.8);
+        };
+        const ANIM = { mapa: [null, 1], controle: [controle, 12], diagnostico: [diagnostico, 9.5], historico: [historico, 12], papeis: [papeis, 11], ota: [ota, 10.5] };
+        let atual = "mapa", t = 0;
+        const escolher = nome => {
+            atual = nome; t = 0;
+            botoes.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.aba === nome)));
+            Object.entries(telas).forEach(([k, el]) => el.classList.toggle("on", k === nome));
+            const [titulo, texto, pontos] = INFO[nome];
+            $("diaTitulo").textContent = titulo; $("diaTexto").textContent = texto;
+            $("diaPontos").innerHTML = pontos.map(x => `<li>${x}</li>`).join("");
+            const f = ANIM[nome][0]; if (f) f(reduzir ? ANIM[nome][1] - .01 : 0);
+        };
+        botoes.forEach(b => b.addEventListener("click", () => escolher(b.dataset.aba)));
+        escolher("mapa");
+        if (!reduzir) registrar(palco, { passo: dt => { const [f, d] = ANIM[atual]; if (!f) return; t = (t + dt) % d; f(t); } });
     })();
 
     /* laço único */
