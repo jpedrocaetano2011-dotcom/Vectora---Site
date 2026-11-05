@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atta · veículos autônomos E4M</title>
+<meta name="description" content="Atta, o veículo autônomo da E4M: segue a linha, anda de lado, gira no lugar e leva kits, peças e caixas pela fábrica. Modelos com garra, rebocador, rolos, elevação e LiDAR.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="E4M · Engineering for Motion">
+<meta property="og:title" content="Atta · veículos autônomos E4M">
+<meta property="og:description" content="Atta, o veículo autônomo da E4M: segue a linha, anda de lado, gira no lugar e leva kits, peças e caixas pela fábrica. Modelos com garra, rebocador, rolos, elevação e LiDAR.">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#05070B">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/estilo.css?v=202611052220">
+</head>
+<body data-pagina="atta">
+
+<header class="topo faixa">
+    <div class="caixa">
+        <a class="marca" href="index.html" aria-label="E4M, início"><img src="assets/marca.webp" alt="E4M" width="121" height="40"></a>
+        <nav class="menu" id="menu" aria-label="Páginas">
+            <div class="menu-grupo">
+                <button type="button" class="menu-abre" aria-expanded="false" aria-controls="subSolucoes">Soluções<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <div class="submenu" id="subSolucoes">
+                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
+                    <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
+                    <a href="index.html#sob-medida"><b>Projetos sob medida</b><span>Engenharia para o seu fluxo</span></a>
+                </div>
+            </div>
+            <a href="index.html#como-trabalhamos">Como trabalhamos</a>
+            <a href="sobre.html" data-pag="sobre">Sobre</a>
+            <a href="contato.html" data-pag="contato">Contato</a>
+            <a class="botao cheio menu-cta" href="contato.html">Pedir uma simulação</a>
+        </nav>
+        <a class="botao cheio topo-cta" href="contato.html">Pedir uma simulação</a>
+        <button type="button" class="hamburguer" id="hamburguer" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><i></i><i></i><i></i></button>
+    </div>
+</header>
+
+<main id="inicio">
+    <section class="hero faixa">
+        <div class="caixa">
+            <div class="hero-texto">
+                <span class="olho">Atta · veículos autônomos</span>
+                <h1>Leva o material sozinho. <span class="prata">Em qualquer direção.</span></h1>
+                <p class="texto">O Atta segue uma linha no chão e leva kits, peças e caixas entre o almoxarifado e a produção, o dia inteiro. Com rodas omnidirecionais, anda para os lados e gira no lugar: manobra onde um veículo comum não entra.</p>
+                <p class="historia"><b>Por que Atta?</b> É o nome científico da saúva, a formiga que segue trilhas e carrega várias vezes o próprio peso, trabalhando em colônia. O nosso faz o mesmo na sua fábrica.</p>
+                <div class="acoes">
+                    <a class="botao cheio" href="contato.html?interesse=atta">Pedir uma simulação</a>
+                    <a class="botao" href="#como-funciona">Ver uma missão</a>
+                </div>
+            </div>
+            <div class="vitrine" id="vitrine" role="img" aria-label="Atta G girando sobre a fita no chão">
+                <div class="camera" id="cameraVitrine"></div>
+                <span class="status-vitrine" id="statusVitrine" aria-live="off"><i></i><span>Em missão</span></span>
+                <span class="legenda-vitrine">Atta G · protótipo funcional</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="modelos" style="padding-top:40px">
+        <div class="caixa">
+            <h2 class="sub3">A família Atta</h2>
+            <div class="modelos">
+                <div class="modelo nosso"><b>Atta <em>G</em></b><span>Plataforma com garra: pega e entrega a carga sozinho</span><span class="st disp">Disponível</span></div>
+                <div class="modelo"><b>Atta <em>T</em></b><span>Rebocador: puxa carrinhos em comboio</span><span class="st proj">Sob encomenda</span></div>
+                <div class="modelo"><b>Atta <em>R</em></b><span>Esteira de rolos: troca carga com transportadores</span><span class="st proj">Sob encomenda</span></div>
+                <div class="modelo"><b>Atta <em>E</em></b><span>Elevação: entra embaixo do carrinho e levanta</span><span class="st proj">Sob encomenda</span></div>
+                <div class="modelo"><b>Atta <em>L</em></b><span>LiDAR: navega sem linha no chão (AMR)</span><span class="st dev">Em desenvolvimento</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="o-que-e" style="padding-top:24px">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">O que é um AGV</span>
+                <h2>Um veículo que faz sozinho o transporte que hoje toma o tempo das pessoas.</h2>
+                <p class="texto">AGV (do inglês <em>Automated Guided Vehicle</em>) é um veículo guiado automaticamente. Ele cumpre rotas definidas, levando material de um ponto a outro sem motorista, o dia inteiro. Quem empurrava carrinho volta para o trabalho que agrega valor.</p>
+            </div>
+            <h3 class="sub3">Onde ele trabalha</h3>
+            <div class="aplicacoes">
+                <article class="aplicacao">
+                    <svg viewBox="0 0 300 130" aria-hidden="true">
+                        <rect x="10" y="8" width="72" height="42" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="16" y="22" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">almoxarifado</text>
+                        <rect x="120" y="8" width="170" height="26" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="126" y="24" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">linha 1</text>
+                        <rect x="120" y="96" width="170" height="26" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="126" y="112" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">linha 2</text>
+                        <path id="ap1" d="M46 50 V65 H220 V36 V65 H160 V94 V65 H46 Z" fill="none" stroke="#1E7BFF" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+                        <circle r="9" fill="#1E7BFF" opacity=".25"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#ap1"/></animateMotion></circle>
+                        <circle r="4.5" fill="#63AEFF"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#ap1"/></animateMotion></circle>
+                    </svg>
+                    <div class="corpo"><h3>Indústria</h3><p>Abastecimento de linha e transporte entre processos, no ritmo da produção.</p><small>kits · peças · produto acabado</small></div>
+                </article>
+                <article class="aplicacao">
+                    <svg viewBox="0 0 300 130" aria-hidden="true">
+                        <rect x="70" y="10" width="16" height="70" rx="2" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><rect x="120" y="10" width="16" height="70" rx="2" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><rect x="170" y="10" width="16" height="70" rx="2" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><rect x="220" y="10" width="16" height="70" rx="2" fill="rgba(99,174,255,.06)" stroke="#1B2533"/>
+                        <rect x="10" y="10" width="40" height="70" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="14" y="24" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">receb.</text>
+                        <rect x="60" y="110" width="230" height="14" rx="3" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="66" y="120" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">expedição</text>
+                        <path id="ap2" d="M30 80 V96 H260 V20 V96 H153 V20 V96 H30 Z" fill="none" stroke="#1E7BFF" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+                        <circle r="9" fill="#1E7BFF" opacity=".25"><animateMotion dur="10s" repeatCount="indefinite"><mpath href="#ap2"/></animateMotion></circle>
+                        <circle r="4.5" fill="#63AEFF"><animateMotion dur="10s" repeatCount="indefinite"><mpath href="#ap2"/></animateMotion></circle>
+                    </svg>
+                    <div class="corpo"><h3>Armazéns e centros de distribuição</h3><p>Do recebimento à expedição, as rotas repetitivas do dia inteiro.</p><small>caixas · totes · paletes</small></div>
+                </article>
+                <article class="aplicacao">
+                    <svg viewBox="0 0 300 130" aria-hidden="true">
+                        <rect x="10" y="8" width="60" height="40" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="15" y="22" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">farmácia</text>
+                        <rect x="90" y="8" width="40" height="40" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><rect x="140" y="8" width="40" height="40" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><rect x="190" y="8" width="40" height="40" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><rect x="240" y="8" width="50" height="40" rx="3" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="244" y="22" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">enferm.</text>
+                        <rect x="10" y="84" width="60" height="38" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="15" y="114" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">cozinha</text>
+                        <rect x="90" y="84" width="200" height="38" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><text x="96" y="114" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">corredor de serviço</text>
+                        <path id="ap3" d="M40 48 V66 H265 V48 V66 H40 V84 V66 Z" fill="none" stroke="#1E7BFF" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+                        <circle r="9" fill="#1E7BFF" opacity=".25"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#ap3"/></animateMotion></circle>
+                        <circle r="4.5" fill="#63AEFF"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#ap3"/></animateMotion></circle>
+                    </svg>
+                    <div class="corpo"><h3>Hospitais</h3><p>Remédios, roupa de cama, refeições e amostras pelos corredores de serviço.</p><small>farmácia · cozinha · laboratório</small></div>
+                </article>
+                <article class="aplicacao">
+                    <svg viewBox="0 0 300 130" aria-hidden="true">
+                        <rect x="10" y="8" width="280" height="44" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="16" y="22" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">estoque · retaguarda</text>
+                        <rect x="30" y="72" width="60" height="12" rx="2" fill="rgba(99,174,255,.03)" stroke="#1B2533"/><rect x="120" y="72" width="60" height="12" rx="2" fill="rgba(99,174,255,.03)" stroke="#1B2533"/><rect x="210" y="72" width="60" height="12" rx="2" fill="rgba(99,174,255,.03)" stroke="#1B2533"/>
+                        <rect x="30" y="100" width="60" height="12" rx="2" fill="rgba(99,174,255,.03)" stroke="#1B2533"/><rect x="120" y="100" width="60" height="12" rx="2" fill="rgba(99,174,255,.03)" stroke="#1B2533"/><rect x="210" y="100" width="60" height="12" rx="2" fill="rgba(99,174,255,.03)" stroke="#1B2533"/>
+                        <text x="134" y="126" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">loja</text>
+                        <path id="ap4" d="M30 34 H270 V52 V34 H150 V52 V34 H30 Z" fill="none" stroke="#1E7BFF" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+                        <circle r="9" fill="#1E7BFF" opacity=".25"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#ap4"/></animateMotion></circle>
+                        <circle r="4.5" fill="#63AEFF"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#ap4"/></animateMotion></circle>
+                    </svg>
+                    <div class="corpo"><h3>Supermercados e varejo</h3><p>Reposição do estoque para a loja, pela retaguarda, fora do caminho do cliente.</p><small>caixas · gaiolas · carrinhos</small></div>
+                </article>
+                <article class="aplicacao">
+                    <svg viewBox="0 0 300 130" aria-hidden="true">
+                        <rect x="10" y="80" width="70" height="42" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="15" y="94" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">lavanderia</text>
+                        <rect x="110" y="8" width="40" height="30" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><rect x="160" y="8" width="40" height="30" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><rect x="210" y="8" width="80" height="30" rx="3" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="216" y="22" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">rouparia</text>
+                        <rect x="110" y="92" width="180" height="30" rx="3" fill="rgba(99,174,255,.04)" stroke="#1B2533"/><text x="116" y="110" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">áreas de serviço</text>
+                        <path id="ap5" d="M45 80 V60 H250 V38 V60 H45 Z" fill="none" stroke="#1E7BFF" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+                        <circle r="9" fill="#1E7BFF" opacity=".25"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#ap5"/></animateMotion></circle>
+                        <circle r="4.5" fill="#63AEFF"><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#ap5"/></animateMotion></circle>
+                    </svg>
+                    <div class="corpo"><h3>Hotéis</h3><p>Enxoval da lavanderia para a rouparia e carrinhos de serviço entre as áreas de apoio.</p><small>enxoval · carrinhos · resíduos</small></div>
+                </article>
+                <article class="aplicacao">
+                    <svg viewBox="0 0 300 130" aria-hidden="true">
+                        <rect x="10" y="8" width="280" height="22" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="16" y="22" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">esteira de bagagem</text>
+                        <rect x="10" y="84" width="70" height="38" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="15" y="98" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">catering</text>
+                        <rect x="200" y="84" width="90" height="38" rx="4" fill="rgba(99,174,255,.06)" stroke="#1B2533"/><text x="206" y="98" font-size="8" fill="#8E9BAE" font-family="JetBrains Mono, monospace">lojas</text>
+                        <path id="ap6" d="M45 84 V62 H240 V84 V62 H160 V30 V62 H45 Z" fill="none" stroke="#1E7BFF" stroke-width="2.5" stroke-linejoin="round" opacity=".85"/>
+                        <circle r="9" fill="#1E7BFF" opacity=".25"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#ap6"/></animateMotion></circle>
+                        <circle r="4.5" fill="#63AEFF"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#ap6"/></animateMotion></circle>
+                    </svg>
+                    <div class="corpo"><h3>Aeroportos</h3><p>Abastecimento de lojas e catering e movimentação nas áreas restritas.</p><small>bagagem · insumos · catering</small></div>
+                </article>
+            </div>
+            <p class="nota-aplic">O AGV rende mais em áreas de serviço, com rota fixa e pouca circulação de público: corredores de apoio, estoques e retaguarda.</p>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="tipos" style="padding-top:24px">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Modelos e configurações</span>
+                <h2>Uma base, várias formas de guiar e de levar a carga.</h2>
+                <p class="texto">O Atta é uma plataforma: o mesmo veículo recebe o módulo de carga e a forma de guiar que o seu fluxo pede. Escolha uma opção para ver como funciona.</p>
+            </div>
+            <div class="explorador">
+                <div class="seletores">
+                    <div class="grupo">
+                        <h3>Como ele se guia</h3>
+                        <div class="opcoes">
+                            <button type="button" class="opcao" data-cena="otica" aria-pressed="true">Linha óptica<span class="st disp">Disponível</span></button>
+                            <button type="button" class="opcao" data-cena="magnetica" aria-pressed="false">Fita magnética<span class="st disp">Disponível</span></button>
+                            <button type="button" class="opcao" data-cena="laser" aria-pressed="false">Laser com refletores<span class="st proj">Sob encomenda</span></button>
+                            <button type="button" class="opcao" data-cena="amr" aria-pressed="false"><span><b class="mod">Atta L</b> AMR com LiDAR</span><span class="st dev">Em desenvolvimento</span></button>
+                        </div>
+                    </div>
+                    <div class="grupo">
+                        <h3>Como ele leva a carga</h3>
+                        <div class="opcoes">
+                            <button type="button" class="opcao" data-cena="garra" aria-pressed="false"><span><b class="mod">Atta G</b> Plataforma com garra</span><span class="st disp">Disponível</span></button>
+                            <button type="button" class="opcao" data-cena="rebocador" aria-pressed="false"><span><b class="mod">Atta T</b> Rebocador</span><span class="st proj">Sob encomenda</span></button>
+                            <button type="button" class="opcao" data-cena="elevacao" aria-pressed="false"><span><b class="mod">Atta E</b> Elevação sob carrinho</span><span class="st proj">Sob encomenda</span></button>
+                            <button type="button" class="opcao" data-cena="rolos" aria-pressed="false"><span><b class="mod">Atta R</b> Esteira de rolos</span><span class="st proj">Sob encomenda</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="cena" id="cena" role="img" aria-label="Animação do tipo de AGV escolhido">
+                        <div class="camera" id="cameraTipos"></div>
+                        <span class="st disp" id="seloCena">Disponível</span>
+                    </div>
+                    <div class="cena-info" aria-live="polite">
+                        <h3 id="cenaTitulo">Linha óptica</h3>
+                        <p id="cenaTexto"></p>
+                        <ul id="cenaPontos"></ul>
+                        <a class="botao" id="cenaCta" href="contato.html?interesse=atta" hidden>Tem um caso para AMR? Conte para a gente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="missao faixa" id="como-funciona">
+        <div class="caixa">
+            <div class="cabeca" style="padding-top:88px;margin-bottom:0">
+                <span class="olho">Como funciona</span>
+                <h2>Acompanhe uma missão: do almoxarifado à montagem.</h2>
+                <p class="texto">Role a página e siga o Atta entregando um kit pronto para montar.</p>
+            </div>
+            <div class="missao-grade">
+                <div class="passos" id="passos">
+                    <article class="passo" data-passo="0"><span class="num">01 · Pedido</span><h3>A montagem precisa de um kit.</h3><p>O pedido sai do painel, ou de um botão no próprio posto, e vai para o Atta que está livre no berço. Quem escolhe é o Eciton.</p></article>
+                    <article class="passo" data-passo="1"><span class="num">02 · Saída</span><h3>O Atta sai do berço e segue a linha.</h3><p>A sinalização muda de cor: quem está por perto vê que ele está em missão.</p></article>
+                    <article class="passo" data-passo="2"><span class="num">03 · Coleta</span><h3>No almoxarifado, a garra indexa o kit.</h3><p>Ele confere que chegou ao lugar certo pelo marcador no chão e prende o kit para o transporte.</p></article>
+                    <article class="passo" data-passo="3"><span class="num">04 · Tráfego</span><h3>No cruzamento, ele pede passagem.</h3><p>Outro Atta está cruzando. O Eciton segura este fora do cruzamento e libera logo depois. Sem colisão e sem engarrafamento.</p></article>
+                    <article class="passo" data-passo="4"><span class="num">05 · Entrega</span><h3>Chega ao posto de montagem.</h3><p>Pela rota mais curta, parando na posição exata do posto.</p></article>
+                    <article class="passo" data-passo="5"><span class="num">06 · Kit pronto</span><h3>A garra desindexa o kit no posto.</h3><p>O kit fica pronto para a montagem. O operador confirma o recebimento com um toque.</p></article>
+                    <article class="passo" data-passo="6"><span class="num">07 · Próxima</span><h3>Missão concluída.</h3><p>O Atta segue para a próxima missão da fila ou volta para o berço para carregar.</p></article>
+                </div>
+                <div class="palco" id="palco" role="img" aria-label="Planta 3D com o Atta cumprindo a missão de entrega de kit">
+                    <div class="camera" id="cameraMissao"></div>
+                    <div class="hud" aria-hidden="true">
+                        <div class="hud-topo"><b>Missão K-204</b><span>Almoxarifado → Montagem 2</span></div>
+                        <ol class="hud-etapas" id="hudEtapas">
+                            <li>Pedido recebido</li><li>Saindo do berço</li><li>Indexando o kit</li><li>Aguardando passagem</li><li>Indo para a montagem</li><li>Desindexando o kit</li><li>Concluída</li>
+                        </ol>
+                        <div class="hud-sinal"><span class="tira" id="hudTira" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span><span id="hudSinal">Pronto no berço</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="ganhos">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Ganhos</span>
+                <h2>Menos gente empurrando carrinho. Mais gente produzindo.</h2>
+                <p class="texto">Números de casos e estudos públicos, os ganhos que não aparecem na folha de pagamento e uma conta rápida para a sua realidade.</p>
+            </div>
+            <div class="casos">
+                <article class="caso">
+                    <span class="origem">EUA</span>
+                    <span class="grande prata">2 anos</span>
+                    <h3>Retorno do investimento</h3>
+                    <p>Na fábrica da LEDVANCE, dois AGVs rebocadores pagaram o projeto em dois anos. Quatro operadores de empilhadeira foram para outras funções e a manutenção de empilhadeiras caiu cerca de US$ 8 mil por ano.</p>
+                    <span class="fonte">Fonte: <a href="https://www.mmh.com/article/using_agvs_at_ledvance/features" target="_blank" rel="noopener">Modern Materials Handling</a></span>
+                </article>
+                <article class="caso">
+                    <span class="origem">EUA</span>
+                    <span class="grande prata">13 a 24 meses</span>
+                    <h3>Prazo de retorno típico</h3>
+                    <p>Nos exemplos de cálculo da MHI, associação de movimentação de materiais dos EUA, um sistema de AGVs se paga entre 13 meses e 2 anos, comparado com operadores e empilhadeiras.</p>
+                    <span class="fonte">Fonte: <a href="https://www.mhi.org/blog/125880/how-to-calculate-the-return-on-investment-of-an-automatic-guided-vehicle-installation" target="_blank" rel="noopener">MHI</a> (exemplos ilustrativos)</span>
+                </article>
+            </div>
+
+            <div class="calc" id="calc">
+                <div class="calc-campos">
+                    <h3>Quanto tempo o transporte toma hoje?</h3>
+                    <label class="campo" for="cViagens">Viagens por turno<input id="cViagens" type="number" min="0" step="1" value="40" inputmode="numeric"></label>
+                    <label class="campo" for="cMinutos">Minutos por viagem (ida e volta)<input id="cMinutos" type="number" min="0" step="1" value="12" inputmode="numeric"></label>
+                    <label class="campo" for="cTurnos">Turnos por dia<input id="cTurnos" type="number" min="1" max="3" step="1" value="2" inputmode="numeric"></label>
+                    <label class="campo" for="cDias">Dias trabalhados por mês<input id="cDias" type="number" min="1" max="31" step="1" value="22" inputmode="numeric"></label>
+                    <label class="campo" for="cCusto">Custo da hora do operador (R$)<input id="cCusto" type="number" min="0" step="1" value="35" inputmode="decimal"></label>
+                    <p class="nota">Valores de exemplo. Troque pelos da sua fábrica: a conta mostra o tempo de pessoas gasto só em levar material, que o AGV pode assumir.</p>
+                </div>
+                <div class="calc-resultado" aria-live="polite">
+                    <div><span>Horas por mês em transporte</span><b id="rHoras">352 h</b></div>
+                    <div><span>Custo dessas horas por mês</span><b id="rCusto">R$ 12.320</b></div>
+                    <div><span>Em um ano</span><b id="rAno">R$ 147.840</b></div>
+                    <a class="botao cheio" id="calcContato" href="contato.html?interesse=atta">Quero essa conta para a minha fábrica</a>
+                </div>
+            </div>
+
+            <div class="bloco">
+                <span class="olho">Além do custo</span>
+                <h3>Os ganhos que não aparecem na folha de pagamento.</h3>
+            </div>
+            <div class="outros">
+                <div class="ganho">
+                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 6L26 9" fill="none" stroke="#63AEFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <h3>Menos retrabalho</h3>
+                    <p>O kit certo chega ao posto certo. O AGV confere o destino pelo marcador no chão e o operador confirma o recebimento: menos peça trocada, faltando ou montada errado.</p>
+                </div>
+                <div class="ganho">
+                    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="none" stroke="#63AEFF" stroke-width="2.4"/><path d="M16 10v6l4 3" fill="none" stroke="#63AEFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <h3>Linha sem parar por falta de material</h3>
+                    <p>Entregas no ritmo da produção, com fila de missões e horário de turno. A linha não fica esperando alguém ficar livre para buscar.</p>
+                </div>
+                <div class="ganho">
+                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25V7M7 25h18M11 20l5-6 4 3 5-7" fill="none" stroke="#63AEFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <h3>Rastreabilidade</h3>
+                    <p>Cada entrega fica registrada: o que saiu, para onde, quando e quem confirmou. Dados reais para melhorar o fluxo, em vez de estimativa.</p>
+                </div>
+                <div class="ganho">
+                    <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="11" width="18" height="14" rx="2" fill="none" stroke="#63AEFF" stroke-width="2.4"/><path d="M11 11V8h10v3" fill="none" stroke="#63AEFF" stroke-width="2.4" stroke-linejoin="round"/></svg>
+                    <h3>Menos avaria de material</h3>
+                    <p>Carga presa durante o trajeto, aceleração suave e sempre o mesmo caminho: menos caixa caindo, batendo ou amassando.</p>
+                </div>
+                <div class="ganho">
+                    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="10" r="4.5" fill="none" stroke="#63AEFF" stroke-width="2.4"/><path d="M7 26c1-5 5-8 9-8s8 3 9 8" fill="none" stroke="#63AEFF" stroke-width="2.4" stroke-linecap="round"/></svg>
+                    <h3>Pessoas no que agrega valor</h3>
+                    <p>Quem empurrava carrinho vai para montagem, qualidade ou manutenção. Menos esforço repetitivo de puxar e empurrar carga o dia inteiro.</p>
+                </div>
+                <div class="ganho">
+                    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 24h20M9 24V15M16 24V10M23 24V6" fill="none" stroke="#63AEFF" stroke-width="2.4" stroke-linecap="round"/></svg>
+                    <h3>Cresce sem contratar</h3>
+                    <p>Mais um turno ou mais demanda? O AGV roda os três turnos, e a frota cresce com mais veículos, não com mais gente no corredor.</p>
+                </div>
+            </div>
+
+            <div class="bloco">
+                <span class="olho">Segurança das pessoas</span>
+                <h3>Tirar as pessoas do caminho da carga.</h3>
+                <p class="texto">Abastecer linha é uma das funções que mais se acidentam no Brasil: carga empurrada e puxada o dia inteiro, corredor dividido com empilhadeira e pressa para a linha não parar. Quando o AGV assume esse transporte repetitivo, as pessoas saem da rota da carga. E ele não se distrai nem tem pressa: para sozinho diante de qualquer pessoa ou obstáculo e só segue quando o caminho está livre. Por isso o AGV tem alto potencial para reduzir esses acidentes.</p>
+            </div>
+            <div class="seg-dados">
+                <article class="caso">
+                    <span class="origem">Brasil</span>
+                    <span class="grande prata">317,8 mil</span>
+                    <h3>Acidentes com alimentadores de linha de produção</h3>
+                    <p>É a 2ª ocupação com mais acidentes de trabalho no país entre 2016 e 2025, com 778 mortes no período. Só em 2025, o Brasil registrou 806 mil acidentes de trabalho e 3.644 mortes, o maior número da série.</p>
+                    <span class="fonte">Fonte: <a href="https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/seguranca-e-saude-no-trabalho/canpat-2/canpat-2025/acidentes-de-trabalho-2016-a-2025.pdf/" target="_blank" rel="noopener">Ministério do Trabalho e Emprego</a>, com dados de CAT do INSS e do eSocial</span>
+                </article>
+                <article class="caso">
+                    <span class="origem">EUA</span>
+                    <span class="grande prata">15.480</span>
+                    <h3>Afastamentos por acidente com empilhadeira</h3>
+                    <p>Foram 15.480 afastamentos do trabalho em 2021 e 2022, e 73 mortes só em 2022, em acidentes com empilhadeira.</p>
+                    <span class="fonte">Fonte: <a href="https://injuryfacts.nsc.org/work/safety-topics/forklifts/" target="_blank" rel="noopener">National Safety Council</a></span>
+                </article>
+            </div>
+            <p class="nota-dados">Os números do Brasil incluem todas as causas de acidente na função, não só o transporte de material.</p>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="sinalizacao" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa sinal-grade">
+            <div>
+                <span class="olho">Sinalização e Eciton</span>
+                <h2 style="margin-top:14px">Quem está no chão vê. Quem está no escritório também.</h2>
+                <p class="texto" style="margin-top:16px">A sinalização luminosa do Atta mostra para as pessoas por perto o que ele está fazendo. O Eciton mostra a frota inteira, ao vivo.</p>
+                <a class="botao" href="eciton.html" style="margin-top:22px">Conhecer o Eciton</a>
+                <div class="leds" aria-label="Cores da sinalização">
+                    <div class="led"><span class="tira" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span>Pronto para trabalhar</div>
+                    <div class="led"><span class="tira corre" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span>Em missão, andando</div>
+                    <div class="led"><span class="tira pisca" style="--c:var(--ciano)"><i></i><i></i><i></i><i></i><i></i></span>Esperando confirmação</div>
+                    <div class="led"><span class="tira respira" style="--c:var(--laranja)"><i></i><i></i><i></i><i></i><i></i></span>Obstáculo à frente</div>
+                    <div class="led"><span class="tira corre" style="--c:var(--roxo)"><i></i><i></i><i></i><i></i><i></i></span>Indo para o berço</div>
+                    <div class="led"><span class="tira pisca" style="--c:var(--vermelho)"><i></i><i></i><i></i><i></i><i></i></span>Emergência acionada</div>
+                </div>
+            </div>
+            <figure class="janela" style="margin:0" aria-label="Exemplo do painel de supervisão">
+                <div class="janela-barra"><i></i><i></i><i></i><span>Eciton · supervisão de frota</span></div>
+                <div class="janela-corpo">
+                    <div class="janela-lado"><b>FROTA</b><span class="ativo">Visão geral</span><span>Missões</span><span>Rotina e berços</span><span>Planta</span><span>Diagnóstico</span></div>
+                    <div class="janela-principal">
+                        <h4>3 Atta · Fábrica 1</h4>
+                        <div class="mini-cartoes">
+                            <div class="mini-cartao" style="--c:var(--azul-claro)"><div class="l1"><b>Atta 01</b><span class="pil">em missão</span></div><small>Kit K-204 → Montagem 2</small><div class="barra"><i style="width:64%"></i></div></div>
+                            <div class="mini-cartao" style="--c:var(--laranja)"><div class="l1"><b>Atta 02</b><span class="pil">aguardando</span></div><small>Passagem no cruzamento</small><div class="barra"><i style="width:30%"></i></div></div>
+                            <div class="mini-cartao" style="--c:var(--roxo)"><div class="l1"><b>Atta 03</b><span class="pil">no berço</span></div><small>Turno encerrado</small><div class="barra"><i style="width:0%"></i></div></div>
+                        </div>
+                        <div class="mapa-mini">
+                            <svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true">
+                                <path d="M20 90H280M80 90V30M220 90V30M150 20V110" fill="none" stroke="#1E7BFF" stroke-width="3" opacity=".8"/>
+                                <rect x="130" y="70" width="40" height="40" rx="6" fill="rgba(30,123,255,.15)" stroke="#63AEFF" stroke-dasharray="4 3"/>
+                                <circle cx="190" cy="90" r="6" fill="#63AEFF"/><circle cx="150" cy="44" r="6" fill="#FF8A3D"/><circle cx="20" cy="90" r="6" fill="#A57BFF"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </figure>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="seguranca">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Comunicação e segurança</span>
+                <h2>Seguro para as pessoas, para a carga e para os dados.</h2>
+            </div>
+            <div class="seguranca">
+                <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3l11 4v9c0 7-5 12-11 15C11 28 6 23 6 16V7z" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linejoin="round"/><path d="M12 17l4 4 7-8" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <h3>Para antes de encostar</h3><p>Sensores na frente detectam pessoas e objetos no caminho. O AGV para e segue sozinho quando libera.</p>
+                </div>
+                <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="13" fill="none" stroke="#FF4D5E" stroke-width="2"/><circle cx="17" cy="17" r="7" fill="#FF4D5E" opacity=".85"/></svg>
+                    <h3>Emergência sempre à mão</h3><p>Botão de emergência e parada no próprio AGV. Para voltar a andar, alguém precisa liberar no local.</p>
+                </div>
+                <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 17h24M17 5v24" stroke="#63AEFF" stroke-width="2" stroke-linecap="round"/><rect x="11" y="11" width="12" height="12" rx="2" fill="none" stroke="#63AEFF" stroke-width="2" stroke-dasharray="3 2"/></svg>
+                    <h3>Um AGV por vez nos cruzamentos</h3><p>Os AGVs combinam a passagem entre si. Se perderem a comunicação, não entram em áreas compartilhadas.</p>
+                </div>
+                <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="8" y="15" width="18" height="13" rx="2" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M12 15v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#63AEFF" stroke-width="2"/></svg>
+                    <h3>Conexão criptografada</h3><p>A comunicação entre AGVs, painel e nuvem é protegida, como num banco online.</p>
+                </div>
+                <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="13" cy="12" r="5" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M4 28c1-5 5-8 9-8s8 3 9 8M23 10h7M23 15h7M23 20h5" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round"/></svg>
+                    <h3>Cada um vê o que deve</h3><p>Acesso por empresa e por papel: administrador, operador e visualizador.</p>
+                </div>
+                <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 5v16m-6-6 6 6 6-6M7 27h20" fill="none" stroke="#63AEFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <h3>Sempre atualizado</h3><p>Melhorias chegam aos AGVs pelo Wi-Fi, sem parar a operação para trocar nada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<section class="chamada faixa" id="chamada">
+    <div class="caixa">
+        <div>
+            <span class="olho">Próximo passo</span>
+            <h2>Vamos ver a frota rodando na sua planta?</h2>
+            <p class="texto">Antes de qualquer instalação, montamos a sua planta no Eciton e rodamos a frota virtual. Você vê as rotas, os tempos e quantos veículos fazem sentido para a sua operação.</p>
+        </div>
+        <div class="chamada-acoes">
+            <a class="botao cheio" href="contato.html">Pedir uma simulação</a>
+            <a class="botao zap" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg>Falar com o João Pedro no WhatsApp</a>
+            <small>Respondemos em até 1 dia útil.</small>
+        </div>
+    </div>
+</section>
+
+<footer class="rodape faixa">
+    <div class="caixa">
+        <img src="assets/placa.webp" alt="E4M · Engineering for Motion" width="180" height="78" loading="lazy">
+        <nav class="rodape-links" aria-label="Rodapé">
+            <a href="atta.html">Atta</a>
+            <a href="eciton.html">Eciton</a>
+            <a href="index.html#sob-medida">Projetos sob medida</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+        </nav>
+        <span class="rodape-fim">São Bernardo do Campo · SP<br>Tecnologia e automação para intralogística · © 2026</span>
+    </div>
+</footer>
+
+<a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
+
+<script src="assets/site.js?v=202611052220" defer></script>
+
+</body>
+</html>
