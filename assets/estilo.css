@@ -942,3 +942,26 @@ section[id] { scroll-margin-top: calc(var(--topo) + env(safe-area-inset-top, 0px
 .legal b { color: var(--texto); font-weight: 600; }
 .lgpd a, .rodape-links a.leve { color: var(--texto-2); }
 .modelo .st { font-size: .68rem; }
+
+/* 0.15: aba Manutenção, Tudo o que vem e perguntas em grupos */
+.man { height: 100%; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 18px; align-items: center; }
+.man-card { border: 1px solid var(--linha); border-radius: 14px; background: var(--fundo); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.man-topo { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.man-topo b { font-family: var(--f-display); font-size: 1.15rem; }
+.man-pil { font-family: var(--f-dado); font-size: .72rem; padding: 3px 9px; border-radius: 999px; border: 1px solid rgba(43, 212, 106, .45); color: var(--verde); transition: color .3s, border-color .3s, background-color .3s; }
+.man-pil.on { color: var(--roxo); border-color: rgba(165, 123, 255, .55); background: rgba(165, 123, 255, .1); }
+.man-fita { align-self: flex-start; }
+.man-card dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; font-size: .88rem; }
+.man-card dt { color: var(--texto-2); }
+.man-card dd { margin: 0; text-align: right; }
+@media (max-width: 640px) { .man { grid-template-columns: 1fr; } }
+.tudo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.tudo-grupo { border: 1px solid var(--linha); border-radius: 16px; padding: 18px; background: var(--fundo-2); }
+.tudo-grupo h3 { font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--azul-claro); margin-bottom: 12px; }
+.tudo-grupo ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tudo-grupo li { display: flex; flex-direction: column; gap: 1px; }
+.tudo-grupo li b { font-family: var(--f-display); font-size: .98rem; }
+.tudo-grupo li span { color: var(--texto-2); font-size: .88rem; }
+@media (max-width: 900px) { .tudo { grid-template-columns: 1fr; } }
+.perguntas-grupo { font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--azul-claro); margin: 14px 0 2px; }
+.perguntas-grupo:first-child { margin-top: 0; }

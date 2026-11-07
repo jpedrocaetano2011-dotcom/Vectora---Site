@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Eciton · supervisão de frota E4M</title>
-<meta name="description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, fila de missões, turnos, tráfego nos cruzamentos, manutenção e indicadores da frota, no navegador.">
+<meta name="description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, pedidos programados, fila de missões, turnos, tráfego nos cruzamentos, manutenção e indicadores da frota, no navegador.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="E4M · Engineering for Motion">
 <meta property="og:title" content="Eciton · supervisão de frota E4M">
-<meta property="og:description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, fila de missões, turnos, tráfego nos cruzamentos, manutenção e indicadores da frota, no navegador.">
+<meta property="og:description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, pedidos programados, fila de missões, turnos, tráfego nos cruzamentos, manutenção e indicadores da frota, no navegador.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611072122">
+<link rel="stylesheet" href="assets/estilo.css?v=202611072327">
 </head>
 <body data-pagina="eciton">
 
@@ -112,6 +112,7 @@
                 <ul class="turno-regras">
                     <li>Missões montadas por você, com os passos que o seu fluxo pede</li>
                     <li>Fila por ordem de chegada, com pedido urgente na frente</li>
+                    <li>Pedido programado: o botão do posto pede sozinho, no ritmo em que o material é consumido</li>
                     <li>Histórico de cada missão: quem pediu, quem levou, quanto demorou</li>
                 </ul>
             </div>
@@ -234,6 +235,7 @@
                             <button type="button" class="opcao" data-aba="mapa" aria-pressed="true">Mapa ao vivo</button>
                             <button type="button" class="opcao" data-aba="controle" aria-pressed="false">Controle manual</button>
                             <button type="button" class="opcao" data-aba="diagnostico" aria-pressed="false">Diagnóstico</button>
+                            <button type="button" class="opcao" data-aba="manutencao" aria-pressed="false">Manutenção</button>
                             <button type="button" class="opcao" data-aba="historico" aria-pressed="false">Histórico</button>
                             <button type="button" class="opcao" data-aba="papeis" aria-pressed="false">Usuários e papéis</button>
                             <button type="button" class="opcao" data-aba="ota" aria-pressed="false">Atualização pelo Wi-Fi</button>
@@ -285,6 +287,23 @@
                                     <li data-n="ok" data-d="-58 dBm">Wi-Fi</li>
                                 </ul>
                                 <div class="diag-fim" id="diagFim">7 OK · 1 aviso · <u>Copiar relatório</u></div>
+                            </div>
+                        </div>
+
+                        <div class="aba-tela" data-tela="manutencao">
+                            <div class="man">
+                                <div class="man-card">
+                                    <div class="man-topo"><b>Atta 03</b><span class="man-pil" id="manPil">pronto</span></div>
+                                    <span class="tira man-fita" id="manFita" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span>
+                                    <dl><dt>Motivo</dt><dd id="manMotivo">—</dd><dt>Despacho</dt><dd id="manDesp">recebe pedidos</dd></dl>
+                                </div>
+                                <ol class="ota-passos" id="manPassos">
+                                    <li>Um toque na chave: “revisão das rodas”, volta às 14:00</li>
+                                    <li>Sai do despacho e da rotina; a luz fica branca</li>
+                                    <li>Diagnóstico e calibração pela tela Manutenção</li>
+                                    <li>Placa nova? Restaura a cópia da configuração</li>
+                                    <li>Volta à operação no lugar certo</li>
+                                </ol>
                             </div>
                         </div>
 
@@ -344,6 +363,41 @@
         </div>
     </section>
 
+    <section class="secao faixa" id="tudo">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Tudo o que vem no Eciton</span>
+                <h2>Uma tela para cada trabalho.</h2>
+            </div>
+            <div class="tudo">
+                <div class="tudo-grupo"><h3>Operar</h3><ul>
+                    <li><b>Despacho pelos postos</b><span>o posto pede, o Eciton escolhe o Atta</span></li>
+                    <li><b>Pedidos programados</b><span>o botão pede sozinho, no ritmo do consumo</span></li>
+                    <li><b>Fila de missões</b><span>na ordem certa, urgente na frente</span></li>
+                    <li><b>Turnos e berços</b><span>cada Atta no seu horário</span></li>
+                    <li><b>Tráfego</b><span>um por vez nos cruzamentos</span></li>
+                    <li><b>Mapa ao vivo e controle manual</b><span>ver e manobrar pelo navegador</span></li>
+                </ul></div>
+                <div class="tudo-grupo"><h3>Manter</h3><ul>
+                    <li><b>Manutenção</b><span>tira da operação e registra o porquê</span></li>
+                    <li><b>Diagnóstico e autoteste</b><span>confere o veículo item por item</span></li>
+                    <li><b>Sensores ao vivo</b><span>o que o Atta está lendo agora</span></li>
+                    <li><b>Calibração</b><span>do seguidor de linha e do movimento</span></li>
+                    <li><b>Configurações e cópias</b><span>volta atrás ou restaura numa placa nova</span></li>
+                    <li><b>Atualização pelo Wi-Fi</b><span>sem abrir nada</span></li>
+                </ul></div>
+                <div class="tudo-grupo"><h3>Gerenciar</h3><ul>
+                    <li><b>Indicadores</b><span>entregas, paradas, tráfego e ganhos, com relatório em PDF</span></li>
+                    <li><b>Histórico</b><span>tudo o que aconteceu, exportável</span></li>
+                    <li><b>Alertas por e-mail</b><span>quando algo para e quando volta</span></li>
+                    <li><b>Usuários e papéis</b><span>cada um vê o que deve</span></li>
+                    <li><b>Modelos</b><span>a ficha técnica de cada Atta</span></li>
+                    <li><b>Planta e simulação</b><span>a frota rodando antes de chegar</span></li>
+                </ul></div>
+            </div>
+        </div>
+    </section>
+
     <section class="secao faixa" id="telas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
@@ -367,6 +421,7 @@
                 <h2 style="margin-top:14px">O que perguntam antes do piloto.</h2>
             </div>
             <div class="perguntas">
+                <h3 class="perguntas-grupo">No dia a dia</h3>
                 <details><summary>E se a internet cair?</summary><p>Cada Atta guarda na memória a missão que está fazendo e a fila dele, e continua a viagem. Antes de entrar num cruzamento ou num corredor que divide com outro veículo, ele precisa combinar com a frota: sem conexão, para antes da zona e espera, nunca entra às cegas. Pedidos novos dos tablets aguardam a conexão. Quando a rede volta, tudo segue sozinho.</p></details>
                 <details><summary>Preciso mudar o chão da fábrica?</summary><p>No Atta G-O, basta uma fita contrastante colada no piso e etiquetas RFID nos pontos de parada. Dá para mudar a rota trocando a fita. A versão magnética (-M, sob encomenda) usa fita magnética, mais resistente a sujeira e ao tráfego de empilhadeira.</p></details>
                 <details><summary>É seguro andar perto das pessoas?</summary><p>O Atta anda mais devagar nas zonas marcadas na planta, para sozinho quando os sensores de distância veem pessoa, carrinho ou outro veículo na frente, e só segue com o caminho livre. O botão de emergência no veículo para tudo, e ele só volta a andar depois que alguém rearma no local.</p></details>
@@ -374,6 +429,16 @@
                 <details><summary>Onde ficam os dados da minha fábrica?</summary><p>Na nuvem, com cada empresa separada das outras pelo próprio banco de dados. Cada pessoa entra com a própria conta e só faz o que o papel dela permite.</p></details>
                 <details><summary>E quando um veículo precisa de manutenção?</summary><p>Um toque tira o Atta da operação: ele sai do despacho, não aceita missão e a luz fica branca. O Eciton guarda cópias da configuração de cada veículo, para restaurar numa placa nova, e mostra a documentação do modelo para a equipe de manutenção.</p></details>
                 <details><summary>Quanto tempo leva para começar?</summary><p>Começamos montando a sua planta no Eciton e rodando a frota virtual. Com a simulação aprovada, o piloto numa rota real.</p></details>
+                <h3 class="perguntas-grupo">Técnicas</h3>
+                <details><summary>Qual protocolo de comunicação vocês usam?</summary><p>MQTT, o protocolo mais usado em Internet das Coisas industrial. Os Atta e o Eciton conversam por um broker MQTT com conexão criptografada (TLS, porta 8883) e certificado conferido. Cada empresa tem as próprias credenciais e só enxerga os próprios veículos. O broker pode ficar na nuvem ou dentro da fábrica: dá para trocar pelo Eciton sem regravar os veículos.</p></details>
+                <details><summary>Integra com o MES ou o ERP da fábrica?</summary><p>Ainda não temos conector pronto para um MES ou ERP específico. O Eciton recebe pedidos de missão por uma interface aberta, a mesma que os tablets dos postos usam, e devolve o andamento de cada pedido. Por ela, o seu MES pode pedir material e saber quando chegou. A integração com o seu sistema (SAP, TOTVS ou outro) faz parte do projeto do piloto.</p></details>
+                <details><summary>Segue algum padrão de mercado, como o VDA 5050?</summary><p>Hoje o Atta usa um protocolo próprio sobre MQTT, feito junto com o Eciton. O VDA 5050, padrão europeu de comunicação entre veículos e gestor de frota, também roda sobre MQTT e está nos nossos planos, junto com a versão LiDAR.</p></details>
+                <details><summary>O que preciso de rede Wi-Fi?</summary><p>Wi-Fi de 2,4 GHz com senha (WPA2) cobrindo as rotas dos veículos. Recomendamos uma rede separada só para eles. Onde o sinal falha, o Atta continua a missão e para antes de cruzamentos e corredores compartilhados até a conexão voltar.</p></details>
+                <details><summary>Preciso abrir alguma porta no firewall da fábrica?</summary><p>Não para entrada. Os veículos e as telas só fazem conexões de saída: os Atta para o broker (porta 8883) e os navegadores para o Eciton (porta 443, como qualquer site). Nenhum acesso de fora entra na rede da fábrica.</p></details>
+                <details><summary>Funciona sem internet?</summary><p>Com o broker dentro da fábrica, os Atta trocam o tráfego entre si pela rede local. As telas do Eciton e o histórico ficam na nuvem. Uma instalação toda dentro da fábrica, sem nuvem, é possível sob projeto.</p></details>
+                <details><summary>Como o software dos veículos é atualizado?</summary><p>Pelo Wi-Fi, a partir do Eciton. O veículo só aceita a atualização parado e sem missão, e confere se a versão nova ligou bem.</p></details>
+                <details><summary>Em que aparelho o Eciton roda?</summary><p>No navegador, sem instalar nada: computador, tablet ou celular. Cada posto usa um tablet comum.</p></details>
+                <details><summary>Quantos veículos dá para ter na mesma frota?</summary><p>Testamos 5 Atta ao mesmo tempo, com o programa real dos veículos rodando em simulação: sem batidas e sem travamento nos cruzamentos. O limite prático depende da planta. A simulação na sua planta mostra quantos cabem.</p></details>
             </div>
         </div>
     </section>
@@ -411,7 +476,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611072122" defer></script>
-<script src="assets/eciton.js?v=202611072122" defer></script>
+<script src="assets/site.js?v=202611072327" defer></script>
+<script src="assets/eciton.js?v=202611072327" defer></script>
 </body>
 </html>

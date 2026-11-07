@@ -455,6 +455,7 @@
             mapa: ["Mapa ao vivo", "A planta da sua fábrica com cada Atta no lugar onde está agora. Um clique no veículo mostra a missão, o sinal e o turno dele.", ["posição em tempo real", "estado de cada veículo", "cruzamentos ocupados"]],
             controle: ["Controle manual", "Para manobrar um veículo na mão, pelo navegador: frente, ré, para os lados e girar no lugar. As travas continuam valendo: com alguém na frente, ele não anda.", ["lateral e ré a 50%", "para se perder o sinal por 0,3 s", "garra sobe e desce"]],
             diagnostico: ["Diagnóstico", "Um autoteste que confere o veículo item por item, à distância: entradas, sensores, seguidor de linha, garra e Wi-Fi. O relatório sai pronto para mandar para a manutenção.", ["autoteste remoto", "teste das luzes", "erros desde que ligou"]],
+            manutencao: ["Manutenção", "Um toque tira o Atta da operação: ele sai do despacho e da rotina, a luz fica branca e o tempo conta como parada planejada. A equipe de manutenção tem a tela dela, com diagnóstico, calibração, cópias da configuração e a documentação do modelo.", ["fora do despacho e da rotina", "cópias da configuração", "documentação do modelo"]],
             historico: ["Histórico", "Tudo o que aconteceu fica registrado: missões, paradas de segurança, mudanças de configuração e ações no site. Dá para filtrar e exportar para planilha.", ["filtros por tipo", "exportar CSV", "quem fez e quando"]],
             papeis: ["Usuários e papéis", "Cada pessoa entra com o próprio login e vê só o que o papel dela permite. O tablet do posto só pede material; o pedido urgente pede o PIN de um líder. Parar o veículo é permitido para todos.", ["administrador", "operador", "manutenção", "líder", "visualizador", "posto"]],
             ota: ["Atualização pelo Wi-Fi", "Melhorias chegam ao veículo pelo Wi-Fi, sem abrir nada. Ele só atualiza parado e sem missão, e se a versão nova não ligar bem, volta sozinho para a anterior.", ["sem parar a operação", "só com o veículo parado", "volta à versão anterior se falhar"]]
@@ -517,7 +518,19 @@
             otaBarra.style.width = (fase(t, 1.2, 5.2) * 100).toFixed(1) + "%";
             otaFim.classList.toggle("on", t >= 7.8);
         };
-        const ANIM = { mapa: [null, 1], controle: [controle, 12], diagnostico: [diagnostico, 9.5], historico: [historico, 12], papeis: [papeis, 13.2], ota: [ota, 10.5] };
+        // --- manutenção
+        const manP = [...document.querySelectorAll("#manPassos li")], manPil = $("manPil"), manFita = $("manFita"), manMot = $("manMotivo"), manDesp = $("manDesp");
+        const manutencao = t => {
+            const lim = [1, 2.4, 4.4, 6.6, 8.6, 10];
+            manP.forEach((li, k) => { li.classList.toggle("feito", t >= lim[k + 1]); li.classList.toggle("agora", t >= lim[k] && t < lim[k + 1]); });
+            const dentro = t >= 1.4 && t < 9.4;
+            manPil.textContent = dentro ? "em manutenção" : "pronto";
+            manPil.classList.toggle("on", dentro);
+            manFita.style.setProperty("--c", dentro ? "#E9EEF5" : "var(--verde)");
+            manMot.textContent = dentro ? "revisão das rodas · volta 14:00" : "—";
+            manDesp.textContent = dentro ? "fora do despacho" : "recebe pedidos";
+        };
+        const ANIM = { mapa: [null, 1], controle: [controle, 12], diagnostico: [diagnostico, 9.5], manutencao: [manutencao, 11], historico: [historico, 12], papeis: [papeis, 13.2], ota: [ota, 10.5] };
         let atual = "mapa", t = 0;
         const escolher = nome => {
             atual = nome; t = 0;
