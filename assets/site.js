@@ -427,7 +427,7 @@
 
         const CENAS = {
             otica: {
-                titulo: "Linha óptica", st: ["disp", "Disponível"],
+                titulo: "Linha óptica · -O", st: ["disp", "Pronto para piloto"],
                 texto: "Um sensor embaixo do AGV enxerga a faixa no chão e corrige a direção o tempo todo. Marcadores no piso confirmam onde ele está e onde parar.",
                 pontos: ["Rota visível para todos na área", "Instalação rápida", "Mudar a rota é mudar a fita"],
                 montar(m) {
@@ -456,7 +456,7 @@
                 }
             },
             magnetica: {
-                titulo: "Fita magnética", st: ["disp", "Disponível"],
+                titulo: "Fita magnética · -M", st: ["proj", "Sob encomenda"],
                 texto: "A faixa é magnética e pode ficar embutida no piso, protegida de sujeira e do tráfego. O sensor lê o campo magnético em vez da cor, com a mesma lógica de missões e tráfego.",
                 pontos: ["Resiste a sujeira, óleo e desgaste", "Rota invisível no piso", "Mesmo sistema de supervisão"],
                 montar(m) {
@@ -518,8 +518,8 @@
                 }
             },
             amr: {
-                titulo: "Atta L · AMR com LiDAR", st: ["dev", "Em desenvolvimento"],
-                texto: "O AMR enxerga o ambiente com um LiDAR, um sensor a laser que mede tudo ao redor dezenas de vezes por segundo. Ele monta o mapa, planeja o próprio caminho e desvia de pessoas e obstáculos. É o próximo passo da E4M.",
+                titulo: "LiDAR · -L, AMR", st: ["dev", "Em desenvolvimento"],
+                texto: "O AMR enxerga o ambiente com um LiDAR, um sensor a laser que mede tudo ao redor dezenas de vezes por segundo. Ele monta o mapa, planeja o próprio caminho e desvia de pessoas e obstáculos. É o próximo passo da E4M, como versão de qualquer módulo do Atta.",
                 pontos: ["Sem fita e sem refletores", "Desvia sozinho do que aparece", "Rota definida pelo destino"],
                 cta: true,
                 montar(m) {
@@ -575,7 +575,7 @@
                 }
             },
             garra: {
-                titulo: "Atta G · plataforma com garra", st: ["disp", "Disponível"],
+                titulo: "Atta G · plataforma com garra", st: ["disp", "Pronto para piloto"],
                 texto: "A garra indexa o kit na estação, prende durante o trajeto e desindexa no posto, deixando o kit pronto para montar. Ninguém precisa pegar a carga.",
                 pontos: ["Pega e entrega sozinho", "Carga presa no trajeto", "Ideal para kits de montagem"],
                 montar(m) {
@@ -617,9 +617,9 @@
                 }
             },
             rebocador: {
-                titulo: "Atta T · rebocador", st: ["proj", "Sob encomenda"],
-                texto: "O AGV engata um trem de carrinhos e puxa vários de uma vez, como um trem de abastecimento que passa pelos postos. Na volta, desengata e deixa o trem pronto para a próxima rodada.",
-                pontos: ["Vários destinos numa viagem", "Engate automático", "Usa os carrinhos que você já tem"],
+                titulo: "Atta T · rebocador", st: ["dev", "Em desenvolvimento"],
+                texto: "O AGV engata um trem de carrinhos e puxa vários de uma vez, como um trem de abastecimento que passa pelos postos. Engatado, ele anda como um rebocador: só para a frente e em curvas abertas. As rodas omnidirecionais ajudam na hora de encaixar no carrinho.",
+                pontos: ["Vários destinos numa viagem", "Usa os carrinhos que você já tem", "Para no corredor, ao lado dos postos"],
                 montar(m) {
                     piso(m);
                     const c = caminhoDe(arredondado(-250, -125, 250, 125, 100, 8), true);
@@ -812,6 +812,74 @@
     };
     document.getElementById("calc").addEventListener("input", conta);
     conta();
+    }
+
+    /* ============================================================
+       CONFIGURADOR RÁPIDO
+       Estimativa com valores típicos de mercado (não é a ficha do Atta):
+       0,8 m/s com pessoas, 1,2 m/s em corredor só da frota, 0,4 m/s²,
+       +15% no trajeto (cruzamentos e curvas), frota a 75% no pico.
+       ============================================================ */
+    if (document.getElementById("config")) {
+    const form = document.getElementById("config");
+    const MODULOS = {
+        garra:    { letra: "G", nome: "garra", limite: 250,  st: ["disp", "Pronto para piloto"], porque: "O Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
+        carrinho: { letra: "E", nome: "elevação", limite: 1000, st: ["proj", "Sob encomenda"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto." },
+        esteira:  { letra: "R", nome: "rolos", limite: 1000, st: ["proj", "Sob encomenda"], porque: "A carga passa da esteira da estação para os rolos do Atta, e dele para a próxima esteira." },
+        comboio:  { letra: "T", nome: "rebocador", limite: 3000, st: ["dev", "Em desenvolvimento"], porque: "" }
+    };
+    const num = (id, min) => Math.max(min, Number(String(document.getElementById(id).value).replace(",", ".")) || 0);
+    const fmt = (v, casas = 1) => v.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
+    const VEL = { sim: 0.8, nao: 1.2 }, ACEL = 0.4, TRAFEGO = 1.15, OCUPACAO = 0.75;
+
+    function calcular() {
+        let manuseio = form.querySelector('input[name="manuseio"]:checked')?.value || "garra";
+        const pessoas = form.querySelector('input[name="pessoas"]:checked')?.value || "sim";
+        const peso = num("cfPeso", 1), dist = num("cfDist", 1), viagens = num("cfViagens", 1), ponta = num("cfPonta", 0);
+        let aviso = "";
+        if (manuseio === "garra" && peso > MODULOS.garra.limite) {
+            aviso = `Acima de ${MODULOS.garra.limite} kg acaba a referência de mercado para garra. Nesse peso, o caminho costuma ser levar a carga num carrinho, com o Atta E embaixo.`;
+            manuseio = "carrinho";
+        }
+        if (manuseio !== "comboio" && peso > MODULOS[manuseio].limite) manuseio = "comboio";
+        const m = MODULOS[manuseio];
+        const v = VEL[pessoas];
+        const trajeto = (2 * dist / v) * TRAFEGO + 2 * v / ACEL;   // ida e volta, com aceleração e frenagem
+        const ciclo = trajeto + 2 * ponta * 60;                     // segundos
+        const frota = Math.max(1, Math.ceil(viagens * ciclo / 3600 / OCUPACAO));
+        const rebocador = manuseio === "comboio";
+
+        document.getElementById("cfModelo").textContent = rebocador ? "Atta T · rebocador" : `Atta ${m.letra}-O`;
+        const selo = document.getElementById("cfSelo");
+        selo.className = "st " + m.st[0];
+        selo.textContent = m.st[1];
+        document.getElementById("cfPorque").textContent = rebocador
+            ? "Para muita carga de uma vez, ou vários carrinhos numa rota, o caminho é o rebocador."
+            : m.porque + (pessoas === "sim" ? " Na conta, ele anda a 0,8 m/s, uma velocidade segura perto de pessoas." : " Na conta, ele anda a 1,2 m/s, num corredor só da frota.");
+        document.getElementById("cfNumeros").hidden = rebocador;
+        const caixaAviso = document.getElementById("cfAviso");
+        if (rebocador) aviso = (peso > MODULOS.esteira.limite ? `Com ${peso.toLocaleString("pt-BR")} kg por viagem, ` : "") +
+            "o rebocador ainda está em desenvolvimento. Com comboio, as curvas, as paradas no corredor e o tamanho do trem pedem um estudo próprio da sua planta. Conte o seu caso e a gente estuda junto.";
+        caixaAviso.hidden = !aviso;
+        caixaAviso.textContent = aviso;
+        const icones = document.getElementById("cfIcones");
+        icones.textContent = "";
+        if (!rebocador) {
+            document.getElementById("cfCiclo").textContent = fmt(ciclo / 60) + " min";
+            document.getElementById("cfFrota").textContent = frota.toLocaleString("pt-BR");
+            const mostrar = Math.min(frota, 12);
+            for (let i = 0; i < mostrar; i++) icones.appendChild(document.createElement("i"));
+            if (frota > mostrar) { const mais = document.createElement("span"); mais.textContent = "+" + (frota - mostrar); icones.appendChild(mais); }
+        }
+        // leva a conta para o formulário de contato
+        const q = new URLSearchParams({ interesse: "atta", origem: "configurador", modulo: m.letra, peso: Math.round(peso), dist: Math.round(dist),
+            viagens: Math.round(viagens), ponta: ponta, pessoas, ciclo: rebocador ? 0 : Math.round(ciclo), frota: rebocador ? 0 : frota });
+        document.getElementById("cfContato").href = "contato.html?" + q;
+    }
+    form.addEventListener("input", calcular);
+    form.addEventListener("change", calcular);
+    form.addEventListener("submit", e => e.preventDefault());
+    calcular();
     }
 })();
 

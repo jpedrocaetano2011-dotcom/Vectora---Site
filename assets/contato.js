@@ -26,6 +26,21 @@
         caixa.querySelector("p").textContent = resumo;
         origem = resumo;
     }
+    if (origem === "configurador") {
+        const n = k => Math.max(0, Number(q.get(k)) || 0);
+        const NOMES = { G: "garra", E: "elevação", R: "rolos", T: "rebocador" };
+        const mod = NOMES[q.get("modulo")] ? q.get("modulo") : "G";
+        const base = `Configurador: ${n("peso").toLocaleString("pt-BR")} kg por viagem, ${n("dist")} m da coleta até a entrega, ${n("viagens")} viagens por hora no pico, ` +
+            `${n("ponta").toLocaleString("pt-BR")} min em cada ponta, corredor ${q.get("pessoas") === "nao" ? "só da frota" : "com pessoas"}.`;
+        const resumo = mod === "T"
+            ? `${base} Indicação: rebocador (Atta T, em desenvolvimento), para estudar o caso.`
+            : `${base} Estimativa: Atta ${mod}-O (${NOMES[mod]}), ${(n("ciclo") / 60).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} min por viagem, ${n("frota")} Atta na frota.`;
+        const caixa = document.getElementById("calcRecebida");
+        caixa.hidden = false;
+        caixa.innerHTML = `<span class="rot">Vai junto com a mensagem</span><p></p>`;
+        caixa.querySelector("p").textContent = resumo;
+        origem = resumo;
+    }
     const pagina = document.referrer && document.referrer.startsWith(location.origin) ? new URL(document.referrer).pathname : "";
     if (!origem && pagina) origem = "veio de " + pagina;
 

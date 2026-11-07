@@ -456,7 +456,7 @@
             controle: ["Controle manual", "Para manobrar um veículo na mão, pelo navegador: frente, ré, para os lados e girar no lugar. As travas continuam valendo: com alguém na frente, ele não anda.", ["lateral e ré a 50%", "para se perder o sinal por 0,3 s", "garra sobe e desce"]],
             diagnostico: ["Diagnóstico", "Um autoteste que confere o veículo item por item, à distância: entradas, sensores, seguidor de linha, garra e Wi-Fi. O relatório sai pronto para mandar para a manutenção.", ["autoteste remoto", "teste das luzes", "erros desde que ligou"]],
             historico: ["Histórico", "Tudo o que aconteceu fica registrado: missões, paradas de segurança, mudanças de configuração e ações no site. Dá para filtrar e exportar para planilha.", ["filtros por tipo", "exportar CSV", "quem fez e quando"]],
-            papeis: ["Usuários e papéis", "Cada pessoa entra com o próprio login e vê só o que o papel dela permite. O tablet do posto só pede material; o pedido urgente pede o PIN de um líder. Parar o veículo é permitido para todos.", ["administrador", "operador", "líder", "visualizador", "posto"]],
+            papeis: ["Usuários e papéis", "Cada pessoa entra com o próprio login e vê só o que o papel dela permite. O tablet do posto só pede material; o pedido urgente pede o PIN de um líder. Parar o veículo é permitido para todos.", ["administrador", "operador", "manutenção", "líder", "visualizador", "posto"]],
             ota: ["Atualização pelo Wi-Fi", "Melhorias chegam ao veículo pelo Wi-Fi, sem abrir nada. Ele só atualiza parado e sem missão, e se a versão nova não ligar bem, volta sozinho para a anterior.", ["sem parar a operação", "só com o veículo parado", "volta à versão anterior se falhar"]]
         };
         // --- controle manual
@@ -503,9 +503,9 @@
         };
         // --- papéis
         const tab = $("tabPapeis"), nota = $("papeisNota");
-        const NOTAS = ["Administrador: configura tudo, inclusive usuários e atualização dos veículos.", "Operador: comanda os veículos e monta as missões.", "Líder: acompanha tudo e libera pedido urgente com o PIN.", "Visualizador: só acompanha, sem mexer em nada.", "Posto: o tablet do posto, que só pede material para o próprio posto."];
+        const NOTAS = ["Administrador: configura tudo, inclusive usuários e atualização dos veículos.", "Operador: comanda os veículos e monta as missões.", "Manutenção: tira o veículo da operação, testa, calibra e vê a documentação do modelo.", "Líder: acompanha tudo e libera pedido urgente com o PIN.", "Visualizador: só acompanha, sem mexer em nada.", "Posto: o tablet do posto, que só pede material para o próprio posto."];
         const papeis = t => {
-            const c = Math.floor(t / 2.2) % 5;
+            const c = Math.floor(t / 2.2) % NOTAS.length;
             tab.querySelectorAll("tr").forEach(tr => [...tr.children].forEach((td, k) => td.classList.toggle("col", k === c + 1)));
             if (nota.textContent !== NOTAS[c]) nota.textContent = NOTAS[c];
         };
@@ -517,7 +517,7 @@
             otaBarra.style.width = (fase(t, 1.2, 5.2) * 100).toFixed(1) + "%";
             otaFim.classList.toggle("on", t >= 7.8);
         };
-        const ANIM = { mapa: [null, 1], controle: [controle, 12], diagnostico: [diagnostico, 9.5], historico: [historico, 12], papeis: [papeis, 11], ota: [ota, 10.5] };
+        const ANIM = { mapa: [null, 1], controle: [controle, 12], diagnostico: [diagnostico, 9.5], historico: [historico, 12], papeis: [papeis, 13.2], ota: [ota, 10.5] };
         let atual = "mapa", t = 0;
         const escolher = nome => {
             atual = nome; t = 0;
