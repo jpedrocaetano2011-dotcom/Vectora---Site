@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Eciton · supervisão de frota E4M</title>
-<meta name="description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, pedidos programados, fila de missões, turnos, tráfego nos cruzamentos, manutenção e indicadores da frota, no navegador.">
+<meta name="description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, pedidos programados pelo consumo, planta 3D a partir do AutoCAD, indicadores, a assistente Mira, simulação, turnos, tráfego e manutenção, no navegador.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="E4M · Engineering for Motion">
 <meta property="og:title" content="Eciton · supervisão de frota E4M">
-<meta property="og:description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, pedidos programados, fila de missões, turnos, tráfego nos cruzamentos, manutenção e indicadores da frota, no navegador.">
+<meta property="og:description" content="Eciton, a supervisão de frota da E4M: despacho pelos postos, pedidos programados pelo consumo, planta 3D a partir do AutoCAD, indicadores, a assistente Mira, simulação, turnos, tráfego e manutenção, no navegador.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611072327">
+<link rel="stylesheet" href="assets/estilo.css?v=202611081815">
 </head>
 <body data-pagina="eciton">
 
@@ -54,7 +54,7 @@
             <div class="hero-texto">
                 <span class="olho">Eciton · supervisão de frota</span>
                 <h1>A frota inteira, <span class="prata">organizada sozinha</span>.</h1>
-                <p class="texto">O Eciton recebe os pedidos dos postos, escolhe o Atta certo, organiza a fila, respeita os turnos e coordena o tráfego nos cruzamentos. Tudo pelo navegador, no computador ou no celular.</p>
+                <p class="texto">O Eciton recebe os pedidos dos postos (ou pede sozinho, no ritmo do consumo), escolhe o Atta certo, organiza a fila e coordena o tráfego. A sua planta vira um gêmeo digital em 3D e os indicadores mostram o que a frota rendeu. Tudo pelo navegador, no computador ou no celular.</p>
                 <p class="historia"><b>Por que Eciton?</b> É o gênero das formigas de correição. Elas organizam o próprio trânsito: formam faixas de ida e de volta para não congestionar, sem ninguém no comando. É o que o Eciton faz com a sua frota.</p>
                 <div class="acoes">
                     <a class="botao cheio" href="contato.html?interesse=eciton">Pedir uma simulação</a>
@@ -72,7 +72,24 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="despacho">
+    <section class="secao faixa destaques-sec" id="destaques">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Destaques</span>
+                <h2>O que o Eciton faz pela sua operação.</h2>
+            </div>
+            <div class="destaques">
+                <a class="destaque" href="#despacho"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h7M4 18h10M17 9l3 3-3 3"/></svg></span><b>Despacho pelos postos</b><span>O posto aperta o botão; o Eciton escolhe o Atta certo para aquela carga e o caminho mais curto.</span></a>
+                <a class="destaque" href="#programacao"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l3 2M9 3h6"/></svg></span><b>Pedidos programados <i class="novo">novo</i></b><span>Pelo consumo, a cada X minutos ou em horários fixos. O material chega antes de acabar.</span></a>
+                <a class="destaque" href="#planta"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span><b>Planta 3D <i class="novo">novo</i></b><span>O desenho do AutoCAD por baixo, as máquinas em 3D e a frota andando: o gêmeo digital da fábrica.</span></a>
+                <a class="destaque" href="#indicadores"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Indicadores <i class="novo">novo</i></b><span>Entregas, disponibilidade, onde a frota para e quanto tempo de gente ficou livre. Vira o relatório do piloto.</span></a>
+                <a class="destaque" href="#simulacao"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M10 9l4 2-4 2z"/></svg></span><b>Simulação na sua planta</b><span>Atta virtuais com o mesmo programa dos de verdade, para saber quantos você precisa antes de comprar.</span></a>
+                <a class="destaque" href="#mira"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2 5.5L19.5 10 14 12l-2 5.5L10 12 4.5 10 10 8.5z"/><circle cx="19" cy="19" r="1.6"/></svg></span><b>Mira, a assistente <i class="novo">novo</i></b><span>Pergunte sobre a tela ou sobre a frota agora. Na Mira Pro, ela explica o que parou e sugere a ação; você confirma.</span></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="despacho" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Despacho e fila</span>
@@ -131,6 +148,35 @@
         </div>
     </section>
 
+    <section class="secao faixa" id="programacao">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Pedidos programados</span>
+                <h2>O botão pede sozinho, no ritmo do consumo.</h2>
+                <p class="texto">Você diz quanto tempo o material dura no posto. O Eciton mede quanto leva cada viagem e pede na hora certa, para o Atta chegar antes de acabar. Ninguém precisa lembrar de apertar.</p>
+            </div>
+            <div class="prog-grade">
+                <figure class="prog-cena" id="cenaProg" aria-label="Linha do tempo de um posto programado pelo consumo: o material dura 5 minutos, a viagem leva 2 e o pedido sai sozinho antes de acabar">
+                    <div class="prog-tablet" aria-hidden="true">
+                        <div class="pt-topo"><b>Prensa 1</b><span id="progHora">08:00</span></div>
+                        <div class="pt-botao"><b>Blanks da prensa</b><small>Kit · Atta E</small></div>
+                        <div class="pt-auto" id="progAuto"><i></i><span>automático · próximo pedido em 2:30</span></div>
+                        <div class="pt-acoes"><span>Pular este</span><span>Pausar</span></div>
+                    </div>
+                    <svg class="prog-svg" id="progSvg" viewBox="0 0 420 212" aria-hidden="true"></svg>
+                    <figcaption class="prog-legenda"><span><i class="pl-nivel"></i>material no posto</span><span><i class="pl-pedido"></i>pedido automático</span><span><i class="pl-viagem"></i>viagem do Atta</span></figcaption>
+                </figure>
+                <ul class="prog-lista">
+                    <li><b>Pelo consumo, a cada X minutos ou em horários fixos</b><span>"O material dura 5 min", "a cada 20 min" ou "07:30, 10:00 e 14:00". Com o horário em que vale e os dias da semana.</span></li>
+                    <li><b>Nunca dois em aberto</b><span>Se o pedido anterior não chegou, o próximo espera. A frota não enche de pedidos repetidos.</span></li>
+                    <li><b>Quem está no posto manda</b><span>O tablet pausa (linha parada, troca de ferramenta), retoma e pula o próximo, com o motivo e, se quiser, o PIN da pessoa.</span></li>
+                    <li><b>Aprende com o dia</b><span>"A Prensa 1 adiantou 4 vezes hoje: o material parece durar 4 min, não 5." Um toque ajusta.</span></li>
+                    <li><b>Cabe na frota?</b><span>O Eciton soma as viagens por hora programadas e avisa antes de passar do que a frota faz.</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section class="secao faixa" id="turnos" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
@@ -172,30 +218,34 @@
     </section>
 
 
-    <section class="secao faixa" id="planta" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="planta">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">A sua planta</span>
-                <h2>Do layout da fábrica ao mapa vivo.</h2>
-                <p class="texto">Você carrega a imagem do layout que já tem, acerta a escala e desenha as rotas por cima. O mesmo mapa vira a tela de acompanhamento e a base da simulação.</p>
+                <h2>Do desenho do AutoCAD ao gêmeo digital.</h2>
+                <p class="texto">Você importa o DXF que a fábrica já tem (ou uma imagem do layout), alinha por dois pontos e desenha as rotas por cima. Com um clique a planta fica em 3D, com as suas máquinas e a frota andando. O mesmo mapa é a tela de acompanhamento e a base da simulação.</p>
             </div>
             <div class="planta-grade">
                 <div class="planta-tela">
-                    <div class="planta-chip" id="pChip">layout_galpao.png</div>
-                    <svg id="pSvg" viewBox="0 0 600 340" aria-label="A planta sendo montada sobre a imagem do layout"></svg>
+                    <div class="planta-chip" id="pChip">galpao_A.dxf</div>
+                    <div class="planta-3d" id="pPalco">
+                        <svg id="pSvg" viewBox="0 0 600 340" aria-label="A planta sendo montada sobre o desenho do CAD e virando 3D"></svg>
+                        <div class="p3d-blocos" id="pBlocos" aria-hidden="true"></div>
+                    </div>
                 </div>
                 <ol class="passos-ec vertical" id="pPassos">
-                    <li><b>Importa o layout</b><span>Uma imagem ou o print do PDF que a fábrica já tem.</span></li>
-                    <li><b>Acerta a escala</b><span>Clica em dois pontos de distância conhecida.</span></li>
-                    <li><b>Desenha as rotas</b><span>As linhas que o Atta vai seguir no chão.</span></li>
-                    <li><b>Marca cruzamentos e postos</b><span>Onde passa um por vez e onde cada um para.</span></li>
+                    <li><b>Importa o DXF</b><span>O desenho do AutoCAD, com as camadas. Paredes viram obstáculo. Também aceita uma imagem.</span></li>
+                    <li><b>Alinha por dois pontos</b><span>Clica num canto do desenho e onde ele fica; a escala vem do arquivo.</span></li>
+                    <li><b>Desenha as rotas</b><span>Linhas, curvas e ramais que o Atta segue no chão.</span></li>
+                    <li><b>Marca cruzamentos e postos</b><span>Onde passa um por vez, onde cada um para e as faixas de pedestre.</span></li>
+                    <li><b>Vira 3D</b><span>Cada máquina com o seu modelo; o GLB do fabricante, se tiver.</span></li>
                     <li><b>Põe a frota para rodar</b><span>Virtual, na simulação, ou de verdade, ao vivo.</span></li>
                 </ol>
             </div>
         </div>
     </section>
 
-    <section class="secao faixa" id="simulacao">
+    <section class="secao faixa" id="simulacao" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa agv-intro">
             <div>
                 <span class="olho">Simulação</span>
@@ -217,6 +267,60 @@
                 </div>
                 <a class="botao cheio" href="contato.html?interesse=eciton" style="margin-top:24px">Pedir uma simulação</a>
             </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="indicadores">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Indicadores</span>
+                <h2>O que a frota rendeu, em números que a diretoria entende.</h2>
+                <p class="texto">Entregas, disponibilidade, onde o tempo foi e quanto tempo de gente ficou livre para produzir. Por dia, por semana, por posto e por veículo, e o relatório do piloto sai pronto em PDF.</p>
+            </div>
+            <div class="ind-painel" id="indPainel">
+                <div class="ind-rot"><span>Semana de exemplo · metalúrgica de demonstração com 6 Atta</span></div>
+                <div class="ind-tiles">
+                    <div class="ind-tile"><span>Entregas na semana</span><b data-conta="1184" data-casas="0">1.184</b><small>+9% sobre a anterior</small></div>
+                    <div class="ind-tile"><span>Disponibilidade da frota</span><b data-conta="97.4" data-casas="1" data-sufixo="%">97,4%</b><small>fora as paradas planejadas</small></div>
+                    <div class="ind-tile"><span>Tempo médio do pedido à entrega</span><b data-conta="4.2" data-casas="1" data-sufixo=" min">4,2 min</b><small>no programado: antes de acabar</small></div>
+                    <div class="ind-tile"><span>Tempo de gente liberado</span><b data-conta="63" data-casas="0" data-sufixo=" h">63 h</b><small>que iam para empurrar carrinho</small></div>
+                </div>
+                <div class="ind-graficos">
+                    <figure class="ind-grafico">
+                        <figcaption>Entregas por dia</figcaption>
+                        <div class="ind-barras" id="indBarras" role="img" aria-label="Entregas por dia na semana de exemplo: segunda 212, terça 228, quarta 219, quinta 241, sexta 236, sábado 48"></div>
+                    </figure>
+                    <figure class="ind-grafico">
+                        <figcaption>Onde o tempo da frota foi</figcaption>
+                        <div class="ind-pilha" id="indPilha" role="img" aria-label="Tempo da frota: 58% andando em missão, 24% pegando e entregando, 6% esperando passagem, 12% em manutenção planejada"></div>
+                        <ul class="ind-legenda" id="indLegenda"></ul>
+                        <p class="ind-nota">Esperando passagem subiu? O cruzamento da prensa pede um desvio, e a simulação mostra quanto ganha.</p>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="mira" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa mira-grade">
+            <div>
+                <span class="olho">Mira · assistente com IA</span>
+                <h2 style="margin-top:14px">Pergunte para a Mira. Ela vê a mesma tela que você.</h2>
+                <p class="texto">A Mira conhece o Eciton de ponta a ponta e enxerga o que está acontecendo agora na frota. Responde em português, curto e direto, para quem opera, mantém ou gerencia. Ela não mexe em nada sozinha.</p>
+                <div class="mira-planos">
+                    <div><b>Mira</b><span>vem no pacote</span><ul><li>Como fazer qualquer coisa no Eciton</li><li>O que a tela está mostrando agora</li><li>Sugestões de pergunta em cada tela</li></ul></div>
+                    <div class="pro"><b>Mira Pro</b><span>adicional</span><ul><li>Diagnóstico com o histórico do dia</li><li>Resumo do turno e análise dos indicadores</li><li>"A Mira notou": o aviso aparece sozinho</li><li>Sugere a ação; quem confirma é você</li></ul></div>
+                </div>
+                <p class="mira-nota">Controle do veículo, parâmetros, emergência, planta e usuários ficam sempre com as pessoas. Toda ação sugerida pela Mira e confirmada fica registrada com o nome de quem confirmou.</p>
+            </div>
+            <figure class="mira-demo" aria-label="Exemplo de conversa com a Mira Pro sobre um Atta parado">
+                <div class="md-topo"><b>✦ Mira <em>Pro</em></b><span>Visão geral</span></div>
+                <div class="md-notou"><span>A Mira notou</span><p>G1 está parado (obstáculo) há 4 min em SUL26.</p></div>
+                <div class="md-msg eu">Por que o G1 parou?</div>
+                <div class="md-msg ela">O G1 está com obstáculo à frente desde 10:42, no corredor sul, ao lado da Prensa 2. Hoje isso aconteceu 3 vezes no mesmo ponto, sempre na troca de turno da prensa: provavelmente um carrinho deixado no corredor. Enquanto isso, o kit da Submontagem 3 está atrasando.
+                    <span class="md-acao">Mudar a prioridade do pedido 214: alta</span><small>Você confirma; nada acontece sozinho.</small></div>
+                <figcaption>Exemplo ilustrativo de conversa.</figcaption>
+            </figure>
         </div>
     </section>
 
@@ -363,7 +467,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="tudo">
+    <section class="secao faixa" id="tudo" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Tudo o que vem no Eciton</span>
@@ -375,6 +479,7 @@
                     <li><b>Pedidos programados</b><span>o botão pede sozinho, no ritmo do consumo</span></li>
                     <li><b>Fila de missões</b><span>na ordem certa, urgente na frente</span></li>
                     <li><b>Turnos e berços</b><span>cada Atta no seu horário</span></li>
+                    <li><b>Quem atende cada botão</b><span>o modelo certo para a carga, preferidos primeiro</span></li>
                     <li><b>Tráfego</b><span>um por vez nos cruzamentos</span></li>
                     <li><b>Mapa ao vivo e controle manual</b><span>ver e manobrar pelo navegador</span></li>
                 </ul></div>
@@ -392,24 +497,9 @@
                     <li><b>Alertas por e-mail</b><span>quando algo para e quando volta</span></li>
                     <li><b>Usuários e papéis</b><span>cada um vê o que deve</span></li>
                     <li><b>Modelos</b><span>a ficha técnica de cada Atta</span></li>
-                    <li><b>Planta e simulação</b><span>a frota rodando antes de chegar</span></li>
+                    <li><b>Planta 2D e 3D</b><span>do DXF do AutoCAD, com os GLB das máquinas</span></li>
+                    <li><b>Simulação</b><span>a frota rodando antes de chegar</span></li>
                 </ul></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="secao faixa" id="telas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
-        <div class="caixa">
-            <div class="cabeca">
-                <span class="olho">As telas de verdade</span>
-                <h2>É assim que a equipe usa o Eciton.</h2>
-                <p class="texto">Capturas do Eciton rodando com Atta virtuais na planta de demonstração. Os números dos indicadores são de exemplo e a tela avisa isso.</p>
-            </div>
-            <div class="telas">
-                <figure class="tela-real"><img src="assets/telas/frota.webp" alt="Tela Frota do Eciton: cartões dos veículos, um deles em manutenção" loading="lazy" width="1440" height="900"><figcaption><b>Frota</b>Cada Atta com o estado, a missão, a posição e o modelo. O que está em manutenção fica marcado e sai do despacho.</figcaption></figure>
-                <figure class="tela-real"><img src="assets/telas/indicadores.webp" alt="Tela Indicadores do Eciton com entregas por dia e o tempo de cada veículo" loading="lazy" width="1440" height="900"><figcaption><b>Indicadores</b>Entregas, disponibilidade, onde a frota para e quanto tempo de gente ficou livre. Vira o relatório do piloto em PDF.</figcaption></figure>
-                <figure class="tela-real"><img src="assets/telas/despacho.webp" alt="Tela Despacho do Eciton com a fila de pedidos e o mapa" loading="lazy" width="1440" height="900"><figcaption><b>Despacho</b>Os pedidos dos postos, quem foi escolhido e por quê, e o caminho no mapa.</figcaption></figure>
-                <figure class="tela-real"><img src="assets/telas/modelos.webp" alt="Tela Modelos do Eciton com a ficha técnica do Atta G-O" loading="lazy" width="1440" height="900"><figcaption><b>Modelos e manutenção</b>A ficha de cada modelo, a documentação para a manutenção e as cópias da configuração de cada veículo.</figcaption></figure>
             </div>
         </div>
     </section>
@@ -423,12 +513,12 @@
             <div class="perguntas">
                 <h3 class="perguntas-grupo">No dia a dia</h3>
                 <details><summary>E se a internet cair?</summary><p>Cada Atta guarda na memória a missão que está fazendo e a fila dele, e continua a viagem. Antes de entrar num cruzamento ou num corredor que divide com outro veículo, ele precisa combinar com a frota: sem conexão, para antes da zona e espera, nunca entra às cegas. Pedidos novos dos tablets aguardam a conexão. Quando a rede volta, tudo segue sozinho.</p></details>
-                <details><summary>Preciso mudar o chão da fábrica?</summary><p>No Atta G-O, basta uma fita contrastante colada no piso e etiquetas RFID nos pontos de parada. Dá para mudar a rota trocando a fita. A versão magnética (-M, sob encomenda) usa fita magnética, mais resistente a sujeira e ao tráfego de empilhadeira.</p></details>
+                <details><summary>Preciso mudar o chão da fábrica?</summary><p>No Atta E-O, basta uma fita contrastante colada no piso e etiquetas RFID nos pontos de parada. Dá para mudar a rota trocando a fita. A versão magnética (-M, sob encomenda) usa fita magnética, mais resistente a sujeira e ao tráfego de empilhadeira.</p></details>
                 <details><summary>É seguro andar perto das pessoas?</summary><p>O Atta anda mais devagar nas zonas marcadas na planta, para sozinho quando os sensores de distância veem pessoa, carrinho ou outro veículo na frente, e só segue com o caminho livre. O botão de emergência no veículo para tudo, e ele só volta a andar depois que alguém rearma no local.</p></details>
                 <details><summary>O Eciton controla veículos de outras marcas?</summary><p>Hoje não: o Eciton foi feito junto com o Atta e fala a língua dele. Integração com outros veículos está nos nossos planos.</p></details>
                 <details><summary>Onde ficam os dados da minha fábrica?</summary><p>Na nuvem, com cada empresa separada das outras pelo próprio banco de dados. Cada pessoa entra com a própria conta e só faz o que o papel dela permite.</p></details>
                 <details><summary>E quando um veículo precisa de manutenção?</summary><p>Um toque tira o Atta da operação: ele sai do despacho, não aceita missão e a luz fica branca. O Eciton guarda cópias da configuração de cada veículo, para restaurar numa placa nova, e mostra a documentação do modelo para a equipe de manutenção.</p></details>
-                <details><summary>Quanto tempo leva para começar?</summary><p>Começamos montando a sua planta no Eciton e rodando a frota virtual. Com a simulação aprovada, o piloto numa rota real.</p></details>
+                <details><summary>Quanto tempo leva para começar?</summary><p>Começamos montando a sua planta no Eciton, a partir do DXF que vocês já têm, e rodando a frota virtual. Com a simulação aprovada, o piloto numa rota real.</p></details>
                 <h3 class="perguntas-grupo">Técnicas</h3>
                 <details><summary>Qual protocolo de comunicação vocês usam?</summary><p>MQTT, o protocolo mais usado em Internet das Coisas industrial. Os Atta e o Eciton conversam por um broker MQTT com conexão criptografada (TLS, porta 8883) e certificado conferido. Cada empresa tem as próprias credenciais e só enxerga os próprios veículos. O broker pode ficar na nuvem ou dentro da fábrica: dá para trocar pelo Eciton sem regravar os veículos.</p></details>
                 <details><summary>Integra com o MES ou o ERP da fábrica?</summary><p>Ainda não temos conector pronto para um MES ou ERP específico. O Eciton recebe pedidos de missão por uma interface aberta, a mesma que os tablets dos postos usam, e devolve o andamento de cada pedido. Por ela, o seu MES pode pedir material e saber quando chegou. A integração com o seu sistema (SAP, TOTVS ou outro) faz parte do projeto do piloto.</p></details>
@@ -438,7 +528,29 @@
                 <details><summary>Funciona sem internet?</summary><p>Com o broker dentro da fábrica, os Atta trocam o tráfego entre si pela rede local. As telas do Eciton e o histórico ficam na nuvem. Uma instalação toda dentro da fábrica, sem nuvem, é possível sob projeto.</p></details>
                 <details><summary>Como o software dos veículos é atualizado?</summary><p>Pelo Wi-Fi, a partir do Eciton. O veículo só aceita a atualização parado e sem missão, e confere se a versão nova ligou bem.</p></details>
                 <details><summary>Em que aparelho o Eciton roda?</summary><p>No navegador, sem instalar nada: computador, tablet ou celular. Cada posto usa um tablet comum.</p></details>
+                <details><summary>A Mira manda nos veículos?</summary><p>Não. A Mira responde, explica e, na Mira Pro, sugere ações como pausar a programação de um posto ou mudar a prioridade de um pedido. Cada sugestão vira um botão, e a ação só acontece quando alguém com permissão confirma. Controle manual, parâmetros, emergência, planta e usuários nunca passam pela Mira. Ela usa o Claude, da Anthropic, e não guarda senhas, PINs nem e-mails nas perguntas.</p></details>
+                <details><summary>Preciso desenhar a planta do zero?</summary><p>Não. O Eciton importa o DXF do AutoCAD (o DWG se salva como DXF em um clique) com as camadas e a unidade do arquivo; as camadas de parede viram obstáculo que a rota não atravessa. Para o 3D, as máquinas usam os modelos da biblioteca, ou o GLB do fabricante, do SketchUp ou do Blender.</p></details>
                 <details><summary>Quantos veículos dá para ter na mesma frota?</summary><p>Testamos 5 Atta ao mesmo tempo, com o programa real dos veículos rodando em simulação: sem batidas e sem travamento nos cruzamentos. O limite prático depende da planta. A simulação na sua planta mostra quantos cabem.</p></details>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="telas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">As telas de verdade</span>
+                <h2>É assim que a equipe usa o Eciton.</h2>
+                <p class="texto">Capturas do Eciton rodando com Atta virtuais na metalúrgica de demonstração. Os números dos indicadores são de exemplo e a tela avisa isso.</p>
+            </div>
+            <div class="telas">
+                <figure class="tela-real"><img src="assets/telas/planta3d.webp" alt="Visão geral do Eciton em 3D: a metalúrgica de demonstração com os Atta andando" loading="lazy" width="1440" height="900"><figcaption><b>Visão geral em 3D</b>A fábrica inteira com cada Atta onde está agora, na cor do LED dele. Clique num veículo para ver a missão e seguir.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/frota.webp" alt="Tela Frota do Eciton: cartões dos veículos, um deles em manutenção" loading="lazy" width="1440" height="900"><figcaption><b>Frota</b>Cada Atta com o estado, a missão, a posição e o modelo. O que está em manutenção fica marcado e sai do despacho.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/programacao.webp" alt="Tela Programação do Eciton com os botões que pedem sozinhos e a capacidade da frota" loading="lazy" width="1440" height="900"><figcaption><b>Programação</b>Os botões que pedem sozinhos, o próximo pedido de cada um, quem pausou e por quê, e se a frota dá conta.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/indicadores.webp" alt="Tela Indicadores do Eciton com entregas por dia e o tempo de cada veículo" loading="lazy" width="1440" height="900"><figcaption><b>Indicadores</b>Entregas, disponibilidade, onde a frota para e quanto tempo de gente ficou livre. Vira o relatório do piloto em PDF.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/despacho.webp" alt="Tela Despacho do Eciton com a fila de pedidos e o mapa" loading="lazy" width="1440" height="900"><figcaption><b>Despacho</b>Os pedidos dos postos, quem foi escolhido e por quê, e o caminho no mapa.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/editor.webp" alt="Editor de planta do Eciton com o desenho do AutoCAD por baixo das rotas" loading="lazy" width="1440" height="900"><figcaption><b>Editor de planta</b>O DXF do AutoCAD por baixo, as rotas, curvas e ramais por cima, e a validação dizendo o que falta antes de publicar.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/modelos.webp" alt="Tela Modelos do Eciton com a ficha técnica do Atta E-O" loading="lazy" width="1440" height="900"><figcaption><b>Modelos e manutenção</b>A ficha de cada modelo, a documentação para a manutenção e as cópias da configuração de cada veículo.</figcaption></figure>
+                <figure class="tela-real"><img src="assets/telas/posto.webp" alt="Tablet do posto no Eciton com o pedido automático a caminho" loading="lazy" width="1440" height="900"><figcaption><b>Tablet do posto</b>Um botão por material. O pedido automático aparece aqui, com a fila e quem vai buscar; quando está esperando, mostra quando sai o próximo, com Pular e Pausar.</figcaption></figure>
             </div>
         </div>
     </section>
@@ -476,7 +588,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611072327" defer></script>
-<script src="assets/eciton.js?v=202611072327" defer></script>
+<script src="assets/site.js?v=202611081815" defer></script>
+<script src="assets/eciton.js?v=202611081815" defer></script>
 </body>
 </html>

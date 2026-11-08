@@ -965,3 +965,125 @@ section[id] { scroll-margin-top: calc(var(--topo) + env(safe-area-inset-top, 0px
 @media (max-width: 900px) { .tudo { grid-template-columns: 1fr; } }
 .perguntas-grupo { font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--azul-claro); margin: 14px 0 2px; }
 .perguntas-grupo:first-child { margin-top: 0; }
+
+/* 3.3: missão por módulo (E de verdade; G, R e T "como vai funcionar") */
+.st.prev { color: #FFB347; border-color: rgba(255, 179, 71, .5); background: rgba(255, 179, 71, .08); }
+.missao-tipos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 28px 0 8px; position: relative; z-index: 3; }
+.missao-tipos button { display: grid; gap: 4px; justify-items: start; text-align: left; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--linha); background: var(--fundo-2); color: var(--texto); font: 500 .9rem var(--f-texto); cursor: pointer; transition: border-color .2s ease, background-color .2s ease; }
+.missao-tipos button b { font-family: var(--f-display); font-size: 1rem; letter-spacing: .02em; }
+.missao-tipos button span { color: var(--texto-2); font-size: .86rem; }
+.missao-tipos button .st { font-style: normal; margin-top: 4px; }
+.missao-tipos button:hover { border-color: rgba(99, 174, 255, .5); }
+.missao-tipos button[aria-pressed="true"] { border-color: var(--azul); background: linear-gradient(180deg, rgba(30, 123, 255, .16), var(--fundo-2)); box-shadow: 0 0 0 1px rgba(30, 123, 255, .3); }
+.palco > .selo-missao { position: absolute; right: 14px; top: 14px; z-index: 2; background-color: rgba(10, 15, 23, .82); }
+@media (max-width: 760px) {
+    .missao-tipos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .missao-tipos button { padding: 10px 12px; }
+    .missao-tipos button span { font-size: .8rem; }
+}
+
+/* 3.3: Eciton — destaques */
+.destaques-sec { padding-top: 56px; }
+.destaques { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.destaque { display: grid; grid-template-columns: 40px 1fr; grid-template-rows: auto 1fr; column-gap: 14px; row-gap: 4px; padding: 18px; border: 1px solid var(--linha); border-radius: 16px; background: linear-gradient(180deg, var(--painel), var(--fundo-2)); color: var(--texto); text-decoration: none; transition: border-color .2s ease, transform .2s ease; }
+.destaque:hover { border-color: rgba(99, 174, 255, .55); transform: translateY(-2px); }
+.destaque .d-ico { grid-row: 1 / 3; width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: rgba(30, 123, 255, .12); border: 1px solid rgba(99, 174, 255, .3); }
+.destaque .d-ico svg { width: 22px; height: 22px; fill: none; stroke: var(--azul-claro); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.destaque b { font-family: var(--f-display); font-size: 1rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.destaque > span:last-child { color: var(--texto-2); font-size: .92rem; line-height: 1.45; }
+.novo { font-style: normal; font-family: var(--f-dado); font-size: .62rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ciano); border: 1px solid rgba(44, 224, 255, .45); border-radius: 999px; padding: 1px 7px; }
+@media (max-width: 980px) { .destaques { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .destaques { grid-template-columns: 1fr; } .destaque { padding: 14px; } }
+
+/* 3.3: Eciton — pedidos programados */
+.prog-grade { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.prog-cena { margin: 0; position: relative; border: 1px solid var(--linha); border-radius: 18px; background: #0A0F17; padding: 18px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 18px; align-items: center; }
+.prog-svg { width: 100%; height: auto; display: block; }
+.prog-tablet { border: 1px solid #273246; border-radius: 16px; background: #0F1621; padding: 12px; display: grid; gap: 10px; font-size: .82rem; }
+.pt-topo { display: flex; justify-content: space-between; color: var(--texto-2); font-family: var(--f-dado); font-size: .74rem; }
+.pt-topo b { color: var(--texto); font-family: var(--f-display); font-size: .82rem; }
+.pt-botao { border-radius: 12px; padding: 14px 12px; background: linear-gradient(180deg, #1E7BFF, #155fcc); display: grid; gap: 2px; }
+.pt-botao small { color: rgba(255, 255, 255, .8); }
+.pt-auto { display: flex; gap: 8px; align-items: flex-start; color: var(--texto-2); font-size: .78rem; line-height: 1.35; min-height: 3.2em; }
+.pt-auto i { flex: 0 0 8px; width: 8px; height: 8px; margin-top: 4px; border-radius: 50%; background: var(--verde); box-shadow: 0 0 8px var(--verde); }
+.pt-auto.caminho i { background: var(--azul-claro); box-shadow: 0 0 8px var(--azul-claro); }
+.pt-acoes { display: flex; gap: 6px; }
+.pt-acoes span { flex: 1; text-align: center; border: 1px solid var(--linha); border-radius: 8px; padding: 5px 4px; color: var(--texto-2); font-size: .74rem; }
+.prog-legenda { grid-column: 1 / -1; display: flex; gap: 16px; flex-wrap: wrap; color: var(--texto-2); font-size: .8rem; }
+.prog-legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.prog-legenda i { width: 14px; height: 8px; border-radius: 2px; display: inline-block; }
+.pl-nivel { background: rgba(43, 212, 106, .55); }
+.pl-pedido { background: var(--laranja); }
+.pl-viagem { background: var(--azul-claro); height: 3px !important; }
+.prog-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.prog-lista li { border-left: 2px solid var(--linha); padding: 2px 0 2px 16px; display: grid; gap: 4px; }
+.prog-lista b { font-family: var(--f-display); font-size: .98rem; }
+.prog-lista span { color: var(--texto-2); font-size: .92rem; line-height: 1.5; }
+@media (max-width: 980px) { .prog-grade { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .prog-cena { grid-template-columns: 1fr; padding: 14px; } .prog-tablet { max-width: 260px; } }
+
+/* 3.3: planta do CAD ao 3D */
+.planta-3d { position: relative; transform-style: preserve-3d; transform-origin: 50% 55%; will-change: transform; }
+.planta-tela { perspective: 1400px; }
+.planta-tela .planta-3d svg { display: block; width: 100%; height: auto; }
+.p3d-blocos { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
+.p3d-bloco { position: absolute; transform-style: preserve-3d; }
+.p3d-bloco > i { position: absolute; display: block; backface-visibility: visible; }
+.p3d-bloco .tp { inset: 0; }
+
+/* 3.3: indicadores */
+.ind-painel { border: 1px solid var(--linha); border-radius: 18px; background: #0A0F17; padding: 20px; display: grid; gap: 18px; }
+.ind-rot { color: var(--texto-2); font-family: var(--f-dado); font-size: .74rem; letter-spacing: .04em; }
+.ind-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ind-tile { border: 1px solid var(--linha); border-radius: 14px; padding: 14px; background: var(--painel); display: grid; gap: 4px; }
+.ind-tile span { color: var(--texto-2); font-size: .84rem; }
+.ind-tile b { font-family: var(--f-display); font-size: 1.9rem; font-variant-numeric: tabular-nums; color: var(--texto); }
+.ind-tile small { color: var(--texto-2); font-size: .78rem; }
+.ind-graficos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.ind-grafico { margin: 0; border: 1px solid var(--linha); border-radius: 14px; padding: 14px; background: var(--painel); display: grid; gap: 12px; align-content: start; }
+.ind-grafico figcaption { font-family: var(--f-display); font-size: .9rem; }
+.ind-barras { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; align-items: end; height: 170px; padding-top: 18px; border-bottom: 1px solid #2A3646; }
+.ind-barra { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; cursor: default; }
+.ind-barra i { display: block; width: min(34px, 70%); border-radius: 4px 4px 0 0; background: #1E7BFF; height: 0; transition: height .9s cubic-bezier(.2, .8, .2, 1); }
+.ind-barra em { position: absolute; bottom: calc(var(--h, 0%) + 4px); font-style: normal; font-family: var(--f-dado); font-size: .72rem; color: var(--texto-2); opacity: 0; transition: opacity .3s .6s, bottom .9s cubic-bezier(.2, .8, .2, 1); }
+.ind-barras.visivel .ind-barra em { opacity: 1; }
+.ind-barra:hover i, .ind-barra:focus-visible i { background: #63AEFF; }
+.ind-barra:hover em { color: var(--texto); }
+.ind-dias { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; text-align: center; color: var(--texto-2); font-size: .76rem; font-family: var(--f-dado); margin-top: -4px; }
+.ind-pilha { display: flex; gap: 2px; height: 34px; border-radius: 4px; overflow: hidden; }
+.ind-pilha i { display: grid; place-items: center; height: 100%; width: 0; transition: width .9s cubic-bezier(.2, .8, .2, 1); font-style: normal; font-family: var(--f-dado); font-size: .74rem; color: #fff; white-space: nowrap; overflow: hidden; }
+.ind-legenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ind-legenda li { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; color: var(--texto-2); font-size: .86rem; }
+.ind-legenda li i { width: 12px; height: 12px; border-radius: 3px; }
+.ind-legenda li b { color: var(--texto); font-family: var(--f-dado); font-weight: 500; font-size: .8rem; }
+.ind-nota { margin: 0; color: var(--texto-2); font-size: .84rem; line-height: 1.5; }
+@media (max-width: 980px) { .ind-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ind-graficos { grid-template-columns: 1fr; } }
+@media (max-width: 440px) { .ind-painel { padding: 14px; } .ind-tile b { font-size: 1.5rem; } }
+.ind-barra em.so-hover { opacity: 0 !important; }
+.ind-barra:hover em.so-hover, .ind-barra:focus-visible em.so-hover { opacity: 1 !important; }
+
+/* 3.4: Mira */
+.mira-grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+.mira-planos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+.mira-planos > div { border: 1px solid var(--linha); border-radius: 14px; padding: 14px 16px; background: var(--painel); display: grid; gap: 4px; align-content: start; }
+.mira-planos > div.pro { border-color: rgba(99, 174, 255, .45); }
+.mira-planos b { font-family: var(--f-display); font-size: 1.05rem; }
+.mira-planos span { color: var(--azul-claro); font-family: var(--f-dado); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
+.mira-planos ul { margin: 6px 0 0; padding-left: 18px; color: var(--texto-2); font-size: .9rem; line-height: 1.55; display: grid; gap: 2px; }
+.mira-nota { color: var(--texto-2); font-size: .88rem; line-height: 1.55; margin-top: 16px; max-width: 60ch; }
+.mira-demo { margin: 0; border: 1px solid var(--linha); border-radius: 18px; background: #0F1621; padding: 16px; display: grid; gap: 12px; }
+.md-topo { display: flex; justify-content: space-between; align-items: center; color: var(--texto-2); font-family: var(--f-dado); font-size: .76rem; }
+.md-topo b { color: var(--azul-claro); font-family: var(--f-display); font-size: .95rem; }
+.md-topo em { font-style: normal; font-size: .62rem; background: var(--azul); color: #fff; border-radius: 999px; padding: 1px 7px; margin-left: 4px; vertical-align: 2px; }
+.md-notou { border: 1px solid rgba(99, 174, 255, .5); border-radius: 12px; padding: 10px 12px; background: rgba(30, 123, 255, .08); }
+.md-notou span { color: var(--azul-claro); font-family: var(--f-dado); font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
+.md-notou p { margin: 4px 0 0; font-size: .92rem; }
+.md-msg { max-width: 88%; padding: 10px 12px; border-radius: 12px; font-size: .92rem; line-height: 1.5; }
+.md-msg.eu { justify-self: end; background: var(--azul); color: #fff; border-bottom-right-radius: 4px; }
+.md-msg.ela { justify-self: start; background: var(--fundo-2); border: 1px solid var(--linha); border-bottom-left-radius: 4px; color: var(--texto); display: grid; gap: 8px; }
+.md-acao { justify-self: start; border-radius: 8px; padding: 6px 10px; background: var(--azul); color: #fff; font-size: .82rem; font-weight: 600; }
+.md-msg small { color: var(--texto-2); font-size: .74rem; }
+.mira-demo figcaption { color: var(--texto-2); font-size: .74rem; font-family: var(--f-dado); }
+@media (max-width: 980px) { .mira-grade { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .mira-planos { grid-template-columns: 1fr; } }
+.mira-grade .texto { margin-top: 14px; }

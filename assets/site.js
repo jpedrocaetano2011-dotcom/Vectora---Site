@@ -203,9 +203,9 @@
     const cinzaLado = { topo: "linear-gradient(135deg,#2b3542,#1a222c)", lado: "#121922", s: "#18212b", l: "#1d2733" };
     caixa3d(mundo, 300, 110, 330, 60, 90, cinzaLado);
     for (let i = 0; i < 6; i++) caixa3d(mundo, 312 + i * 52, 118, 40, 40, 22, { topo: i % 2 ? "#4c7dbf" : "#d9822b", lado: i % 2 ? "#2e5288" : "#9a5718" }, 90);
-    caixa3d(mundo, 420, 205, 80, 50, 26, { topo: "#3a4654", lado: "#202933", s: "#27313c" });
+    const mesaKit = caixa3d(mundo, 420, 205, 80, 50, 26, { topo: "#3a4654", lado: "#202933", s: "#27313c" }).g;
     // montagem: bancada, operador, máquina
-    caixa3d(mundo, 1280, 205, 140, 58, 30, { topo: "#3a4654", lado: "#202933", s: "#27313c" });
+    const bancadaKit = caixa3d(mundo, 1280, 205, 140, 58, 30, { topo: "#3a4654", lado: "#202933", s: "#27313c" }).g;
     caixa3d(mundo, 1440, 120, 150, 110, 70, cinzaLado);
     const corpoOp = caixa3d(mundo, 1300, 160, 22, 16, 44, { topo: "#63AEFF", lado: "#2a5c9c" });
     const cabeca = el("div", "rotulo3d", mundo, { width: "18px", height: "18px", padding: "0", borderRadius: "50%", background: "#d9b38c", border: "0" });
@@ -221,9 +221,36 @@
     rotulo(mundo, "Berço", 180, 900, 60);
     rotulo(mundo, "Cruzamento", 900, 500, 20);
 
-    const agv = criarAGVE4M(mundo, "AGV 01");
+    // um Atta por módulo (só o da missão escolhida aparece) e a carga de cada um
+    const rolosFundo = "repeating-linear-gradient(90deg,#5b6672 0 5px,#252c34 5px 10px)";
+    const ATTAS = { E: criarAGVE4M(mundo, "AGV 01"), G: criarAGV(mundo, "AGV 01"), R: criarAGV(mundo, "AGV 01"), T: criarAGV(mundo, "AGV 01") };
+    ATTAS.R.garra.style.display = "none";
+    caixa3d(ATTAS.R.giro, -33, -24, 66, 48, 4, { topo: rolosFundo, lado: "#2a3138" }, 20);
+    ATTAS.T.garra.style.display = "none";
+    caixa3d(ATTAS.T.giro, -44, -5, 10, 10, 10, { topo: "#9aa6b2", lado: "#5b6672" }, 8);      // engate atrás
+    let agv = ATTAS.E;
     const agv2 = criarAGVE4M(mundo, "AGV 02");
     const kit = criarKit(mundo);
+    // Atta E: o carrinho de peças (pernas por fora do Atta, ele entra por baixo)
+    function criarCarrinho(pai, w = 84, d = 80, alt = 38, cheio = true) {
+        const raiz = el("div", "obj", pai), giro = el("div", "giro", raiz);
+        [[-w / 2, -d / 2], [w / 2 - 4, -d / 2], [-w / 2, d / 2 - 4], [w / 2 - 4, d / 2 - 4]].forEach(([x, y]) => caixa3d(giro, x, y, 4, 4, alt, { topo: "#9aa6b2", lado: "#6b7682" }));
+        caixa3d(giro, -w / 2, -d / 2, w, d, 3, { topo: "linear-gradient(135deg,#3a6db5,#24487d)", lado: "#1c3a66" }, alt);
+        const carga = el("div", "obj", giro);
+        if (cheio) {
+            caixa3d(carga, -w / 2 + 6, -d / 2 + 6, w / 2 - 9, d / 2 - 8, 16, { topo: "#d9822b", lado: "#9a5718" }, alt + 3);
+            caixa3d(carga, 3, -d / 2 + 6, w / 2 - 9, d / 2 - 8, 16, { topo: "#4c7dbf", lado: "#2e5288" }, alt + 3);
+            caixa3d(carga, -w / 4, 4, w / 2, d / 2 - 10, 13, { topo: "#d9822b", lado: "#9a5718" }, alt + 3);
+        }
+        return { raiz, giro, carga };
+    }
+    const carrinhoE = criarCarrinho(mundo);
+    // Atta R: esteiras na estação e na montagem
+    const esteirasR = el("div", "obj", mundo);
+    caixa3d(esteirasR, 428, 196, 64, 66, 24, { topo: rolosFundo, lado: "#1d2733", s: "#18212b", l: "#202a35" });
+    caixa3d(esteirasR, 1318, 198, 64, 66, 24, { topo: rolosFundo, lado: "#1d2733", s: "#18212b", l: "#202a35" });
+    // Atta T: o comboio de dois carrinhos
+    const vagoes = [criarCarrinho(mundo, 62, 46, 14, true), criarCarrinho(mundo, 62, 46, 14, true)];
     const nome1 = rotulo(mundo, "AGV 01", 0, 0, 0, "agv");
     const nome2 = rotulo(mundo, "AGV 02", 0, 0, 0, "agv");
 
@@ -249,6 +276,9 @@
     const aposCruz = rota([[836, 560], [1350, 560], [1350, 315]]);
     const volta = rota([[1350, 315], [1350, 560], [180, 560], [180, 830]]);
     const linha2 = rota([[900, 250], [900, 950]]);
+    // rebocador: só para a frente, pelo corredor (o comboio vem atrás pela mesma trilha)
+    const trilhoT = rota([[180, 1010], [180, 560], [1660, 560]]);
+    const sDe = (x, y) => y > 560 ? 1010 - y : 450 + (x - 180);
     const suave = u => u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u);
     const entre = (t, a, b) => suave((t - a) / (b - a));
 
@@ -262,9 +292,41 @@
         ["#A57BFF", "corre", "Indo para o berço"]
     ];
 
+    let modo = "E";
+    function cenaT(t) {
+        const s0 = sDe(180, 830), sAlmox = sDe(460, 560), sCruz = sDe(836, 560), sPosto = sDe(1500, 560), sFim = sDe(1640, 560);
+        let s, zonaEstado = "livre";
+        if (t < 1) s = s0;
+        else if (t < 2) s = s0 + (sAlmox - s0) * entre(t, 1, 1.95);
+        else if (t < 3) s = sAlmox;
+        else if (t < 4) {
+            s = sAlmox + (sCruz - sAlmox) * entre(t, 3, 3.45);
+            if (t > 3.95) s = sCruz + (t - 3.95) * 300;
+            zonaEstado = t > 3.2 && t < 3.92 ? "outro" : t >= 3.92 ? "meu" : "pedida";
+        }
+        else if (t < 5) { s = sCruz + 15 + (sPosto - sCruz - 15) * entre(t, 4, 4.95); zonaEstado = s - 150 < 948 ? "meu" : "livre"; }
+        else if (t < 6) s = sPosto;
+        else s = sPosto + (sFim - sPosto) * entre(t, 6.02, 6.98);
+        const p = trilhoT.em(s / trilhoT.total);
+        posicionarAGV(agv, p.x, p.y, p.ang);
+        agv.raiz.style.opacity = t > 6.6 ? String(1 - entre(t, 6.6, 6.98)) : "1";
+        const solto = t >= 5.45;
+        vagoes.forEach((v, i) => {
+            const fixo = i === 1 && solto;
+            const sv = fixo ? sPosto - 150 : s - 75 * (i + 1);
+            const q = trilhoT.em(sv / trilhoT.total);
+            v.raiz.style.transform = `translate3d(${q.x}px,${q.y}px,0)`;
+            v.giro.style.transform = `rotateZ(${q.ang}deg)`;
+            v.carga.style.opacity = String(entre(t, 2.05, 2.5));
+            v.raiz.style.opacity = !fixo && t > 6.6 ? String(1 - entre(t, 6.6, 6.98)) : "1";
+        });
+        return { p, ang: p.ang, zonaEstado };
+    }
     function cena(t) {
         // AGV 01
         let p, ang, kitEstado, zonaEstado = "livre";
+        if (modo === "T") ({ p, ang, zonaEstado } = cenaT(t));
+        else {
         if (t < 1) { p = ida.em(0); ang = -90; }
         else if (t < 2) { p = ida.em(entre(t, 1, 1.95)); ang = p.ang; }
         else if (t < 3) { p = ida.em(1); ang = -90; }
@@ -281,26 +343,40 @@
         if (t >= 4 && t < 5 && Math.abs(p.x - 1350) < 1 && p.y < 560) ang = -90;
         // giro suave: AGV de rodas omnidirecionais vira no ponto
         posicionarAGV(agv, p.x, p.y, ang);
+        agv.raiz.style.opacity = "1";
+        }
 
-        // kit: na mesa → garra → AGV → bancada
-        const mesa = { x: 460, y: 230, z: 26 }, bancada = { x: 1350, y: 232, z: 30 };
-        const topo = 36;
-        let kx, ky, kz, ka = 0, sobeGarra = 0;
-        if (t < 2.25) { kx = mesa.x; ky = mesa.y; kz = mesa.z; }
-        else if (t < 2.85) {
-            const u = entre(t, 2.25, 2.8);
-            kx = mesa.x; ky = mesa.y + (p.y - mesa.y) * u; kz = mesa.z + (topo - mesa.z) * u + Math.sin(u * Math.PI) * 18;
-            sobeGarra = Math.sin(u * Math.PI) * 6;
+        if (modo === "E") {
+            // entra embaixo do carrinho, ergue pelo fuso, leva e abaixa na montagem
+            const sobe = t < 2.25 ? 0 : t < 2.85 ? 8 * entre(t, 2.25, 2.8) : t < 5.2 ? 8 : t < 5.75 ? 8 * (1 - entre(t, 5.2, 5.7)) : 0;
+            agv.garra.style.transform = `translateZ(${sobe}px)`;
+            const z = Math.max(0, sobe - 3);
+            const leva = t >= 2.25 && t < 5.75;
+            const c = t < 2.25 ? { x: 460, y: 300, a: -90 } : leva ? { x: p.x, y: p.y, a: ang } : { x: 1350, y: 315, a: -90 };
+            carrinhoE.raiz.style.transform = `translate3d(${c.x}px,${c.y}px,${z}px)`;
+            carrinhoE.giro.style.transform = `rotateZ(${c.a}deg)`;
+        } else if (modo === "G" || modo === "R") {
+            // G: a garra pega o kit da mesa; R: a caixa passa da esteira para os rolos
+            const arco = modo === "G" ? 18 : 0;
+            const mesa = modo === "G" ? { x: 460, y: 230, z: 26 } : { x: 460, y: 229, z: 24 }, bancada = modo === "G" ? { x: 1350, y: 232, z: 30 } : { x: 1350, y: 231, z: 24 };
+            const topo = modo === "G" ? 36 : 24;
+            let kx, ky, kz, ka = 0, sobeGarra = 0;
+            if (t < 2.25) { kx = mesa.x; ky = mesa.y; kz = mesa.z; }
+            else if (t < 2.85) {
+                const u = entre(t, 2.25, 2.8);
+                kx = mesa.x; ky = mesa.y + (p.y - mesa.y) * u; kz = mesa.z + (topo - mesa.z) * u + Math.sin(u * Math.PI) * arco;
+                sobeGarra = Math.sin(u * Math.PI) * 6;
+            }
+            else if (t < 5.2) { kx = p.x; ky = p.y; kz = topo; ka = ang; }
+            else if (t < 5.75) {
+                const u = entre(t, 5.2, 5.7);
+                kx = bancada.x; ky = p.y + (bancada.y - p.y) * u; kz = topo + (bancada.z - topo) * u + Math.sin(u * Math.PI) * arco;
+                sobeGarra = Math.sin(u * Math.PI) * 6;
+            }
+            else { kx = bancada.x; ky = bancada.y; kz = bancada.z; }
+            posicionarKit(kit, kx, ky, kz, ka);
+            if (modo === "G") agv.garra.style.transform = `translateZ(${sobeGarra}px)`;
         }
-        else if (t < 5.2) { kx = p.x; ky = p.y; kz = topo; ka = ang; }
-        else if (t < 5.75) {
-            const u = entre(t, 5.2, 5.7);
-            kx = bancada.x; ky = p.y + (bancada.y - p.y) * u; kz = topo + (bancada.z - topo) * u + Math.sin(u * Math.PI) * 18;
-            sobeGarra = Math.sin(u * Math.PI) * 6;
-        }
-        else { kx = bancada.x; ky = bancada.y; kz = bancada.z; }
-        posicionarKit(kit, kx, ky, kz, ka);
-        agv.garra.style.transform = `translateZ(${sobeGarra}px)`;
 
         // AGV 02 cruza durante o passo 4
         const u2 = entre(t, 3.15, 3.95);
@@ -316,12 +392,14 @@
         zona.style.borderColor = zonaEstado === "livre" ? "rgba(142,155,174,.6)" : zonaEstado === "pedida" ? "#FF8A3D" : "#63AEFF";
 
         // rótulos acompanham os AGVs
+        nome1.style.opacity = agv.raiz.style.opacity;
         nome1.style.transform = `translate3d(${p.x}px,${p.y}px,${70}px) rotateZ(${-GIRO}deg) rotateX(${-TILT}deg) translate(-50%,-100%)`;
         nome2.style.transform = `translate3d(${p2.x}px,${p2.y}px,${70}px) rotateZ(${-GIRO}deg) rotateX(${-TILT}deg) translate(-50%,-100%)`;
 
         // sinalização + painel
         const passo = Math.max(0, Math.min(6, Math.floor(t)));
-        const [cor, efeito, texto] = t >= 5.75 && t < 6 ? ["#2BD46A", "", "Kit entregue"] : SINAIS[passo];
+        const M = MISSOES[modo];
+        const [cor, efeito, texto] = t >= 5.75 && t < 6 ? ["#2BD46A", "", M.entregue] : passo === 2 || passo === 5 ? ["#2BD46A", "respira", M.sinais[passo === 2 ? 0 : 1]] : SINAIS[passo];
         sinalAGV(agv, cor, efeito);
         const tira = document.getElementById("hudTira");
         tira.style.setProperty("--c", cor);
@@ -334,8 +412,76 @@
         return p;
     }
 
-    // rolagem → tempo da missão (contínuo dentro de cada passo)
+    // as quatro missões: textos dos passos, etapas do painel e o que aparece
+    const MISSOES = {
+        E: { selo: ["disp", "Protótipo · pronto para piloto"], missao: "Missão C-118", rota: "Almoxarifado → Montagem 2", entregue: "Carrinho entregue",
+             aria: "Planta 3D com o Atta E levando um carrinho do almoxarifado à montagem", sinais: ["Parado numa etapa: erguendo o carrinho", "Parado numa etapa: abaixando o carrinho"],
+             etapas: ["Pedido recebido", "Saindo do berço", "Erguendo o carrinho", "Aguardando passagem", "Indo para a montagem", "Abaixando o carrinho", "Concluída"],
+             passos: [["01 · Pedido", "A montagem precisa do carrinho de peças.", "O pedido sai de um botão no posto, ou sai sozinho, programado pelo consumo, e vai para o Atta livre no berço. Quem escolhe é o Eciton."],
+                      ["02 · Saída", "O Atta sai do berço e segue a linha.", "A sinalização muda de cor: quem está por perto vê que ele está em missão."],
+                      ["03 · Coleta", "No almoxarifado, entra embaixo do carrinho e ergue.", "Ele confere o lugar pela tag no chão, para embaixo do carrinho e ergue por um fuso. Carregado, continua girando no lugar e andando de lado."],
+                      ["04 · Tráfego", "No cruzamento, ele pede passagem.", "Outro Atta está cruzando. O Eciton segura este fora do cruzamento e libera logo depois. Sem colisão e sem engarrafamento."],
+                      ["05 · Entrega", "Chega à montagem com o carrinho.", "Pela rota mais curta, parando na posição exata do posto."],
+                      ["06 · Carrinho no posto", "Abaixa o carrinho e sai de baixo.", "O carrinho fica no lugar certo, pronto para usar. O operador confirma o recebimento com um toque."],
+                      ["07 · Próxima", "Missão concluída.", "O Atta segue para a próxima missão da fila ou volta para o berço para carregar."]] },
+        G: { selo: ["prev", "Como vai funcionar · sob encomenda"], missao: "Missão K-204", rota: "Almoxarifado → Montagem 2", entregue: "Kit entregue",
+             aria: "Planta 3D mostrando como o Atta G vai levar um kit na garra", sinais: ["Parado numa etapa: a garra pega o kit", "Parado numa etapa: a garra solta o kit"],
+             etapas: ["Pedido recebido", "Saindo do berço", "Pegando o kit", "Aguardando passagem", "Indo para a montagem", "Soltando o kit", "Concluída"],
+             passos: [["01 · Pedido", "A montagem precisa de um kit.", "O pedido sai do botão no posto e vai para o Atta G livre. A garra dele foi desenhada para esse kit."],
+                      ["02 · Saída", "O Atta sai do berço e segue a linha.", "A sinalização muda de cor: quem está por perto vê que ele está em missão."],
+                      ["03 · Coleta", "No almoxarifado, a garra pega o kit.", "Ele confere o lugar pela tag no chão, a garra tira o kit da mesa e prende para o transporte."],
+                      ["04 · Tráfego", "No cruzamento, ele pede passagem.", "Outro Atta está cruzando. O Eciton segura este fora do cruzamento e libera logo depois."],
+                      ["05 · Entrega", "Chega ao posto de montagem.", "Pela rota mais curta, parando na posição exata do posto."],
+                      ["06 · Kit pronto", "A garra solta o kit na bancada.", "O kit fica pronto para montar, sem ninguém pegar a carga. O operador confirma com um toque."],
+                      ["07 · Próxima", "Missão concluída.", "O Atta segue para a próxima missão da fila ou volta para o berço."]] },
+        R: { selo: ["prev", "Como vai funcionar · sob encomenda"], missao: "Missão R-031", rota: "Esteira do almoxarifado → Montagem 2", entregue: "Caixa entregue",
+             aria: "Planta 3D mostrando como o Atta R vai trocar uma caixa entre esteiras", sinais: ["Parado numa etapa: recebendo pelos rolos", "Parado numa etapa: passando pelos rolos"],
+             etapas: ["Pedido recebido", "Saindo do berço", "Recebendo a caixa", "Aguardando passagem", "Indo para a montagem", "Passando a caixa", "Concluída"],
+             passos: [["01 · Pedido", "A caixa ficou pronta na esteira.", "A própria esteira (ou a máquina) pede o transporte. O Eciton manda o Atta R livre."],
+                      ["02 · Saída", "O Atta sai do berço e segue a linha.", "A sinalização muda de cor: quem está por perto vê que ele está em missão."],
+                      ["03 · Coleta", "Encosta na esteira e a caixa passa para os rolos.", "Ele para alinhado com a esteira pela tag no chão; os rolos dos dois giram juntos e a caixa vem sozinha."],
+                      ["04 · Tráfego", "No cruzamento, ele pede passagem.", "Outro Atta está cruzando. O Eciton segura este fora do cruzamento e libera logo depois."],
+                      ["05 · Entrega", "Chega à esteira da montagem.", "Para alinhado com a esteira do posto, com a precisão que a troca pede."],
+                      ["06 · Caixa no posto", "Os rolos passam a caixa para a esteira.", "Sem ninguém pegar a carga. A esteira da montagem confirma que recebeu."],
+                      ["07 · Próxima", "Missão concluída.", "O Atta segue para a próxima missão da fila ou volta para o berço."]] },
+        T: { selo: ["prev", "Como vai funcionar · em desenvolvimento"], missao: "Milk-run 10:00", rota: "Supermercado → Montagem 2 → anel", entregue: "Carrinho deixado no posto",
+             aria: "Planta 3D mostrando como o Atta T vai fazer o milk-run puxando dois carrinhos", sinais: ["Parado no corredor: abastecendo o comboio", "Parado no corredor: trocando o carrinho"],
+             etapas: ["Hora do milk-run", "Saindo com o comboio", "Abastecendo", "Aguardando passagem", "Indo para a montagem", "Trocando o carrinho", "Seguindo o anel"],
+             passos: [["01 · Programado", "10:00: hora do milk-run.", "É uma programação: o rebocador sai sozinho na hora marcada, sem ninguém pedir."],
+                      ["02 · Saída", "O Atta T sai do berço puxando o comboio.", "Engatado, ele anda como um rebocador: só para a frente e em curvas abertas."],
+                      ["03 · Supermercado", "Para no corredor e os carrinhos são abastecidos.", "Ele não entra no ramal: com o comboio não dá para dar ré. Para ao lado do supermercado e espera o abastecimento."],
+                      ["04 · Tráfego", "No cruzamento, espera com o comboio inteiro.", "O Eciton só solta o cruzamento depois que o último carrinho passou."],
+                      ["05 · Entrega", "Para no corredor, ao lado da montagem.", "Na parada do comboio, com o carrinho certo de frente para o posto."],
+                      ["06 · Troca", "Solta o carrinho cheio no posto.", "O operador desengata o carrinho; o vazio volta na próxima passada."],
+                      ["07 · Próxima", "Segue o anel.", "Continua para as próximas paradas e volta ao supermercado. Na próxima hora, sai de novo."]] }
+    };
     const passos = [...document.querySelectorAll(".passo")];
+    function escolherMissao(m) {
+        modo = m;
+        const M = MISSOES[m];
+        Object.entries(ATTAS).forEach(([k, a]) => { a.raiz.style.display = k === m ? "" : "none"; });
+        agv = ATTAS[m];
+        kit.raiz.style.display = m === "G" || m === "R" ? "" : "none";
+        carrinhoE.raiz.style.display = m === "E" ? "" : "none";
+        esteirasR.style.display = m === "R" ? "" : "none";
+        mesaKit.style.display = bancadaKit.style.display = m === "R" ? "none" : "";
+        vagoes.forEach(v => { v.raiz.style.display = m === "T" ? "" : "none"; });
+        passos.forEach((s, i) => {
+            const [num, h, txt] = M.passos[i];
+            s.querySelector(".num").textContent = num; s.querySelector("h3").textContent = h; s.querySelector("p").textContent = txt;
+        });
+        document.querySelectorAll("#hudEtapas li").forEach((li, i) => { li.textContent = M.etapas[i]; });
+        document.getElementById("hudMissao").textContent = M.missao;
+        document.getElementById("hudRota").textContent = M.rota;
+        const selo = document.getElementById("seloMissao");
+        selo.className = "st " + M.selo[0] + " selo-missao"; selo.textContent = M.selo[1];
+        palco.setAttribute("aria-label", M.aria);
+        document.querySelectorAll("#missaoTipos [data-missao]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.missao === m)));
+    }
+    document.querySelectorAll("#missaoTipos [data-missao]").forEach(b => b.addEventListener("click", () => escolherMissao(b.dataset.missao)));
+    escolherMissao("E");
+
+    // rolagem → tempo da missão (contínuo dentro de cada passo)
     const tempoAlvo = () => {
         const meio = innerHeight * (innerWidth <= 980 ? 0.86 : 0.5);
         const topos = passos.map(s => s.getBoundingClientRect().top);
@@ -575,9 +721,9 @@
                 }
             },
             garra: {
-                titulo: "Atta G · plataforma com garra", st: ["disp", "Pronto para piloto"],
-                texto: "A garra indexa o kit na estação, prende durante o trajeto e desindexa no posto, deixando o kit pronto para montar. Ninguém precisa pegar a carga.",
-                pontos: ["Pega e entrega sozinho", "Carga presa no trajeto", "Ideal para kits de montagem"],
+                titulo: "Atta G · garras sob medida", st: ["proj", "Sob encomenda"],
+                texto: "Uma família de garras: cada uma é feita para a carga do cliente (caixa, KLT, kit de montagem). A garra pega a carga na estação, prende durante o trajeto e solta no posto. Ninguém precisa pegar a carga.",
+                pontos: ["Garra desenhada para a sua carga", "Pega e entrega sozinho", "Ideal para kits e caixas"],
                 montar(m) {
                     piso(m);
                     fita(m, -260, 50, 260, 50); fita(m, -170, 50, -170, -20); fita(m, 170, 50, 170, -20);
@@ -675,9 +821,9 @@
                 }
             },
             elevacao: {
-                titulo: "Atta E · elevação sob carrinho", st: ["proj", "Sob encomenda"],
-                texto: "O AGV entra por baixo do carrinho ou rack, levanta alguns centímetros e leva junto. Na chegada, abaixa e sai, deixando o carrinho no lugar.",
-                pontos: ["Carrinho inteiro de uma vez", "Baixo, cabe sob racks", "Troca carrinho cheio por vazio"],
+                titulo: "Atta E · elevação sob carrinho", st: ["disp", "Pronto para piloto"],
+                texto: "É o nosso protótipo: o Atta entra por baixo do carrinho ou rack, ergue alguns centímetros por um fuso e leva junto. Na chegada, abaixa e sai, deixando o carrinho no lugar. Carregado, ele continua girando no lugar e andando de lado.",
+                pontos: ["Carrinho inteiro de uma vez", "Usa os carrinhos que você já tem", "Troca carrinho cheio por vazio"],
                 montar(m) {
                     piso(m);
                     fita(m, -290, 0, 290, 0);
@@ -823,8 +969,8 @@
     if (document.getElementById("config")) {
     const form = document.getElementById("config");
     const MODULOS = {
-        garra:    { letra: "G", nome: "garra", limite: 250,  st: ["disp", "Pronto para piloto"], porque: "O Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
-        carrinho: { letra: "E", nome: "elevação", limite: 1000, st: ["proj", "Sob encomenda"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto." },
+        garra:    { letra: "G", nome: "garra", limite: 250,  st: ["proj", "Sob encomenda"], porque: "A garra é feita para a sua carga: o Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
+        carrinho: { letra: "E", nome: "elevação", limite: 1000, st: ["disp", "Pronto para piloto"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto. É o módulo do nosso protótipo." },
         esteira:  { letra: "R", nome: "rolos", limite: 1000, st: ["proj", "Sob encomenda"], porque: "A carga passa da esteira da estação para os rolos do Atta, e dele para a próxima esteira." },
         comboio:  { letra: "T", nome: "rebocador", limite: 3000, st: ["dev", "Em desenvolvimento"], porque: "" }
     };

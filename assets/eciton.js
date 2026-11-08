@@ -412,8 +412,44 @@
         ];
         const chip = $("pChip");
         const passos = [...document.querySelectorAll("#pPassos li")];
+        // 3.3: as mesmas formas do desenho levantam em 3D (CSS 3D, sem biblioteca)
+        const palco3d = $("pPalco"), blocosEl = $("pBlocos");
+        const blocos = [];
+        const bloco = (x, y, w, d, h, topo, lado) => {
+            const b = document.createElement("div");
+            b.className = "p3d-bloco";
+            Object.assign(b.style, { left: x / 6 + "%", top: y / 3.4 + "%", width: w / 6 + "%", height: d / 3.4 + "%" });
+            const f = {};
+            [["tp", topo], ["n", lado], ["s", lado], ["l", lado], ["o", lado]].forEach(([k, c]) => { const i = document.createElement("i"); i.className = k; i.style.background = c; b.appendChild(i); f[k] = i; });
+            blocosEl.appendChild(b);
+            const o = { b, f, h, x, y, w, d };
+            blocos.push(o);
+            return o;
+        };
+        if (blocosEl) {
+            const parede = ["#4A5869", "#2C3644"], maq = ["#5B6B80", "#334052"];
+            [[20, 19, 560, 2], [20, 319, 560, 2], [19, 20, 2, 300], [579, 20, 2, 300], [20, 119, 50, 2], [110, 119, 150, 2], [299, 20, 2, 40], [299, 100, 2, 60]].forEach(([x, y, w, d]) => bloco(x, y, w, d, 26, ...parede));
+            for (let i = 0; i < 4; i++) bloco(60, 36 + i * 20, 190, 10, 34, "#3D6FB0", "#24467A");
+            for (let i = 0; i < 3; i++) bloco(60 + i * 70, 222, 50, 30, 12, "#B98A55", "#7A5A36");
+            bloco(380, 50, 70, 46, 46, ...maq); bloco(470, 50, 80, 46, 46, ...maq);
+            bloco(420, 236, 130, 56, 16, "#46566A", "#2A3442");
+            for (let x = 110; x < 580; x += 90) bloco(x - 3, 167, 6, 6, 56, "#8C949D", "#5A616A");
+        }
+        const carros = blocosEl ? [bloco(0, 0, 18, 14, 9, "#1E7BFF", "#0E3D80"), bloco(0, 0, 18, 14, 9, "#2BD46A", "#167A3C")] : [];
+        const alturas = k => {
+            const esc = (palco3d.clientWidth || 600) / 600;
+            blocos.forEach(o => {
+                const H = Math.max(0.01, o.h * esc * k);
+                o.f.tp.style.transform = `translateZ(${H.toFixed(2)}px)`;
+                Object.assign(o.f.s.style, { left: 0, top: "100%", width: "100%", height: H + "px", transformOrigin: "top", transform: "rotateX(90deg)" });
+                Object.assign(o.f.n.style, { left: 0, bottom: "100%", width: "100%", height: H + "px", transformOrigin: "bottom", transform: "rotateX(-90deg)" });
+                Object.assign(o.f.l.style, { left: "100%", top: 0, width: H + "px", height: "100%", transformOrigin: "left", transform: "rotateY(-90deg)" });
+                Object.assign(o.f.o.style, { right: "100%", top: 0, width: H + "px", height: "100%", transformOrigin: "right", transform: "rotateY(90deg)" });
+                o.b.style.opacity = k > 0.02 ? "1" : "0";
+            });
+        };
         let t = 0;
-        const DUR = 19;
+        const DUR = 26;
         const desenhar = tt => {
             cad.setAttribute("opacity", (.25 + .75 * fase(tt, 0, 1.5)).toFixed(2));
             const e1 = fase(tt, 2, 2.4), e2 = fase(tt, 2.6, 3), e3 = fase(tt, 3, 3.8);
@@ -425,21 +461,29 @@
             const m = fase(tt, 10, 11.5);
             zonas.forEach(z => z.setAttribute("opacity", m.toFixed(2)));
             postos.forEach((g, i) => g.setAttribute("opacity", fase(tt, 10 + i * .25, 10.6 + i * .25).toFixed(2)));
-            const anda = tt >= 12;
-            voltas.forEach(o => {
-                o.v.setAttribute("opacity", anda ? fase(tt, 12, 12.6) : 0);
+            // 12–14 vira 3D, 14–24 frota rodando em 3D, 24–26 volta ao 2D
+            const k3 = tt < 12 ? 0 : tt < 14 ? fase(tt, 12, 14) : tt < 24 ? 1 : 1 - fase(tt, 24, 25.6);
+            if (palco3d) palco3d.style.transform = k3 > 0 ? `translateY(${(-7 * k3).toFixed(2)}%) rotateX(${(50 * k3).toFixed(2)}deg) rotateZ(${(-28 * k3).toFixed(2)}deg) scale(${(1 - .24 * k3).toFixed(3)})` : "";
+            if (blocosEl) alturas(k3);
+            const anda = tt >= 13.4 && tt < 25.6;
+            voltas.forEach((o, i) => {
+                o.v.setAttribute("opacity", anda ? Math.min(fase(tt, 13.4, 14), 1 - fase(tt, 25, 25.6)) : 0);
+                if (carros[i]) carros[i].b.style.visibility = anda && k3 > .05 ? "visible" : "hidden";
                 if (!anda) return;
-                const u = ((tt - 12) / 7 + o.off) % 1;
+                const u = ((tt - 13.4) / 6 + o.off) % 1;
                 const k = u < .5 ? suave(u * 2) : suave((1 - u) * 2);
-                o.v.pos(...o.r.em(o.r.tot * k));
+                const [x, y] = o.r.em(o.r.tot * k);
+                o.v.pos(x, y);
+                if (carros[i]) { carros[i].b.style.left = (x - 9) / 6 + "%"; carros[i].b.style.top = (y - 7) / 3.4 + "%"; }
             });
-            const pIdx = tt < 2 ? 0 : tt < 5 ? 1 : tt < 10 ? 2 : tt < 12 ? 3 : 4;
+            const pIdx = tt < 2 ? 0 : tt < 5 ? 1 : tt < 10 ? 2 : tt < 12 ? 3 : tt < 14 ? 4 : 5;
             passos.forEach((p, i) => p.classList.toggle("agora", i === pIdx));
-            const txt = ["layout_galpao.png", "escala: 12,0 m entre os pontos", "desenhando as rotas", "cruzamentos e postos", "frota rodando"][pIdx];
+            const txt = ["galpao_A.dxf · 3 camadas", "alinhado por 2 pontos: 12,0 m", "desenhando as rotas", "cruzamentos e postos", "vista 3D", "frota rodando em 3D"][pIdx];
             if (chip.textContent !== txt) chip.textContent = txt;
             chip.classList.toggle("ativo", pIdx > 0);
         };
-        desenhar(reduzir ? 15 : 0);
+        desenhar(reduzir ? 18 : 0);
+        if (reduzir) addEventListener("resize", () => desenhar(18));
         if (!reduzir) registrar(svg.closest(".planta-tela"), { passo: dt => { t = (t + dt) % DUR; desenhar(t); } });
     })();
 
@@ -544,6 +588,129 @@
         botoes.forEach(b => b.addEventListener("click", () => escolher(b.dataset.aba)));
         escolher("mapa");
         if (!reduzir) registrar(palco, { passo: dt => { const [f, d] = ANIM[atual]; if (!f) return; t = (t + dt) % d; f(t); } });
+    })();
+
+    /* ---------------------------------------------------------
+       7) PEDIDOS PROGRAMADOS: material dura 5 min, viagem de 2,
+          o pedido sai sozinho antes de acabar
+       --------------------------------------------------------- */
+    (() => {
+        const svg = $("progSvg"); if (!svg) return;
+        const X = m => 22 + m * 26, Y = n => 112 - n * 84;     // 0..15 min; nível 0..1
+        const DURA = 5, VIAGEM = 2, PEDE = 2.5;
+        const entregas = [0, 4.5, 9, 13.5], pedidos = [2.5, 7, 11.5];
+        const grade = S("g", { stroke: "#1B2533", "stroke-width": 1 }, svg);
+        for (let m = 0; m <= 15; m += 2.5) S("line", { x1: X(m), y1: 18, x2: X(m), y2: 186 }, grade);
+        S("line", { x1: X(0), y1: Y(0), x2: X(15), y2: Y(0), stroke: "#2A3646" }, svg);
+        T("material no posto", { x: X(0) + 6, y: 14, "font-family": MONO, "font-size": 11, fill: COR.texto2 }, svg);
+        T("pedidos e viagens", { x: X(0) + 6, y: 134, "font-family": MONO, "font-size": 11, fill: COR.texto2 }, svg);
+        for (let m = 0; m <= 15; m += 5) T(hhmm(8 * 60 + m), { x: X(m), y: 206, "text-anchor": m === 0 ? "start" : m === 15 ? "end" : "middle", "font-family": MONO, "font-size": 11, fill: COR.texto2 }, svg);
+        const area = S("path", { fill: "rgba(43,212,106,.22)", stroke: COR.verde, "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+        const fantasma = S("line", { stroke: COR.vermelho, "stroke-width": 1.4, "stroke-dasharray": "4 4", opacity: .7 }, svg);
+        const fantasmaT = T("acabaria", { "font-family": MONO, "font-size": 10.5, fill: COR.vermelho, "text-anchor": "start" }, svg);
+        const marcas = pedidos.map((pm, i) => {
+            const g = S("g", { opacity: 0 }, svg);
+            S("path", { d: `M${X(pm)} 144 l6 6 -6 6 -6 -6z`, fill: COR.laranja }, g);
+            S("line", { x1: X(pm), y1: 150, x2: X(entregas[i + 1]), y2: 150, stroke: COR.azulC, "stroke-width": 3, "stroke-linecap": "round", "stroke-dasharray": X(entregas[i + 1]) - X(pm), "stroke-dashoffset": X(entregas[i + 1]) - X(pm) }, g);
+            S("path", { d: `M${X(entregas[i + 1]) - 4} 150 l3 3 6 -7`, fill: "none", stroke: COR.verde, "stroke-width": 2, opacity: 0 }, g);
+            if (i === 0) {
+                T("pede sozinho", { x: X(pm) - 4, y: 172, "text-anchor": "middle", "font-family": MONO, "font-size": 10.5, fill: COR.laranja }, g);
+                T("chegou", { x: X(entregas[1]) + 6, y: 172, "text-anchor": "start", "font-family": MONO, "font-size": 10.5, fill: COR.verde }, g);
+            }
+            return g;
+        });
+        const atta = veiculo(svg, COR.azulC);
+        atta.setAttribute("opacity", 0);
+        const cursor = S("line", { y1: 20, y2: 188, stroke: "#E9EEF5", "stroke-width": 1, opacity: .5 }, svg);
+        const auto = $("progAuto"), autoTxt = auto.querySelector("span"), hora = $("progHora");
+        const nivel = m => { const e = entregas.filter(x => x <= m).pop(); return Math.max(0, 1 - (m - e) / DURA); };
+        const mmss = min => { const s = Math.max(0, Math.round(min * 60)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+        const desenhar = tt => {
+            const m = Math.max(0, Math.min(15, tt));
+            // nível: dente de serra até o cursor
+            let d = `M${X(0)} ${Y(0)} L${X(0)} ${Y(1)}`;
+            for (let k = 0; k < entregas.length; k++) {
+                const a = entregas[k], b = Math.min(m, entregas[k + 1] ?? 15);
+                if (a > m) break;
+                d += ` L${X(b).toFixed(1)} ${Y(1 - (b - a) / DURA).toFixed(1)}`;
+                if (entregas[k + 1] !== undefined && entregas[k + 1] <= m) d += ` L${X(entregas[k + 1])} ${Y(1)}`;
+            }
+            d += ` L${X(m).toFixed(1)} ${Y(0)} Z`;
+            area.setAttribute("d", d);
+            const e = entregas.filter(x => x <= m).pop();
+            fantasma.setAttribute("x1", X(e + DURA)); fantasma.setAttribute("x2", X(e + DURA)); fantasma.setAttribute("y1", Y(1) - 4); fantasma.setAttribute("y2", Y(0));
+            fantasmaT.setAttribute("x", X(e + DURA) + 4); fantasmaT.setAttribute("y", Y(0.35));
+            const mostraF = e + DURA <= 15.2 && m >= e + 0.3;
+            fantasma.setAttribute("opacity", mostraF ? .7 : 0); fantasmaT.setAttribute("opacity", mostraF ? 1 : 0);
+            let caminho = null;
+            marcas.forEach((g, i) => {
+                const pm = pedidos[i], em = entregas[i + 1];
+                g.setAttribute("opacity", m >= pm ? 1 : 0);
+                const linha = g.children[1], L = X(em) - X(pm);
+                linha.setAttribute("stroke-dashoffset", (L * (1 - Math.max(0, Math.min(1, (m - pm) / VIAGEM)))).toFixed(1));
+                g.children[2].setAttribute("opacity", m >= em ? 1 : 0);
+                if (m >= pm && m < em) caminho = { pm, em };
+            });
+            if (caminho) { atta.setAttribute("opacity", 1); atta.pos(X(m), 150); } else atta.setAttribute("opacity", 0);
+            cursor.setAttribute("x1", X(m)); cursor.setAttribute("x2", X(m));
+            hora.textContent = hhmm(8 * 60 + m);
+            const prox = pedidos.find(x => x > m);
+            auto.classList.toggle("caminho", Boolean(caminho));
+            autoTxt.textContent = caminho ? `Pedido automático a caminho · chega em ${mmss(caminho.em - m)} (material: ${Math.round(nivel(m) * 100)}%)`
+                : prox !== undefined ? `automático · próximo pedido em ${mmss(prox - m)}` : "automático · material reposto";
+        };
+        let t = 0;
+        desenhar(reduzir ? 5.6 : 0);
+        if (!reduzir) registrar($("cenaProg"), { passo: dt => { t = (t + Math.max(0, dt) * 0.95) % 16.5; desenhar(t); } });
+    })();
+
+    /* ---------------------------------------------------------
+       8) INDICADORES: números e gráficos sobem quando aparecem
+       --------------------------------------------------------- */
+    (() => {
+        const painel = $("indPainel"); if (!painel) return;
+        const DIAS = [["Seg", 212], ["Ter", 228], ["Qua", 219], ["Qui", 241], ["Sex", 236], ["Sáb", 48]];
+        const max = 260, maior = Math.max(...DIAS.map(d => d[1]));
+        const barras = $("indBarras");
+        DIAS.forEach(([dia, v]) => {
+            const b = document.createElement("div");
+            b.className = "ind-barra"; b.tabIndex = 0; b.title = `${dia}: ${v} entregas`; b.setAttribute("aria-label", `${dia}: ${v} entregas`);
+            b.style.setProperty("--h", (v / max * 100).toFixed(1) + "%");
+            b.innerHTML = `<i></i><em>${v}</em>`;
+            if (v !== maior) b.querySelector("em").classList.add("so-hover");
+            barras.appendChild(b);
+        });
+        const dias = document.createElement("div"); dias.className = "ind-dias"; dias.setAttribute("aria-hidden", "true");
+        dias.innerHTML = DIAS.map(d => `<span>${d[0]}</span>`).join("");
+        barras.after(dias);
+        const PILHA = [["Andando em missão", 58, "#1FA855"], ["Pegando e entregando", 24, "#1E7BFF"], ["Esperando passagem", 6, "#E0702A"], ["Manutenção planejada", 12, "#8B5CF6"]];
+        const pilha = $("indPilha"), leg = $("indLegenda");
+        PILHA.forEach(([n, v, c]) => {
+            const i = document.createElement("i"); i.style.background = c; i.title = `${n}: ${v}%`; i.dataset.v = v;
+            i.textContent = v >= 10 ? v + "%" : "";
+            pilha.appendChild(i);
+            const li = document.createElement("li"); li.innerHTML = `<i style="background:${c}"></i><span>${n}</span><b>${v}%</b>`;
+            leg.appendChild(li);
+        });
+        const fmt = (v, casas) => v.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
+        const numeros = [...painel.querySelectorAll("[data-conta]")];
+        let feito = false;
+        const mostrar = () => {
+            if (feito) return; feito = true;
+            barras.classList.add("visivel");
+            [...barras.children].forEach(b => { b.querySelector("i").style.height = b.style.getPropertyValue("--h"); });
+            [...pilha.children].forEach(i => { i.style.width = `calc(${i.dataset.v}% - 2px)`; });
+            const t0 = performance.now();
+            const passo = agora => {
+                const u = reduzir ? 1 : Math.min(1, (agora - t0) / 1100), k = 1 - Math.pow(1 - u, 3);
+                numeros.forEach(n => { n.textContent = fmt(Number(n.dataset.conta) * k, Number(n.dataset.casas)) + (n.dataset.sufixo || ""); });
+                if (u < 1) requestAnimationFrame(passo);
+            };
+            requestAnimationFrame(passo);
+        };
+        if (reduzir || !("IntersectionObserver" in window)) { mostrar(); return; }
+        numeros.forEach(n => { n.textContent = fmt(0, Number(n.dataset.casas)) + (n.dataset.sufixo || ""); });
+        new IntersectionObserver((es, o) => { if (es.some(e => e.isIntersecting)) { mostrar(); o.disconnect(); } }, { threshold: .35 }).observe(painel);
     })();
 
     /* laço único */
