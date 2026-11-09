@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611082134">
+<link rel="stylesheet" href="assets/estilo.css?v=202611082353">
 </head>
 <body data-pagina="eciton">
 
@@ -245,7 +245,34 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="simulacao" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="eciton-io" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Eciton I/O · portas e semáforos</span>
+                <h2>A porta abre para o Atta. Sem ninguém apertar botão.</h2>
+                <p class="texto">O Eciton I/O é um controlador pequeno que fica na parede, ao lado da porta automática ou do cruzamento com empilhadeira. Ele conversa com a frota pela mesma rede dos Atta: o veículo pede passagem, a porta abre, e ele só passa quando o sensor confirma que ela está aberta de verdade.</p>
+            </div>
+            <div class="planta-grade">
+                <div class="planta-tela io-tela">
+                    <div class="planta-chip" id="ioChip">porta 1 · fechada</div>
+                    <svg id="ioSvg" viewBox="0 0 600 340" role="img" aria-label="Um Atta, visto por trás, chega na porta automática; o controlador na parede recebe o pedido, a porta abre, o sensor confirma e o Atta passa"></svg>
+                </div>
+                <ol class="passos-ec vertical" id="ioPassos">
+                    <li><b>O Atta pede passagem</b><span>Antes de chegar, ele pede a porta como pede um cruzamento.</span></li>
+                    <li><b>O Eciton I/O abre a porta</b><span>O controlador na parede liga o contato que abre e segura a porta.</span></li>
+                    <li><b>O sensor confirma</b><span>Só com a porta aberta de verdade o caminho é liberado. Até lá, o Atta espera parado.</span></li>
+                    <li><b>O Atta passa e a porta fecha</b><span>Alguns segundos depois, ela fecha sozinha. Caiu a energia ou o Wi-Fi do controlador? A passagem fica fechada: na dúvida, ninguém passa.</span></li>
+                </ol>
+            </div>
+            <div class="io-extras">
+                <div><b>Semáforo no cruzamento</b><span>Vermelho para a empilhadeira enquanto um Atta passa. Um botão segura os Atta quando a empilhadeira precisa cruzar.</span></div>
+                <div><b>Alarme de incêndio</b><span>Ligado à central de incêndio, faz a frota inteira parar de entrar em cruzamentos e portas, e as portas fecham.</span></div>
+                <div><b>Pronto para testar</b><span>A porta e o controlador também rodam na simulação, junto com a frota virtual, antes de instalar.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="simulacao">
         <div class="caixa agv-intro">
             <div>
                 <span class="olho">Simulação</span>
@@ -270,7 +297,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="indicadores">
+    <section class="secao faixa" id="indicadores" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Indicadores</span>
@@ -301,7 +328,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="mira" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="mira">
         <div class="caixa mira-grade">
             <div>
                 <span class="olho">Mira · assistente com IA</span>
@@ -325,7 +352,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="dia-a-dia">
+    <section class="secao faixa" id="dia-a-dia" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">No dia a dia</span>
@@ -468,7 +495,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="tudo" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="tudo">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Tudo o que vem no Eciton</span>
@@ -505,7 +532,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="perguntas">
+    <section class="secao faixa" id="perguntas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa perguntas-grade">
             <div>
                 <span class="olho">Perguntas</span>
@@ -516,6 +543,7 @@
                 <details><summary>E se a internet cair?</summary><p>Cada Atta guarda na memória a missão que está fazendo e a fila dele, e continua a viagem. Antes de entrar num cruzamento ou num corredor que divide com outro veículo, ele precisa combinar com a frota: sem conexão, para antes da zona e espera, nunca entra às cegas. Pedidos novos dos tablets aguardam a conexão. Quando a rede volta, tudo segue sozinho.</p></details>
                 <details><summary>Preciso mudar o chão da fábrica?</summary><p>No Atta E-O, basta uma fita contrastante colada no piso e etiquetas RFID nos pontos de parada. Dá para mudar a rota trocando a fita. A versão magnética (-M, sob encomenda) usa fita magnética, mais resistente a sujeira e ao tráfego de empilhadeira.</p></details>
                 <details><summary>É seguro andar perto das pessoas?</summary><p>O Atta anda mais devagar nas zonas marcadas na planta, para sozinho quando os sensores de distância veem pessoa, carrinho ou outro veículo na frente, e só segue com o caminho livre. O botão de emergência no veículo para tudo, e ele só volta a andar depois que alguém rearma no local.</p></details>
+                <details><summary>O Atta passa por porta automática?</summary><p>Passa, com o Eciton I/O: um controlador na parede ligado ao contato da porta (o mesmo do radar ou do botão) e a um sensor de porta aberta. O Atta pede passagem, a porta abre e ele só segue quando o sensor confirma. Se o controlador ficar sem energia ou sem rede, a passagem fica fechada até ele voltar. A segurança das pessoas na porta continua com os sensores da própria porta. Elevador ainda não: depende de integração com o fabricante do elevador.</p></details>
                 <details><summary>O Eciton controla veículos de outras marcas?</summary><p>Hoje não: o Eciton foi feito junto com o Atta e fala a língua dele. Integração com outros veículos está nos nossos planos.</p></details>
                 <details><summary>Onde ficam os dados da minha fábrica?</summary><p>Na nuvem, com cada empresa separada das outras pelo próprio banco de dados. Cada pessoa entra com a própria conta e só faz o que o papel dela permite.</p></details>
                 <details><summary>E quando um veículo precisa de manutenção?</summary><p>Um toque tira o Atta da operação: ele sai do despacho, não aceita missão e a luz fica branca. O Eciton guarda cópias da configuração de cada veículo, para restaurar numa placa nova, e mostra a documentação do modelo para a equipe de manutenção.</p></details>
@@ -536,7 +564,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="telas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="telas">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">As telas de verdade</span>
@@ -589,7 +617,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611082134" defer></script>
-<script src="assets/eciton.js?v=202611082134" defer></script>
+<script src="assets/site.js?v=202611082353" defer></script>
+<script src="assets/eciton.js?v=202611082353" defer></script>
 </body>
 </html>
