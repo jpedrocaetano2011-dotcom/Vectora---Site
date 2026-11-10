@@ -26,6 +26,15 @@
         caixa.querySelector("p").textContent = resumo;
         origem = resumo;
     }
+    // vindo das páginas do Estudo de frota e do Eciton I/O
+    const PEDIDOS = { estudo: "Quero um estudo de frota (quantos Atta a operação precisa).", "eciton-io": "Quero falar sobre o Eciton I/O (portas, semáforos, alarme de incêndio).", elevador: "Tenho um projeto com elevador (Eciton I/O)." };
+    if (PEDIDOS[origem]) {
+        const caixa = document.getElementById("calcRecebida");
+        caixa.hidden = false;
+        caixa.innerHTML = `<span class="rot">Vai junto com a mensagem</span><p></p>`;
+        caixa.querySelector("p").textContent = PEDIDOS[origem];
+        origem = PEDIDOS[origem];
+    }
     if (origem === "configurador") {
         const n = k => Math.max(0, Number(q.get(k)) || 0);
         const NOMES = { G: "garra", E: "elevação", R: "rolos", T: "rebocador" };

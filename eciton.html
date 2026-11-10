@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611082353">
+<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
 </head>
 <body data-pagina="eciton">
 
@@ -35,6 +35,8 @@
                 <div class="submenu" id="subSolucoes">
                     <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
                     <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
+                    <a href="estudo.html" data-pag="estudo"><b>Estudo de frota</b><span>Quantos Atta a operação precisa</span></a>
+                    <a href="eciton-io.html" data-pag="eciton-io"><b>Eciton I/O</b><span>Portas, semáforos e alarme</span></a>
                     <a href="index.html#sob-medida"><b>Projetos sob medida</b><span>Engenharia para o seu fluxo</span></a>
                 </div>
             </div>
@@ -182,13 +184,13 @@
             <div class="cabeca">
                 <span class="olho">Turnos e horários</span>
                 <h2>Você define o turno. O Atta obedece.</h2>
-                <p class="texto">Cada veículo tem o seu horário e os dias da semana em que trabalha. Na hora certa ele sai sozinho; perto do fim, termina a entrega que está fazendo e só depois volta para o berço.</p>
+                <p class="texto">Um calendário para a fábrica inteira: os turnos, o almoço e o jantar (a frota vai para o berço e volta sozinha no fim) e as paradas planejadas, como feriado e inventário. Cada Atta escolhe em que turnos trabalha. Na hora certa ele sai sozinho; perto do fim, termina a entrega que está fazendo e só depois volta para o berço. Quem cumpre é o próprio veículo, mesmo com o site fechado.</p>
             </div>
             <div class="turno-cena">
                 <aside class="rotina-card" aria-label="Configuração de rotina do Atta 01">
                     <div class="rc-topo"><b>Rotina</b><span>Atta 01</span></div>
                     <div class="rc-linha"><span>Berço</span><b>B1</b></div>
-                    <div class="rc-linha rc-check-linha"><span class="rc-check">✓</span><b>Turno por horário</b></div>
+                    <div class="rc-linha rc-check-linha"><span class="rc-check">✓</span><b>Trabalha no 1º turno</b></div>
                     <div class="rc-horas">
                         <div class="rc-campo" id="rcInicio"><span>Início</span><b>07:00</b></div>
                         <div class="rc-campo" id="rcFim"><span>Fim</span><b>17:00</b></div>
@@ -246,29 +248,19 @@
     </section>
 
     <section class="secao faixa" id="eciton-io" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
-        <div class="caixa">
-            <div class="cabeca">
-                <span class="olho">Eciton I/O · portas e semáforos</span>
-                <h2>A porta abre para o Atta. Sem ninguém apertar botão.</h2>
-                <p class="texto">O Eciton I/O é um controlador pequeno que fica na parede, ao lado da porta automática ou do cruzamento com empilhadeira. Ele conversa com a frota pela mesma rede dos Atta: o veículo pede passagem, a porta abre, e ele só passa quando o sensor confirma que ela está aberta de verdade.</p>
+        <div class="caixa chamada-produto">
+            <div>
+                <span class="olho">Eciton I/O · portas, semáforos e alarme</span>
+                <h2 style="margin-top:14px">A porta abre para o Atta. Sem ninguém apertar botão.</h2>
+                <p class="texto" style="margin-top:14px">Um controlador pequeno na parede liga a frota ao que já existe no prédio: as portas automáticas que você já tem, o semáforo do cruzamento com a empilhadeira e o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.</p>
             </div>
-            <div class="planta-grade">
-                <div class="planta-tela io-tela">
-                    <div class="planta-chip" id="ioChip">porta 1 · fechada</div>
-                    <svg id="ioSvg" viewBox="0 0 600 340" role="img" aria-label="Um Atta, visto por trás, chega na porta automática; o controlador na parede recebe o pedido, a porta abre, o sensor confirma e o Atta passa"></svg>
-                </div>
-                <ol class="passos-ec vertical" id="ioPassos">
-                    <li><b>O Atta pede passagem</b><span>Antes de chegar, ele pede a porta como pede um cruzamento.</span></li>
-                    <li><b>O Eciton I/O abre a porta</b><span>O controlador na parede liga o contato que abre e segura a porta.</span></li>
-                    <li><b>O sensor confirma</b><span>Só com a porta aberta de verdade o caminho é liberado. Até lá, o Atta espera parado.</span></li>
-                    <li><b>O Atta passa e a porta fecha</b><span>Alguns segundos depois, ela fecha sozinha. Caiu a energia ou o Wi-Fi do controlador? A passagem fica fechada: na dúvida, ninguém passa.</span></li>
-                </ol>
-            </div>
-            <div class="io-extras">
-                <div><b>Semáforo no cruzamento</b><span>Vermelho para a empilhadeira enquanto um Atta passa. Um botão segura os Atta quando a empilhadeira precisa cruzar.</span></div>
-                <div><b>Alarme de incêndio</b><span>Ligado à central de incêndio, faz a frota inteira parar de entrar em cruzamentos e portas, e as portas fecham.</span></div>
-                <div><b>Pronto para testar</b><span>A porta e o controlador também rodam na simulação, junto com a frota virtual, antes de instalar.</span></div>
-            </div>
+            <ul class="chamada-itens">
+                <li><b>Portas automáticas</b><span>abre quando o Atta chega e só libera com a porta aberta de verdade</span></li>
+                <li><b>Semáforo no cruzamento</b><span>vermelho para a empilhadeira enquanto um Atta passa</span></li>
+                <li><b>Alarme de incêndio</b><span>a frota sai do caminho e as portas fecham</span></li>
+                <li><b>Elevadores</b><span>em projeto, com o fabricante do elevador</span></li>
+            </ul>
+            <a class="botao cheio" href="eciton-io.html">Conhecer o Eciton I/O</a>
         </div>
     </section>
 
@@ -279,7 +271,7 @@
                 <h2 style="margin-top:14px">Antes do primeiro veículo chegar, a frota já rodou na sua planta.</h2>
             </div>
             <div>
-                <p class="texto">No Eciton, um Atta virtual roda o mesmo programa do Atta de verdade, na planta da sua fábrica. Dá para ver quantos veículos o seu fluxo pede, onde a fila aperta e quanto tempo leva cada entrega, antes de qualquer instalação.</p>
+                <p class="texto">O <a href="estudo.html" class="link-claro">Estudo de frota</a> simula o turno inteiro na planta da sua fábrica e acha a menor frota que entrega no prazo, com a previsão para quando a produção crescer. Depois, um Atta virtual roda o mesmo programa do Atta de verdade, na mesma planta, para conferir a frota escolhida antes de qualquer instalação.</p>
                 <div class="quantos" aria-label="Exemplo: quantos Atta uma operação precisa">
                     <span class="rot">Quantos Atta eu preciso? · exemplo</span>
                     <div class="quantos-passos">
@@ -292,7 +284,26 @@
                     <div class="quantos-frota" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
                     <p class="quantos-nota">Velocidade média de 0,8 m/s, referência de mercado para áreas com pessoas. Faça a sua conta no <a href="atta.html#configurador">configurador rápido</a>; a simulação na sua planta dá o número certo.</p>
                 </div>
-                <a class="botao cheio" href="contato.html?interesse=eciton" style="margin-top:24px">Pedir uma simulação</a>
+                <div class="acoes" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap"><a class="botao cheio" href="estudo.html">Conhecer o Estudo de frota</a><a class="botao" href="contato.html?interesse=eciton">Pedir uma simulação</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="chao" style="border-top:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Feito para o chão de fábrica</span>
+                <h2>Menos tempo instalando, menos dúvida operando.</h2>
+            </div>
+            <div class="chao-quatro">
+                <article><svg viewBox="0 0 120 50" aria-hidden="true"><g><rect x="8" y="18" width="104" height="14" rx="3" fill="#000"/><g fill="#2BD46A"><rect x="12" y="21" width="12" height="8" rx="2"/><rect x="28" y="21" width="12" height="8" rx="2"/><rect x="44" y="21" width="12" height="8" rx="2"/></g><g fill="#63AEFF"><rect x="64" y="21" width="12" height="8" rx="2"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></rect><rect x="80" y="21" width="12" height="8" rx="2"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></rect><rect x="96" y="21" width="12" height="8" rx="2"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></rect></g></g></svg>
+                    <h3>Sinalização com as cores da empresa</h3><p>A legenda de cada luz do Atta, com o que fazer e quem resolve, e um cartaz para imprimir. O administrador escolhe as cores de operação para a planta inteira; os avisos de segurança ficam travados.</p></article>
+                <article><svg viewBox="0 0 120 50" aria-hidden="true"><rect x="6" y="6" width="108" height="38" rx="4" fill="#0A0F17" stroke="#1B2533"/><g><rect x="16" y="14" width="10" height="10" fill="#2BD46A" opacity=".5"/><rect x="26" y="14" width="10" height="10" fill="#84CC16" opacity=".5"/><rect x="36" y="14" width="10" height="10" fill="#F59E0B" opacity=".55"/><rect x="46" y="14" width="10" height="10" fill="#EA580C" opacity=".6"/><rect x="56" y="24" width="10" height="10" fill="#DC2626" opacity=".65"/><rect x="66" y="24" width="10" height="10" fill="#EA580C" opacity=".5"/><rect x="76" y="24" width="10" height="10" fill="#F59E0B" opacity=".45"/><rect x="86" y="24" width="10" height="10" fill="#2BD46A" opacity=".45"/></g></svg>
+                    <h3>Mapas de calor da planta</h3><p>Onde o Wi-Fi está fraco, onde os Atta esperam no tráfego, onde param por obstáculo, onde a fita está gasta e quanto cada posto espera pela entrega. Antes que vire parada de linha.</p></article>
+                <article><svg viewBox="0 0 120 50" aria-hidden="true"><path d="M10 34 H110" stroke="#1E7BFF" stroke-width="3"/><g fill="#2BD46A"><rect x="18" y="30" width="8" height="8" rx="1"/><rect x="44" y="30" width="8" height="8" rx="1"/></g><g fill="#2A3646"><rect x="70" y="30" width="8" height="8" rx="1"><animate attributeName="fill" values="#2A3646;#2A3646;#2BD46A;#2BD46A" keyTimes="0;.5;.55;1" dur="3s" repeatCount="indefinite"/></rect><rect x="96" y="30" width="8" height="8" rx="1"/></g><rect x="0" y="16" width="22" height="14" rx="3" fill="#0B0F15" stroke="#63AEFF"><animate attributeName="x" values="10;62;62" keyTimes="0;.5;1" dur="3s" repeatCount="indefinite"/></rect><text x="70" y="14" font-family="JetBrains Mono, monospace" font-size="8" fill="#8E9BAE">R07 ✓</text></svg>
+                    <h3>Instalação rápida das tags</h3><p>A corrida das tags: o Atta (ou um leitor USB) passa pela fita e cada etiqueta RFID vai para o seu ponto na planta, na sequência certa. O Eciton avisa tag repetida ou fora do lugar.</p></article>
+                <article><svg viewBox="0 0 120 50" aria-hidden="true"><rect x="6" y="12" width="108" height="26" rx="13" fill="rgba(255,176,0,.12)" stroke="#FFB000"/><text x="60" y="29" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#FFB000">frota pausada · visita</text></svg>
+                    <h3>Pausar e modo devagar</h3><p>Visita, auditoria, DDS ou obra: um toque pausa a frota inteira (cada Atta para no próximo ponto) ou baixa a velocidade por um tempo. Uma faixa no topo de todas as telas avisa quem está olhando.</p></article>
             </div>
         </div>
     </section>
@@ -506,7 +517,8 @@
                     <li><b>Despacho pelos postos</b><span>o posto pede, o Eciton escolhe o Atta</span></li>
                     <li><b>Pedidos programados</b><span>o botão pede sozinho, no ritmo do consumo</span></li>
                     <li><b>Fila de missões</b><span>na ordem certa, urgente na frente</span></li>
-                    <li><b>Turnos e berços</b><span>cada Atta no seu horário</span></li>
+                    <li><b>Calendário da fábrica</b><span>turnos, almoço no berço e paradas planejadas</span></li>
+                    <li><b>Pausar e modo devagar</b><span>a frota inteira, num toque</span></li>
                     <li><b>Quem atende cada botão</b><span>o modelo certo para a carga, preferidos primeiro</span></li>
                     <li><b>Tráfego</b><span>um por vez nos cruzamentos</span></li>
                     <li><b>Mapa ao vivo e controle manual</b><span>ver e manobrar pelo navegador</span></li>
@@ -518,6 +530,8 @@
                     <li><b>Calibração</b><span>do seguidor de linha e do movimento</span></li>
                     <li><b>Configurações e cópias</b><span>volta atrás ou restaura numa placa nova</span></li>
                     <li><b>Atualização pelo Wi-Fi</b><span>sem abrir nada</span></li>
+                    <li><b>Mapas de calor</b><span>Wi-Fi, espera, obstáculos, fita e entrega por posto</span></li>
+                    <li><b>Sinalização</b><span>a legenda das luzes, com as cores da empresa</span></li>
                 </ul></div>
                 <div class="tudo-grupo"><h3>Gerenciar</h3><ul>
                     <li><b>Indicadores</b><span>entregas, paradas, tráfego e ganhos, com relatório em PDF</span></li>
@@ -526,7 +540,9 @@
                     <li><b>Usuários e papéis</b><span>cada um vê o que deve</span></li>
                     <li><b>Modelos</b><span>a ficha técnica de cada Atta</span></li>
                     <li><b>Planta 2D e 3D</b><span>do DXF do AutoCAD, com os GLB das máquinas</span></li>
+                    <li><b><a href="estudo.html" class="link-claro">Estudo de frota</a></b><span>quantos Atta, com relatório para a diretoria</span></li>
                     <li><b>Simulação</b><span>a frota rodando antes de chegar</span></li>
+                    <li><b><a href="eciton-io.html" class="link-claro">Eciton I/O</a></b><span>portas, semáforos e alarme de incêndio</span></li>
                 </ul></div>
             </div>
         </div>
@@ -606,6 +622,8 @@
         <nav class="rodape-links" aria-label="Rodapé">
             <a href="atta.html">Atta</a>
             <a href="eciton.html">Eciton</a>
+            <a href="estudo.html">Estudo de frota</a>
+            <a href="eciton-io.html">Eciton I/O</a>
             <a href="index.html#sob-medida">Projetos sob medida</a>
             <a href="sobre.html">Sobre</a>
             <a href="contato.html">Contato</a>
@@ -617,7 +635,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611082353" defer></script>
-<script src="assets/eciton.js?v=202611082353" defer></script>
+<script src="assets/site.js?v=202611100250" defer></script>
+<script src="assets/eciton.js?v=202611100250" defer></script>
 </body>
 </html>

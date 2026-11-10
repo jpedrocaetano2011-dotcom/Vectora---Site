@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eciton I/O · portas, semáforos e alarme para a frota · E4M</title>
+<meta name="description" content="Eciton I/O, o controlador da E4M que faz o Atta conversar com a fábrica: abre as portas automáticas que você já tem, comanda o semáforo do cruzamento com empilhadeira e para a frota com o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="E4M · Engineering for Motion">
+<meta property="og:title" content="Eciton I/O · portas, semáforos e alarme para a frota · E4M">
+<meta property="og:description" content="Eciton I/O, o controlador da E4M que faz o Atta conversar com a fábrica: abre as portas automáticas que você já tem, comanda o semáforo do cruzamento com empilhadeira e para a frota com o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://vectora-sandy.vercel.app/eciton-io">
+<link rel="canonical" href="https://vectora-sandy.vercel.app/eciton-io">
+<meta name="theme-color" content="#05070B">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAQEUlEQVR42u2baYwkZ3nHf+9bRx/T19yzO97TexuD7QUfAtscNpgjwlEwIloSYsAYBYkbE0OkBClBhCAShQ8hUhQTgkCgAMYExzI2htgxXuP12tgLe8/szuzOPd09fVR1He+TD9Uz07veyAaPzS7ekkrdVerpqef/XP/naOWkuoSX8KF5iR/nATgPwHkAzgNwHoCX8mGfvY+mQKlTrwHooC0ip16f+wC0hVYWaCt5VapDeJZBEAMmTk6Jf2sgzh4AlE4Etly0k8EoB2U5KG23AVBtIQUxERIHEPkQtyAGJDpXAWhr3HJQbhfK7qIVpciW+tFuFrSdgINKtC4REnqYVpXIL0NLEguI1W9lBfbvPAZrG7FTONkiLdOFzg5wywd2ccVr30CzZQEKAxhJXD6KIlxXGDk4zj9/7sPosIl5houcCwB0aN1Ol/DCHFsuvZyPfvqD1DJb+c5uQYk5xeU10Aw0l+xQxFaTUEqk9cQZYsRZDYBa0rqdKRKqPIE9yK7338Tb3vVu7tlr8+jucTJOhFIaMWpJPBU2qEUZUq9Yy2NP7QfRiAhgzpEgqCzQDrhZnEyi9TXbL+ETn74Ve9Ur+Mp3GyzMHKe7pxdJFZflEhAFpj5DTqCQgZHDx1CmgTFxYh5ntwW0tW652JkCsVXAU33c+Kc38sfvfQ8/O5Dlga+foMs1FIbWYrAhlLbwghAjyiLwavSvHsavV5gcH8OmDiZq84GzFQClE607ba1HXfSvuYhP3HYLfVuv5F9+5DM5dpRSTwkyPZiobdFKgTEIgkGhTEgUxAwNppgYP4xfniQlTYwxZ6sFKNAWYqWw0nnELuBJN2/8o7fwvg+9n8fGi3zja5OkVIvSqgswyk203mZ/0pyHVBGDSbJF2ESUxUAv7HliFFpziPGfFwl64QBY1LqdxsmW8KIcxf7N3P7J97H58tfx7/eGjB4aodidh+wQxgCRgFYQtjDVMSRqQboEsQGlkaBBOpMl6wqjh46hZAGJw+el/RcAgETraBedzoFbwosKvOaG6/jQxz7A/uoAf3/HDFbUoDS0CmOlE8FRifDNeWKvhkoVESdGtWOAwhD6Hj2rV9NqVJhaIf9fWQBUQmqw09iZEp7JkSms57aPvIed172Vbz9g2P/0KIViBtW9flnrSqFEiCsnCUMhN7QOb34yocBiEus2AWEUMziQZfLEKF55AleayPPMACsEQAeVTeXQqSJemOeyq6/hY7fdyklZyxe/Po9pVOkeHCS2swltl8Tkdejhz08ibokbru9mYk7YM94kUxpE4ij5/riJYNHfo9j7s2MQzMEK+P8KANBJZUv4ksPKDPOhj+/iDTfexHd/DnsfO0Yx76IG1xMbdYrJq+YctfICg+su4LU7HTYMBuzdL1hKQNkQR8n3t5qkMxkyKcOxw6MoszL+//wAOJ3KBjm2vfIKbrv9gzTyW/jiN6v45Tl6B/qJ7DwmbmtdKZQY4vJJGr5i5xUbuGi4yT0/vJ+rr7+ahUqEZdsICjAoiQlbPt2rhmg1q0yf4v+/EwDOTGVvvvWdvH3XLn601+Z/7xyjkNXkVq0nMhqJ2maqFTpo4s1PojO9vP1tRVRtnC987i6Ghyys9A0slI+TzaYRMW36FxJFEf39XUyfPIhXmezwf3mRATidygZdrLvoUv7iMx/EGX45X/7POpWpaXp7ezGpIlHULuOUSkJFY5aFco3hjWu5/gqbxx7azfe/9zCtyf3c8LrrmJwHE3pgFxPzB4g9BIveXptfPngMWnNgWiui/d8AgE4qWyTSeTz6uOnmG/mTW/6MnxzMcN/XEipbXJVQ2XiRymqFMnFi8i2bK1+9ge1Ddb51x33seeRJ8tYcgXeEVevey5FJwdYmeSyJQNlI0MRJZ8i4hrEjoyipJsFvsYGyWCq+YMWQspL05mQTUhN0MbD+Im6//Rb6d1zJV+72mTx2lFJvCdI9xBEY034YS6FbDZpzUzj5Pt7xpgL+zAhf+Px9lCeOkmOG5vQI3cP9FC+4mOkH5nEcN/F/MShigpZPcXCQlldlevw4tvITo9JOwjlMnMQDE7c59IoBcAYqa7p5y01v4dYPv5/dJ4vcccck6Q4qK6GQyK6SJk59mmqlybrN63njqzQP3f8w3//eQzjRJKlgiqB+HGMCNlz8JgLJUq9Okln0fxQSh4RhRF9/jpmJI3iVCRwV4hYGCJsNxIQoiSDyIA7abmNWAIAlUpNZprIDm/nrT72XLVe9nn+9N2Tk4AjdPXkkO5T0JaO28EqhJCKaPYkXpbj62vVs6lng3776Y36555fk9BxRbZygNorlRIjdx4bNW5idBxP6YBXBRIgoJPYRpenpTbHv4WOoqEoUhFz51nczsGYz3/3Hz5LJpQibFRS1JCia36xTbJ9ZeBedzoNbxIuKXHPD9Xz0Ux9g/8IAn79jBits0LtqFZGVhnY2MqISWhDUaMzOkO4e4F2vy1EZO8zf/s191GaOkTNTtMrHEf8EqADl9uOk+xjeuJ2jEwG2TvK/xFG7JG7ipjJkUjHjR0awdQvJDTKw8RKuevPrOTE+yaN3f4NMzqZVN6jFNrl57gTJfiaxcVHpAi1yZHLr+ewn38flb/wDvvlTw76nRimVsuie9URxQmXFkPTkNFCbYqHWYtO2jbzhMrj/vx/irrseJh1P4npjBM0pLNWAdBrl9CKpHrqHN5HvWcvsU2Vsx8GISmKINsSBT6F/kMCvM3tiFCudwu3bRPfqbdxz5xTX/OEt1Boe+x/8AalsH4EsdgeDJC48BxDs0yO9drOEusAll1/DZ/7q45zU6/n81+eJGlV6hwYxdjZxNQFjQJSCOCSunCSQLK959VrW5Wf4py/dy6EnnyalZmjVxsACO9+HqD5QFsrtIiLHum2vICJDvTpOKpNO6ntAmYAojOjrzzM1fpTmzBhu7yADF+4kne3mxNgJjIl5864/Z2F+nqlf/Q92ppvIRCgTJqlXeFYQ1NKGiNIoJ0tsF1m79ZV89T/u4DtPuOz++TGKBRe7MERsFBIn/SljQDTg1TCNeez8ANddmeHKrbDvYJnqQo1MCsKWn7StUjmMJBlCUAiaKFasHi6wd5/L3kcOkSr1IdhJBRg3adWq7Hz1VlYN+MxOTIKTZWCoyOgoPPXw04Bi7fZNrNuc4ttf/kuaUwfQBMTNWeL6FISNZ09ySwBoBytTwjdF3nnzzVy76yN85RtjDA3kMNluTLA8iTIGRAxm4SREASq/Gse2KaZj/ADSaQtt6cSUF3t67dJVRJZeFYYojCmXPYw3C13DYMKkDvCmwICbL5FxwbIdxISYKKS+4GO8aTQxfpRh686tuF0tHr37WxRTMa1mmdmxX1MdfQzjzbfnCrI8WFt8jmUXSMxf2WmgyI6LL2Z0CtJ2hKS6MYEgopaFByT0Eb+GShWQ+gwtI0xEAkowxiwJmpS00jHSShBRIku3LR2Dk29/XkhGPRaYOn65hWdixMTEsSGOBa0iRKcRnUb5J3hy9wEuu/Zi3vHu99Dlj9Js1Nm9u5c9tTLVw2NncAON5aTQWrcBUAkARrtkSn2suXAb/7Xf4FgWRgRpa9IsPz/KzmINbG+PpZJTq0UNm46UZJYFk2XWJkYwi9awhOwi/Y0SQJwCWmIUBoljurOKYpfGtcG1BdsGS9LEEtOd8rhqaw8Xr3o55YUmpWKeUiFHZWQD4peJYkPL9/C9Jo1GnakTY7R8bxEAjbJsQmOzZe0FuIUhJiZrONl8EuSUWu68L06gzKmcw6hFcKTdzpZlzS9+HlkygqTX0b4wcaJ1IQFi0SolaXiKGIwxZFM2Q702XWnIuJBO2bhaU/MVuZ40+awil9KYXJqB/n42bNpK1AM6rOJ5Po16jUatytzMFOXZaXy/uQyAthxMpNi+bSPlQNOolClkFCaOMbEsG5GcfiYaXBKm8+TM76Xz2hiw06DTbSBIBp5hvYPnGywRTozHjI6EiLIR5UJQIWjU6NmwiW2X9lFrTjM+pFlYmOMn9z/Agz/+ITP77jkjO7TsNNqysBcnr0pZYGDHji0cOAkm3U+oW8SRWnah0wRHzJJin/GZU94val61i7jkWmkLbTxotSCdSYRVFrTmEdEYdDIea5+WBjctKFPHGE1kx2x+zauwcw6P/uxBfmX77Ol28WtTnPj1o3izR0hlsolsHXFAZNn9lmKAxDGpjM26C7eyYwi2D3ShdFeSujr83xhOuXf6KWb5s0kYkI57CV2OY3Bsw8mpmH17RnEcC6Ej/0cRvWvWs3lHN76fBFRtCbWyx9EnDmKaDezCEJuv2MbczCR7fnQvQXUM1w4YiaqY2hGC8hFir9xus0fPQoREiE2ENg3+7h/uJF1cg5LgFBdeWsg4bU8jUbB65r1lRZ/yN1ppGg2fa6+7DKewjciv46T72osOQOwTR8LQcJ4DT+7h4FOHERG277yIoaENNBZ8Vm/extCmYZ5+9Bcc/MVD2NEMNKdoVg5B8yjEHkrpdvp7LkxQDJiAuDnPyOM/QBcvSSotpZ5rt+BZjmUYtFK0mnWcN13G9JSHpSV5DBMllhh52K6Lm7Y48PjjzBx5gigIeNmlG5k5WWXjpZvIlNL89M4fMH9sH46ZJ6yNIwsHUf7J5H9ZznNigW0A2lE4aqG0hd08gjIB0kEeVnJmYERTLHZT7B9m/9EKtu20Y2Sc7AIEHtmeXoKgycL0CSxvBK1gYPgC7Nxqju4/wIN3309cG8cOZgkWRqF2EKLK8s6X/MbV4KKTxkgcIsG+5zVzP6Pwlo1KlzBOH8Mvv4JY99CsjpPKuAlLxKCMIY4Cij0FyjPTeJVJbFNn4MKXYeeH2H3fTzn6xCPY8Sw0Jgmrh6E5AtJKiNPz2xCRFWky/v9OYqO0jcHhgo1bqVZiJPJAdSUESADjIwL57i4OP/0UEsxj4gWCIOLe7/yQ2aOP4ZoKYW0Ms3AQ1ZpsC22d5fsB7c0vpR3sTJ7BtVuYnqqidXtGYJIoLaGP7bo4aYupYyOouIqSkLlDD+E2urCjBkHlCNQPoaKF5d0h5NzYDzBY5HsHyXVfwMFfT2E7TkesSQJgtthDEPhUJo5hSR1CHx3WiGd/gcQx1A8laU1ZKxKj7BdrBU5pmziG/uE1hGGGWqWKq+pJG8zEKGUI/RZ96wpU5mbwKhPYcQ2JfYgNsnCgYxRmrViAftFcQGtNGIWs27Qdg6bQ10PK7Ut2/sSgEAI/pG+4l189/gjSmoGosdzolM54IufSqmybJBmDpQ2h5IniCms3ZRBldTDGhCk2gyYTRw9jxWUkaq7YAOTZGyIvsP/jZJJxWu9V6J7Lk+nuaalWKUFIaoHw+F3gHX/OhOYstoB2gRAHKDGY+T0orDP6sSzVJSGElbb21bluAYs7BO1RllZglZIZ4zM2vxdfDQSz7QbJ7wUAnfFAdSw2nh7QOsiYsvg9/L1AZ7NAnaGU0h2X8lL8wYSc/8nMeQDOA3AegPMAnAfgRTz+D0rXxHghnHmgAAAAAElFTkSuQmCC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
+</head>
+<body data-pagina="eciton-io">
+
+<header class="topo faixa">
+    <div class="caixa">
+        <a class="marca" href="index.html" aria-label="E4M, início"><img src="assets/marca.webp" alt="E4M" width="121" height="40"></a>
+        <nav class="menu" id="menu" aria-label="Páginas">
+            <div class="menu-grupo">
+                <button type="button" class="menu-abre" aria-expanded="false" aria-controls="subSolucoes">Soluções<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <div class="submenu" id="subSolucoes">
+                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
+                    <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
+                    <a href="estudo.html" data-pag="estudo"><b>Estudo de frota</b><span>Quantos Atta a operação precisa</span></a>
+                    <a href="eciton-io.html" data-pag="eciton-io"><b>Eciton I/O</b><span>Portas, semáforos e alarme</span></a>
+                    <a href="index.html#sob-medida"><b>Projetos sob medida</b><span>Engenharia para o seu fluxo</span></a>
+                </div>
+            </div>
+            <a href="index.html#como-trabalhamos">Como trabalhamos</a>
+            <a href="sobre.html" data-pag="sobre">Sobre</a>
+            <a href="contato.html" data-pag="contato">Contato</a>
+            <a class="botao cheio menu-cta" href="contato.html">Pedir uma simulação</a>
+        </nav>
+        <a class="botao cheio topo-cta" href="contato.html">Pedir uma simulação</a>
+        <button type="button" class="hamburguer" id="hamburguer" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><i></i><i></i><i></i></button>
+    </div>
+</header>
+
+<main id="inicio">
+    <section class="hero faixa hero-io">
+        <div class="caixa">
+            <div class="hero-texto">
+                <span class="olho">Eciton I/O</span>
+                <h1>O Atta conversa com a fábrica. <span class="prata">Porta, semáforo e alarme.</span></h1>
+                <p class="texto">O Eciton I/O é um controlador pequeno, na parede, que liga a frota ao que já existe no prédio. Ele abre a porta automática quando o Atta chega, acende o semáforo do cruzamento com a empilhadeira e, com o alarme de incêndio, faz a frota inteira parar de entrar em portas e cruzamentos. Ninguém precisa apertar botão.</p>
+                <div class="acoes">
+                    <a class="botao cheio" href="contato.html?interesse=eciton&amp;origem=eciton-io">Falar sobre a minha planta</a>
+                    <a class="botao" href="#o-que-liga">O que ele liga</a>
+                </div>
+            </div>
+            <div class="io-hero">
+                <div class="planta-tela io-tela">
+                    <div class="planta-chip" id="ioChip">porta 1 · fechada</div>
+                    <svg id="ioSvg" viewBox="0 0 600 340" role="img" aria-label="Um Atta, visto por trás, chega na porta automática; o controlador na parede recebe o pedido, a porta abre, o sensor confirma e o Atta passa"></svg>
+                </div>
+                <ol class="passos-ec io-passos" id="ioPassos">
+                    <li><b>O Atta pede</b><span>a porta, como pede um cruzamento</span></li>
+                    <li><b>O I/O abre</b><span>liga o contato que abre a porta</span></li>
+                    <li><b>O sensor confirma</b><span>só com a porta aberta de verdade</span></li>
+                    <li><b>O Atta passa</b><span>e a porta fecha sozinha</span></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="o-que-liga" style="padding-top:24px">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">O que ele liga</span>
+                <h2>O que já está no prédio passa a fazer parte da frota.</h2>
+                <p class="texto">Cada Eciton I/O tem 4 saídas (relés) e 4 entradas e fala com os Atta pela mesma rede e pelo mesmo canal criptografado da frota. Um controlador atende uma porta, um cruzamento ou o alarme, e todos são configurados pelo Eciton, na tela Dispositivos.</p>
+            </div>
+            <div class="io-quatro">
+                <a class="io-card" href="#portas">
+                    <svg viewBox="0 0 120 80" aria-hidden="true"><rect x="20" y="10" width="80" height="62" rx="3" fill="none" stroke="#2A3646" stroke-width="2"/><rect x="24" y="14" width="34" height="58" fill="rgba(99,174,255,.18)" stroke="#63AEFF"><animate attributeName="x" values="24;8;8;24" keyTimes="0;.3;.7;1" dur="4s" repeatCount="indefinite"/></rect><rect x="62" y="14" width="34" height="58" fill="rgba(99,174,255,.18)" stroke="#63AEFF"><animate attributeName="x" values="62;78;78;62" keyTimes="0;.3;.7;1" dur="4s" repeatCount="indefinite"/></rect><circle cx="108" cy="40" r="4" fill="#2BD46A"><animate attributeName="fill" values="#FF4D5E;#2BD46A;#2BD46A;#FF4D5E" keyTimes="0;.3;.7;1" dur="4s" repeatCount="indefinite"/></circle></svg>
+                    <h3>Portas automáticas</h3><p>As que você já tem: deslizantes, rápidas de lona, de enrolar. O I/O liga na entrada de comando da porta e lê se ela abriu.</p><span class="io-selo pronto">disponível</span>
+                </a>
+                <a class="io-card" href="#cruzamento">
+                    <svg viewBox="0 0 120 80" aria-hidden="true"><rect x="52" y="6" width="16" height="40" rx="4" fill="#0B0F15" stroke="#2A3646"/><circle cx="60" cy="17" r="5" fill="#FF4D5E"><animate attributeName="opacity" values="1;1;.15;.15;1" keyTimes="0;.5;.52;.98;1" dur="4s" repeatCount="indefinite"/></circle><circle cx="60" cy="35" r="5" fill="#2BD46A"><animate attributeName="opacity" values=".15;.15;1;1;.15" keyTimes="0;.5;.52;.98;1" dur="4s" repeatCount="indefinite"/></circle><path d="M10 66H110" stroke="#1E7BFF" stroke-width="3"/><path d="M60 50V78" stroke="#2A3646" stroke-width="3" stroke-dasharray="4 3"/></svg>
+                    <h3>Semáforo e cruzamento</h3><p>Vermelho para a empilhadeira enquanto um Atta cruza. Um botão segura os Atta quando a empilhadeira precisa passar.</p><span class="io-selo pronto">disponível</span>
+                </a>
+                <a class="io-card" href="#incendio">
+                    <svg viewBox="0 0 120 80" aria-hidden="true"><path d="M60 10c10 14 22 20 22 36a22 22 0 0 1-44 0c0-10 6-14 8-22 4 6 6 8 8 8 0-8 2-14 6-22z" fill="rgba(255,77,94,.2)" stroke="#FF4D5E" stroke-width="2"><animate attributeName="fill-opacity" values="1;.4;1" dur="1.2s" repeatCount="indefinite"/></path></svg>
+                    <h3>Alarme de incêndio</h3><p>Ligado à central de incêndio, faz a frota parar de entrar em portas e cruzamentos, e as portas fecham.</p><span class="io-selo pronto">disponível</span>
+                </a>
+                <a class="io-card projeto" href="#elevadores">
+                    <svg viewBox="0 0 120 80" aria-hidden="true"><rect x="38" y="6" width="44" height="70" rx="3" fill="none" stroke="#2A3646" stroke-width="2"/><path d="M60 6V76" stroke="#2A3646"/><rect x="44" y="40" width="32" height="26" rx="2" fill="rgba(165,123,255,.2)" stroke="#A57BFF"><animate attributeName="y" values="44;12;12;44;44" keyTimes="0;.35;.55;.9;1" dur="5s" repeatCount="indefinite"/></rect><path d="M92 30l6-6 6 6M92 50l6 6 6-6" fill="none" stroke="#A57BFF" stroke-width="2" stroke-linecap="round"/></svg>
+                    <h3>Elevadores</h3><p>O Atta chama o elevador, entra, vai de andar em andar e sai sozinho. Para hospitais, hotéis e fábricas de vários pisos.</p><span class="io-selo">em projeto · integração com o fabricante</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="portas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa agv-intro">
+            <div>
+                <span class="olho">Portas automáticas</span>
+                <h2 style="margin-top:14px">Funciona com a porta que você já tem.</h2>
+                <p class="texto" style="margin-top:16px">Quase toda porta automática tem uma entrada para o botão ou o radar que a abre. O Eciton I/O liga nela, como se fosse mais um botão, e num sensor de porta aberta. Não é preciso trocar a porta nem mexer no comando dela.</p>
+                <ul class="lista-ok">
+                    <li><b>Na dúvida, ninguém passa.</b> Enquanto a porta está fechada, o controlador segura a passagem como se houvesse outro veículo dentro. Sem energia ou sem rede, ela continua segura.</li>
+                    <li><b>Só passa com a porta aberta de verdade.</b> O caminho só é liberado quando o sensor confirma. Se a porta não abrir a tempo, o Atta espera e o Eciton avisa.</li>
+                    <li><b>A segurança das pessoas continua com a porta.</b> Os sensores e o fechamento da própria porta seguem valendo como antes.</li>
+                    <li><b>Fecha sozinha.</b> Alguns segundos depois que o último Atta passou, a porta fecha.</li>
+                </ul>
+            </div>
+            <figure class="io-ligacao" aria-label="Como o Eciton I/O liga na porta">
+                <svg viewBox="0 0 460 300" role="img" aria-label="O Atta pede pela rede; o Eciton I/O liga o relé na entrada de comando da porta e lê o sensor de porta aberta">
+                    <g font-family="JetBrains Mono, monospace" font-size="10">
+                        <rect x="18" y="118" width="92" height="64" rx="10" fill="#0B0F15" stroke="#2A3646"/>
+                        <rect x="34" y="132" width="60" height="22" rx="3" fill="#FF8A3D"/>
+                        <rect x="26" y="170" width="76" height="5" rx="2" fill="#2BD46A"/>
+                        <text x="64" y="198" text-anchor="middle" fill="#8E9BAE">Atta</text>
+                        <rect x="180" y="104" width="106" height="92" rx="10" fill="#0F1621" stroke="#63AEFF"/>
+                        <text x="233" y="128" text-anchor="middle" fill="#E9EEF5" font-weight="700">Eciton I/O</text>
+                        <text x="233" y="146" text-anchor="middle" fill="#8E9BAE">4 relés</text>
+                        <text x="233" y="162" text-anchor="middle" fill="#8E9BAE">4 entradas</text>
+                        <circle cx="270" cy="182" r="4" fill="#2BD46A"><animate attributeName="fill" values="#FF4D5E;#FF8A3D;#2BD46A;#2BD46A;#FF4D5E" keyTimes="0;.25;.5;.85;1" dur="6s" repeatCount="indefinite"/></circle>
+                        <path d="M110 140 C 140 120, 150 120, 180 130" fill="none" stroke="#2CE0FF" stroke-width="2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.2s" repeatCount="indefinite"/></path>
+                        <text x="146" y="110" text-anchor="middle" fill="#2CE0FF">Wi-Fi · MQTT</text>
+                        <text x="146" y="122" text-anchor="middle" fill="#8E9BAE">"quero a porta"</text>
+                        <rect x="350" y="40" width="92" height="220" rx="6" fill="none" stroke="#2A3646" stroke-width="2"/>
+                        <rect x="356" y="46" width="38" height="208" fill="rgba(99,174,255,.14)" stroke="#63AEFF"><animate attributeName="width" values="38;10;10;38" keyTimes="0;.35;.8;1" dur="6s" repeatCount="indefinite"/></rect>
+                        <rect x="398" y="46" width="38" height="208" fill="rgba(99,174,255,.14)" stroke="#63AEFF"><animate attributeName="x" values="398;426;426;398" keyTimes="0;.35;.8;1" dur="6s" repeatCount="indefinite"/><animate attributeName="width" values="38;10;10;38" keyTimes="0;.35;.8;1" dur="6s" repeatCount="indefinite"/></rect>
+                        <text x="396" y="30" text-anchor="middle" fill="#8E9BAE">porta existente</text>
+                        <path d="M286 130 H 330 V 80 H 350" fill="none" stroke="#FF8A3D" stroke-width="2"/>
+                        <text x="342" y="72" text-anchor="end" fill="#FF8A3D">relé → "abrir"</text>
+                        <path d="M350 220 H 330 V 172 H 286" fill="none" stroke="#2BD46A" stroke-width="2"/>
+                        <text x="342" y="238" text-anchor="end" fill="#2BD46A">sensor "aberta"</text>
+                        <text x="233" y="214" text-anchor="middle" fill="#8E9BAE">na parede, ao lado da porta</text>
+                    </g>
+                </svg>
+                <figcaption>Um relé na entrada de comando da porta (a mesma do botão ou do radar) e uma entrada no sensor de porta aberta. Um sensor de porta fechada é opcional.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="cruzamento">
+        <div class="caixa agv-intro">
+            <figure class="io-ligacao" aria-label="Cruzamento entre a rota dos Atta e o corredor das empilhadeiras">
+                <svg viewBox="0 0 460 300" role="img" aria-label="Enquanto um Atta cruza, o semáforo fica vermelho para a empilhadeira; depois o Atta espera e a empilhadeira passa">
+                    <defs><path id="rotaAttaX" d="M20 170 H 440"/><path id="rotaEmpX" d="M230 300 V 0"/></defs>
+                    <rect x="0" y="0" width="460" height="300" fill="#0A0F17"/>
+                    <path d="M20 170 H440" stroke="#1E7BFF" stroke-width="4" opacity=".85"/>
+                    <rect x="190" y="0" width="80" height="300" fill="rgba(255,138,61,.06)" stroke="rgba(255,138,61,.35)" stroke-dasharray="6 5"/>
+                    <rect x="190" y="140" width="80" height="60" rx="6" fill="rgba(30,123,255,.12)" stroke="#63AEFF" stroke-dasharray="4 3"/>
+                    <g>
+                        <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.45;1" calcMode="linear"><mpath href="#rotaAttaX"/></animateMotion>
+                        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.45;0.46;1" dur="8s" repeatCount="indefinite"/>
+                        <rect x="-20" y="-14" width="40" height="28" rx="6" fill="#0B0F15" stroke="#2BD46A" stroke-width="2"/>
+                        <rect x="-10" y="-7" width="20" height="14" rx="2" fill="#FF8A3D"/>
+                    </g>
+                    <g opacity="0">
+                        <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0;0.33;0.33" keyTimes="0;0.5;0.6;1" calcMode="linear"><mpath href="#rotaAttaX"/></animateMotion>
+                        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.5;0.51;1" dur="8s" repeatCount="indefinite"/>
+                        <rect x="-20" y="-14" width="40" height="28" rx="6" fill="#0B0F15" stroke="#2BD46A" stroke-width="2"/>
+                        <rect x="-10" y="-7" width="20" height="14" rx="2" fill="#FF8A3D"/>
+                        <text x="0" y="-22" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#2BD46A">espera</text>
+                    </g>
+                    <g>
+                        <animateTransform attributeName="transform" type="translate" values="230 340; 230 340; 230 -50" keyTimes="0;0.55;1" dur="8s" repeatCount="indefinite"/>
+                        <rect x="-16" y="-24" width="32" height="44" rx="4" fill="#3B2A12" stroke="#FF8A3D" stroke-width="2"/>
+                        <path d="M-10 -24 V -40 M10 -24 V -40" stroke="#FF8A3D" stroke-width="3"/>
+                    </g>
+                    <g transform="translate(300 60)">
+                        <rect x="-12" y="-30" width="24" height="56" rx="6" fill="#0B0F15" stroke="#2A3646"/>
+                        <circle cx="0" cy="-14" r="7" fill="#FF4D5E"><animate attributeName="opacity" values="1;1;.15;.15;1" keyTimes="0;.5;.52;.98;1" dur="8s" repeatCount="indefinite"/></circle>
+                        <circle cx="0" cy="10" r="7" fill="#2BD46A"><animate attributeName="opacity" values=".15;.15;1;1;.15" keyTimes="0;.5;.52;.98;1" dur="8s" repeatCount="indefinite"/></circle>
+                        <text x="20" y="-10" font-family="JetBrains Mono, monospace" font-size="10" fill="#8E9BAE">semáforo da</text>
+                        <text x="20" y="4" font-family="JetBrains Mono, monospace" font-size="10" fill="#8E9BAE">empilhadeira</text>
+                    </g>
+                    <text x="24" y="196" font-family="JetBrains Mono, monospace" font-size="10" fill="#63AEFF">rota dos Atta</text>
+                    <text x="236" y="290" font-family="JetBrains Mono, monospace" font-size="10" fill="#FF8A3D">corredor das empilhadeiras</text>
+                </svg>
+            </figure>
+            <div>
+                <span class="olho">Semáforo no cruzamento</span>
+                <h2 style="margin-top:14px">Atta e empilhadeira no mesmo cruzamento, sem conversa no grito.</h2>
+                <p class="texto" style="margin-top:16px">Onde a rota dos Atta cruza o corredor das empilhadeiras, o Eciton I/O comanda um semáforo. Enquanto um Atta passa, o vermelho fica para a empilhadeira. Quando o operador da empilhadeira precisa cruzar, aperta um botão: os Atta esperam antes do cruzamento e o verde é dele.</p>
+                <ul class="lista-ok">
+                    <li>O semáforo segue o tráfego da frota, não um tempo fixo</li>
+                    <li>O mesmo vale para a faixa de pedestre: botão para atravessar, sinal para quem vem</li>
+                    <li>Tudo registrado no histórico do Eciton</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="incendio" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Alarme de incêndio</span>
+                <h2>Tocou o alarme, a frota sai do caminho da evacuação.</h2>
+                <p class="texto">A central de incêndio do prédio liga numa entrada do Eciton I/O. Com o alarme, nenhum Atta parte, entra em cruzamento, porta ou corredor de mão dupla, nem começa etapa nova; quem já estava passando termina de sair. As portas comandadas pela frota fecham, e uma faixa vermelha aparece no topo de todas as telas do Eciton.</p>
+            </div>
+            <div class="estudo-quando">
+                <div><b>Fio rompido também é alarme</b><span>A entrada usa contato normalmente fechado: se o fio da central for cortado, a frota age como se o alarme tocasse.</span></div>
+                <div><b>Os veículos cumprem sozinhos</b><span>Cada Atta recebe o alarme e obedece mesmo sem o site aberto.</span></div>
+                <div><b>A porta corta-fogo é da central</b><span>Ela continua comandada pela central de incêndio, como manda o projeto do prédio. Quando o alarme normaliza, a frota volta sozinha.</span></div>
+                <div><b>Testado na simulação</b><span>O alarme, as portas e o semáforo rodam no Atta virtual, junto com a frota, antes de instalar.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="elevadores">
+        <div class="caixa agv-intro">
+            <div>
+                <span class="olho">Elevadores · em projeto</span>
+                <h2 style="margin-top:14px">De andar em andar, sem ninguém apertar o botão.</h2>
+                <p class="texto" style="margin-top:16px">Em hospital e hotel, o transporte mais cansativo não é no corredor: é entre andares. Levar medicamentos da farmácia aos postos de enfermagem, roupa limpa e suja, refeições, amostras de laboratório, enxoval e room service. Com o elevador integrado, o Atta chama o elevador, espera a porta abrir, entra, vai ao andar certo e sai sozinho.</p>
+                <div class="io-usos">
+                    <div><b>Hospitais</b><span>farmácia → enfermarias · cozinha → quartos · rouparia · laboratório</span></div>
+                    <div><b>Hotéis</b><span>enxoval e lavanderia · room service · bagagem · reposição de frigobar</span></div>
+                    <div><b>Fábricas em vários pisos</b><span>almoxarifado no térreo, montagem no mezanino</span></div>
+                </div>
+                <p class="nota-ex">A integração com elevador é feita com o fabricante dele (a interface muda de marca para marca e de modelo para modelo) e entra como projeto. Tem um prédio com elevador? Vamos estudar juntos.</p>
+                <a class="botao cheio" href="contato.html?interesse=eciton&amp;origem=elevador" style="margin-top:24px">Tenho um projeto com elevador</a>
+            </div>
+            <figure class="io-ligacao io-predio" aria-label="Um Atta usa o elevador para subir do térreo ao segundo andar">
+                <svg viewBox="0 0 460 320" role="img" aria-label="Prédio de três andares com elevador: o Atta entra no elevador no térreo, sobe e sai no 2º andar">
+                    <g font-family="JetBrains Mono, monospace" font-size="10" fill="#8E9BAE">
+                        <rect x="20" y="20" width="420" height="290" rx="6" fill="#0A0F17" stroke="#2A3646"/>
+                        <path d="M20 116 H440 M20 212 H440" stroke="#2A3646" stroke-width="2"/>
+                        <text x="30" y="40">2º andar · enfermaria</text>
+                        <text x="30" y="136">1º andar</text>
+                        <text x="30" y="232">térreo · farmácia</text>
+                        <rect x="200" y="20" width="70" height="290" fill="rgba(165,123,255,.05)" stroke="#2A3646" stroke-dasharray="4 3"/>
+                        <path d="M40 300 H200 M270 108 H430" stroke="#1E7BFF" stroke-width="3" opacity=".8"/>
+                        <g>
+                            <animateTransform attributeName="transform" type="translate" values="0 216; 0 216; 0 24; 0 24; 0 216" keyTimes="0;0.3;0.55;0.85;1" dur="10s" repeatCount="indefinite"/>
+                            <rect x="204" y="0" width="62" height="88" rx="3" fill="rgba(165,123,255,.14)" stroke="#A57BFF" stroke-width="2"/>
+                        </g>
+                        <g>
+                            <animateTransform attributeName="transform" type="translate" values="60 290; 235 290; 235 290; 235 98; 235 98; 380 98; 380 98; 60 290" keyTimes="0;0.25;0.3;0.55;0.6;0.8;0.99;1" dur="10s" repeatCount="indefinite"/>
+                            <rect x="-18" y="-14" width="36" height="24" rx="5" fill="#0B0F15" stroke="#2BD46A" stroke-width="2"/>
+                            <rect x="-9" y="-8" width="18" height="10" rx="2" fill="#FF8A3D"/>
+                        </g>
+                        <text x="262" y="36" text-anchor="end" fill="#A57BFF">elevador</text>
+                    </g>
+                </svg>
+            </figure>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="por-dentro" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Por dentro</span>
+                <h2>Pequeno na parede, parte da frota no sistema.</h2>
+            </div>
+            <div class="seguranca">
+                <div class="item-seg"><h3>4 saídas e 4 entradas</h3><p>Relés para abrir porta, acender semáforo ou sinalizar; entradas para sensor de porta, botão de cruzamento e alarme de incêndio.</p></div>
+                <div class="item-seg"><h3>A mesma rede da frota</h3><p>Fala com os Atta pelo mesmo canal criptografado (MQTT com TLS). Cada empresa só enxerga os próprios dispositivos.</p></div>
+                <div class="item-seg"><h3>Configurado pelo Eciton</h3><p>Na tela Dispositivos: o que cada saída e cada entrada faz, o estado ao vivo e o histórico. Na planta, a porta fica ligada ao controlador dela.</p></div>
+                <div class="item-seg"><h3>Falha para o lado seguro</h3><p>Sem energia, sem rede ou com o sensor em dúvida, a passagem fica fechada. Ninguém entra às cegas.</p></div>
+                <div class="item-seg"><h3>Testado antes de instalar</h3><p>O controlador e a porta rodam no Atta virtual, com a frota, na planta da sua fábrica.</p></div>
+                <div class="item-seg"><h3>Atualizado pelo Wi-Fi</h3><p>Como os Atta, recebe as versões novas a partir do Eciton.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="perguntas">
+        <div class="caixa perguntas-grade">
+            <div>
+                <span class="olho">Perguntas</span>
+                <h2 style="margin-top:14px">O que perguntam sobre o Eciton I/O.</h2>
+            </div>
+            <div class="perguntas">
+                <details><summary>Funciona com qualquer porta automática?</summary><p>Com as que aceitam um comando externo para abrir, como um botão ou um radar: a grande maioria das portas automáticas industriais e comerciais. Na visita técnica a gente confere a entrada de comando e onde fica o sensor de porta aberta.</p></details>
+                <details><summary>E se a porta não abrir?</summary><p>O Atta não passa: ele espera antes da porta, e o Eciton avisa quanto tempo ele está esperando e por quê. Nada entra sem o sensor confirmar que a porta abriu.</p></details>
+                <details><summary>Preciso de um controlador por porta?</summary><p>Uma porta por controlador é o mais simples. Um semáforo de cruzamento com botão e o alarme de incêndio podem dividir o mesmo controlador, conforme a distância entre eles.</p></details>
+                <details><summary>O Eciton I/O substitui a segurança da porta?</summary><p>Não. Os sensores e o fechamento seguro da própria porta continuam valendo, para pessoas e para os Atta. O controlador só pede para abrir e confere se abriu.</p></details>
+                <details><summary>Quando o elevador fica pronto?</summary><p>A integração com elevador está em projeto e depende do fabricante do elevador, porque cada um tem a sua interface. Ela entra caso a caso, como projeto. Se você tem um prédio com elevador, fale com a gente: é assim que o primeiro sai.</p></details>
+                <details><summary>Serve sem o Atta?</summary><p>O Eciton I/O foi feito para a frota: ele traduz o que os Atta pedem (passagem, cruzamento) para portas e semáforos. Sem veículos, ele não tem a quem servir.</p></details>
+            </div>
+        </div>
+    </section>
+</main>
+
+<section class="chamada faixa" id="chamada">
+    <div class="caixa">
+        <div>
+            <span class="olho">Próximo passo</span>
+            <h2>Vamos ver a frota rodando na sua planta?</h2>
+            <p class="texto">Antes de qualquer instalação, montamos a sua planta no Eciton e rodamos a frota virtual. Você vê as rotas, os tempos e quantos veículos fazem sentido para a sua operação.</p>
+        </div>
+        <div class="chamada-acoes">
+            <a class="botao cheio" href="contato.html">Pedir uma simulação</a>
+            <a class="botao zap" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg>Falar com o João Pedro no WhatsApp</a>
+            <small>Respondemos em até 1 dia útil.</small>
+        </div>
+    </div>
+</section>
+
+<footer class="rodape faixa">
+    <div class="caixa">
+        <img src="assets/placa.webp" alt="E4M · Engineering for Motion" width="180" height="78" loading="lazy">
+        <nav class="rodape-links" aria-label="Rodapé">
+            <a href="atta.html">Atta</a>
+            <a href="eciton.html">Eciton</a>
+            <a href="estudo.html">Estudo de frota</a>
+            <a href="eciton-io.html">Eciton I/O</a>
+            <a href="index.html#sob-medida">Projetos sob medida</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a href="privacidade.html" class="leve">Privacidade</a>
+        </nav>
+        <span class="rodape-fim">São Bernardo do Campo · SP<br>Tecnologia e automação para intralogística · © 2026</span>
+    </div>
+</footer>
+
+<a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
+
+<script src="assets/site.js?v=202611100250" defer></script>
+<script src="assets/eciton-io.js?v=202611100250" defer></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Estudo de frota · quantos Atta você precisa · E4M</title>
+<meta name="description" content="Estudo de frota da E4M: a simulação do turno inteiro na sua planta diz quantos Atta a operação precisa, onde o tráfego aperta e o que acontece quando a produção cresce. Com relatório completo para a diretoria.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="E4M · Engineering for Motion">
+<meta property="og:title" content="Estudo de frota · quantos Atta você precisa · E4M">
+<meta property="og:description" content="Estudo de frota da E4M: a simulação do turno inteiro na sua planta diz quantos Atta a operação precisa, onde o tráfego aperta e o que acontece quando a produção cresce. Com relatório completo para a diretoria.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:url" content="https://vectora-sandy.vercel.app/estudo">
+<link rel="canonical" href="https://vectora-sandy.vercel.app/estudo">
+<meta name="theme-color" content="#05070B">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
+</head>
+<body data-pagina="estudo">
+
+<header class="topo faixa">
+    <div class="caixa">
+        <a class="marca" href="index.html" aria-label="E4M, início"><img src="assets/marca.webp" alt="E4M" width="121" height="40"></a>
+        <nav class="menu" id="menu" aria-label="Páginas">
+            <div class="menu-grupo">
+                <button type="button" class="menu-abre" aria-expanded="false" aria-controls="subSolucoes">Soluções<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <div class="submenu" id="subSolucoes">
+                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
+                    <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
+                    <a href="estudo.html" data-pag="estudo"><b>Estudo de frota</b><span>Quantos Atta a operação precisa</span></a>
+                    <a href="eciton-io.html" data-pag="eciton-io"><b>Eciton I/O</b><span>Portas, semáforos e alarme</span></a>
+                    <a href="index.html#sob-medida"><b>Projetos sob medida</b><span>Engenharia para o seu fluxo</span></a>
+                </div>
+            </div>
+            <a href="index.html#como-trabalhamos">Como trabalhamos</a>
+            <a href="sobre.html" data-pag="sobre">Sobre</a>
+            <a href="contato.html" data-pag="contato">Contato</a>
+            <a class="botao cheio menu-cta" href="contato.html">Pedir uma simulação</a>
+        </nav>
+        <a class="botao cheio topo-cta" href="contato.html">Pedir uma simulação</a>
+        <button type="button" class="hamburguer" id="hamburguer" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><i></i><i></i><i></i></button>
+    </div>
+</header>
+
+<main id="inicio">
+    <section class="hero faixa hero-estudo">
+        <div class="caixa">
+            <div class="hero-texto">
+                <span class="olho">Estudo de frota</span>
+                <h1>Quantos Atta a sua operação precisa? <span class="prata">A resposta vem antes da compra.</span></h1>
+                <p class="texto">Simulamos o turno inteiro na planta da sua fábrica: cada pedido, cada viagem, cada cruzamento, o almoço e o pico da troca de turno. O estudo testa frota por frota até achar a menor que entrega no prazo e mostra o que acontece quando a produção crescer.</p>
+                <div class="acoes">
+                    <a class="botao cheio" href="contato.html?interesse=eciton&amp;origem=estudo">Pedir um estudo de frota</a>
+                    <a class="botao" href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener">Ver um relatório de exemplo (PDF)</a>
+                </div>
+            </div>
+            <figure class="estudo-busca" aria-label="O estudo testa frotas de 4 a 9 Atta até cumprir a meta de 95% das entregas no prazo">
+                <div class="janela-barra"><i></i><i></i><i></i><span>Estudo de frota · achar a frota</span><b class="painel-hora" id="ebStatus">simulando…</b></div>
+                <div class="eb-corpo">
+                    <div class="eb-grafico" id="ebGrafico">
+                        <div class="eb-meta" style="--y:95%"><span>meta 95% no prazo</span></div>
+                    </div>
+                    <div class="eb-eixo" id="ebEixo"></div>
+                    <div class="eb-resultado" id="ebResultado"><span class="rot">Frota recomendada</span><b>3 Atta G-O + 3 Atta E-O + 2 Atta R-O + 1 Atta T-O</b><small>95% no prazo · 9 min do pedido à entrega · cada Atta ocupado 53% do tempo</small></div>
+                </div>
+                <figcaption>Exemplo: a metalúrgica de exemplo do Eciton, 543 pedidos por dia em 2 turnos.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="o-que-e" style="padding-top:24px">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Por que estudar antes</span>
+                <h2>Conta de cabeça erra para os dois lados.</h2>
+                <p class="texto">Dividir as viagens pela capacidade de um veículo dá um número, mas ignora o que acontece de verdade: todo mundo pede material ao mesmo tempo na troca de turno, dois veículos querem o mesmo cruzamento, a estação de kits atende quatro linhas. Frota pequena demais atrasa a produção. Frota grande demais fica parada no berço. O estudo mostra o tamanho certo, com a sua planta.</p>
+            </div>
+            <div class="estudo-tres">
+                <article>
+                    <span class="rot">O que entra</span>
+                    <h3>A sua operação, como ela é</h3>
+                    <ul><li>A planta da fábrica, a partir do DXF do AutoCAD</li><li>O que vai de onde para onde, e quanto: por hora, pelo consumo da linha ou em horários fixos</li><li>Turnos, almoço, jantar e paradas</li><li>O prazo de cada entrega e que veículo serve para cada carga</li></ul>
+                </article>
+                <article>
+                    <span class="rot">O que a simulação faz</span>
+                    <h3>O turno inteiro, vários dias seguidos</h3>
+                    <ul><li>Cada viagem pela rota real, na velocidade de cada modelo, com zona lenta e faixa de pedestre</li><li>Os cruzamentos como os Atta fazem: um por vez, e quem chega espera</li><li>Picos na entrada do turno e na volta do almoço</li><li>Vários dias com variação: o resultado vem em faixa, do dia ruim ao dia bom</li></ul>
+                </article>
+                <article>
+                    <span class="rot">O que você recebe</span>
+                    <h3>A frota certa e o porquê dela</h3>
+                    <ul><li>A menor frota que cumpre o prazo, com folga para imprevisto</li><li>O que acontece com um Atta a menos ou em manutenção</li><li>A previsão com +25%, +50% e +100% de produção</li><li>Onde o tráfego aperta, e o relatório completo para a diretoria</li></ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="como" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Como funciona</span>
+                <h2>Do desenho da planta à frota recomendada.</h2>
+            </div>
+            <ol class="passos-ec">
+                <li><b>Montamos a sua planta</b><span>Importamos o DXF, desenhamos a rota dos Atta, as estações, os berços e os cruzamentos. É a mesma planta que vai rodar na operação.</span></li>
+                <li><b>Descrevemos os fluxos</b><span>Com você, cada fluxo de material: de onde sai, para onde vai, quanto e com que prazo. Se já existe operação, repetimos um dia real.</span></li>
+                <li><b>O estudo acha a frota</b><span>Começa com poucos Atta e põe um de cada vez onde mais falta, até as entregas saírem no prazo sem ninguém sobrecarregado.</span></li>
+                <li><b>Previsão e relatório</b><span>A mesma frota com mais produção e com um Atta parado. Tudo num relatório, com os campos de investimento e retorno para fechar a conta.</span></li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="exemplo">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Um estudo de verdade, numa planta de exemplo</span>
+                <h2>A metalúrgica de exemplo: 543 pedidos por dia, 12 fluxos, 2 turnos.</h2>
+                <p class="texto">Quatro submontagens recebem kits do supermercado, três prensas e três CNC mandam peças para a solda e a inspeção, e um rebocador faz o milk-run da montagem. Almoço e jantar com a frota no berço. Meta: 95% das entregas no prazo e nenhum Atta ocupado mais de 75% do tempo.</p>
+            </div>
+            <div class="estudo-exemplo">
+                <div class="ex-caminho">
+                    <h3>O caminho até a frota</h3>
+                    <div class="tabela-ex" role="table" aria-label="Frotas testadas">
+                        <div role="row" class="cab"><span role="columnheader">Atta</span><span role="columnheader">No prazo</span><span role="columnheader">Pedido à entrega</span><span role="columnheader">Sobram no fim do dia</span></div>
+                        <div role="row"><span>4</span><span><i class="barra-ex" style="--v:13%"></i>13%</span><span>113 min</span><span>117</span></div>
+                        <div role="row"><span>5</span><span><i class="barra-ex" style="--v:45%"></i>45%</span><span>52 min</span><span>31</span></div>
+                        <div role="row"><span>6</span><span><i class="barra-ex" style="--v:70%"></i>70%</span><span>17 min</span><span>8</span></div>
+                        <div role="row"><span>7</span><span><i class="barra-ex" style="--v:78%"></i>78%</span><span>16 min</span><span>6</span></div>
+                        <div role="row"><span>8</span><span><i class="barra-ex" style="--v:91%"></i>91%</span><span>10 min</span><span>1</span></div>
+                        <div role="row" class="ok"><span>9 ✓</span><span><i class="barra-ex" style="--v:95%"></i>95%</span><span>9 min</span><span>0</span></div>
+                    </div>
+                    <p class="nota-ex">Com 8 Atta, a conta parecia fechar: 91% no prazo. Num dia ruim, porém, só 81% sairiam a tempo e um pedido ficaria para o turno seguinte. O nono Atta (um Atta E-O a mais, para prensas e solda) leva o dia ruim a 88% e o dia típico a 95%.</p>
+                </div>
+                <div class="ex-lado">
+                    <div class="ex-cartao destaque">
+                        <span class="rot">A descoberta que vale o estudo</span>
+                        <h3>Para crescer 25%, a resposta é o layout, não a compra.</h3>
+                        <p>Com mais produção, o estudo tentou pôr mais Atta, e as entregas no prazo não subiam: o cruzamento central (zona ZR01) já segura 194 minutos de espera por dia. Comprar veículos não resolveria. Um segundo corredor ou uma rota de mão única, sim. Isso se descobre na simulação, não depois da instalação.</p>
+                    </div>
+                    <div class="ex-cartao">
+                        <span class="rot">Previsão</span>
+                        <ul class="ex-previsao">
+                            <li><b>1 Atta em manutenção</b><span>88% no prazo: a operação pede um Atta G-O reserva (10 no total)</span></li>
+                            <li><b>+25% de produção</b><span>81% no prazo: o tráfego trava antes da frota</span></li>
+                            <li><b>+50% de produção</b><span>38% no prazo: precisa de outro layout</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="relatorio" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa agv-intro">
+            <div>
+                <span class="olho">O relatório</span>
+                <h2 style="margin-top:14px">Um documento para decidir, não um número solto.</h2>
+                <p class="texto" style="margin-top:16px">Sete páginas com o resumo em linguagem de diretoria, o resultado da frota recomendada hora a hora, por fluxo e por veículo, o caminho até ela, a previsão, os gargalos, o cenário e as premissas usadas, e o método com os limites da simulação. A parte de investimento e retorno vem com os campos para fechar a conta com a proposta.</p>
+                <ul class="lista-ok">
+                    <li>Resultados em faixa: dia ruim, dia típico e dia bom</li>
+                    <li>Premissas à vista: crescimento, picos, ocupação máxima, meta de prazo</li>
+                    <li>Na versão com a Mira Pro, o resumo é escrito pela assistente, só com os números da simulação</li>
+                </ul>
+                <a class="botao cheio" href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" style="margin-top:26px">Abrir o relatório de exemplo (PDF)</a>
+            </div>
+            <div class="rel-paginas" aria-label="Páginas do relatório de exemplo">
+                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p1"><img src="assets/estudo-pag1.webp" alt="Página 1: resumo e resultado da frota recomendada" width="620" height="876" loading="lazy"></a>
+                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p2"><img src="assets/estudo-pag3.webp" alt="Página 3: o caminho até a frota e a previsão" width="620" height="876" loading="lazy"></a>
+                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p3"><img src="assets/estudo-pag7.webp" alt="Página 7: investimento, retorno e método" width="620" height="876" loading="lazy"></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="quando">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Quando fazer</span>
+                <h2>Toda vez que a operação vai mudar.</h2>
+            </div>
+            <div class="estudo-quando">
+                <div><b>Antes de comprar</b><span>O tamanho da frota e o modelo de cada fluxo, com a sua planta, antes de assinar.</span></div>
+                <div><b>Antes de mudar o layout</b><span>Mudou a linha de lugar, abriu um corredor, trocou o supermercado de posição: veja o efeito no tráfego antes da obra.</span></div>
+                <div><b>Quando a produção cresce</b><span>Um turno a mais, um produto novo, 30% de volume: quantos Atta a mais, e se o layout aguenta.</span></div>
+                <div><b>Para justificar o investimento</b><span>O relatório leva a diretoria do "quanto custa" ao "quanto precisa e por quê".</span></div>
+            </div>
+            <div class="estudo-depois">
+                <div>
+                    <span class="olho">Depois do estudo, a prova</span>
+                    <h3>A frota escolhida roda no Atta virtual, com o programa de verdade.</h3>
+                    <p>O estudo é uma simulação rápida, feita para comparar muitas frotas em segundos. A frota escolhida vai então para o Atta virtual do Eciton, que roda o mesmo programa dos veículos reais na sua planta: as mesmas decisões, os mesmos cruzamentos. Só depois vem o piloto numa rota real.</p>
+                </div>
+                <a class="botao" href="eciton.html#simulacao">Ver o Atta virtual</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="perguntas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa perguntas-grade">
+            <div>
+                <span class="olho">Perguntas</span>
+                <h2 style="margin-top:14px">O que perguntam sobre o estudo.</h2>
+            </div>
+            <div class="perguntas">
+                <details><summary>Preciso já ter o Eciton?</summary><p>Não. A E4M faz o estudo com você antes da compra, a partir do desenho da planta e de como o material anda hoje. Quando a frota chega, o estudo fica no seu Eciton (Operação › Estudo de frota), para refazer sempre que a produção ou o layout mudarem.</p></details>
+                <details><summary>O que vocês precisam de mim?</summary><p>O DXF da planta (o DWG do AutoCAD se salva como DXF em um clique), a lista do que vai de onde para onde e quanto, os turnos e os horários de almoço e jantar. Se a operação já existe, um dia de pedidos reais deixa o estudo mais fiel.</p></details>
+                <details><summary>Qual a diferença para o configurador do site?</summary><p>O <a href="atta.html#configurador">configurador</a> faz a conta rápida de um fluxo: distância, carga e viagens por hora. O estudo junta todos os fluxos na mesma planta, com os cruzamentos, os picos, o calendário e qual modelo atende cada carga. É ele que mostra que o gargalo é um cruzamento, ou que o dia ruim pede um veículo a mais.</p></details>
+                <details><summary>O resultado é exato?</summary><p>É uma simulação rápida e honesta sobre os seus limites. Não entram bateria e recarga, falhas, pessoas no caminho nem o tempo de voltar ao berço. Por isso a meta deixa folga (nenhum Atta ocupado mais de 75% do tempo) e o resultado vem em faixa, do dia ruim ao dia bom. A frota escolhida é conferida no Atta virtual, com o programa real, antes do piloto.</p></details>
+                <details><summary>O que é "no prazo"?</summary><p>Cada fluxo tem um prazo, do pedido à entrega: por exemplo, 15 minutos para o kit da submontagem. O estudo conta quantas entregas chegaram dentro do prazo, em cada dia simulado. A meta padrão é 95%, e você pode mudar.</p></details>
+                <details><summary>Dá para comparar modelos diferentes?</summary><p>Dá. Cada fluxo diz que modelo serve (garra para kits, elevação para carrinhos, roletes para esteira, rebocador para milk-run), e o estudo põe um Atta de cada vez no modelo que mais falta. Também dá para testar todas as combinações de uma faixa.</p></details>
+                <details><summary>A Mira escreve o relatório?</summary><p>Na Mira Pro, a assistente do Eciton monta o rascunho dos fluxos a partir de uma descrição ("quatro linhas consomem 120 peças por hora, kit de 30 peças…") e escreve o resumo para a diretoria. Os números vêm sempre da simulação: a Mira descreve e explica, não inventa.</p></details>
+            </div>
+        </div>
+    </section>
+</main>
+
+<section class="chamada faixa" id="chamada">
+    <div class="caixa">
+        <div>
+            <span class="olho">Próximo passo</span>
+            <h2>Vamos ver a frota rodando na sua planta?</h2>
+            <p class="texto">Antes de qualquer instalação, montamos a sua planta no Eciton e rodamos a frota virtual. Você vê as rotas, os tempos e quantos veículos fazem sentido para a sua operação.</p>
+        </div>
+        <div class="chamada-acoes">
+            <a class="botao cheio" href="contato.html">Pedir uma simulação</a>
+            <a class="botao zap" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg>Falar com o João Pedro no WhatsApp</a>
+            <small>Respondemos em até 1 dia útil.</small>
+        </div>
+    </div>
+</section>
+
+<footer class="rodape faixa">
+    <div class="caixa">
+        <img src="assets/placa.webp" alt="E4M · Engineering for Motion" width="180" height="78" loading="lazy">
+        <nav class="rodape-links" aria-label="Rodapé">
+            <a href="atta.html">Atta</a>
+            <a href="eciton.html">Eciton</a>
+            <a href="estudo.html">Estudo de frota</a>
+            <a href="eciton-io.html">Eciton I/O</a>
+            <a href="index.html#sob-medida">Projetos sob medida</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a href="privacidade.html" class="leve">Privacidade</a>
+        </nav>
+        <span class="rodape-fim">São Bernardo do Campo · SP<br>Tecnologia e automação para intralogística · © 2026</span>
+    </div>
+</footer>
+
+<a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
+
+<script src="assets/site.js?v=202611100250" defer></script>
+<script src="assets/estudo.js?v=202611100250" defer></script>
+</body>
+</html>

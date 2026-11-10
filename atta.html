@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611082353">
+<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
 </head>
 <body data-pagina="atta">
 
@@ -35,6 +35,8 @@
                 <div class="submenu" id="subSolucoes">
                     <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
                     <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
+                    <a href="estudo.html" data-pag="estudo"><b>Estudo de frota</b><span>Quantos Atta a operação precisa</span></a>
+                    <a href="eciton-io.html" data-pag="eciton-io"><b>Eciton I/O</b><span>Portas, semáforos e alarme</span></a>
                     <a href="index.html#sob-medida"><b>Projetos sob medida</b><span>Engenharia para o seu fluxo</span></a>
                 </div>
             </div>
@@ -378,46 +380,6 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="sinalizacao" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
-        <div class="caixa sinal-grade">
-            <div>
-                <span class="olho">Sinalização e Eciton</span>
-                <h2 style="margin-top:14px">Quem está no chão vê. Quem está no escritório também.</h2>
-                <p class="texto" style="margin-top:16px">A sinalização luminosa do Atta mostra para as pessoas por perto o que ele está fazendo. O Eciton mostra a frota inteira, ao vivo.</p>
-                <a class="botao" href="eciton.html" style="margin-top:22px">Conhecer o Eciton</a>
-                <div class="leds" aria-label="Cores da sinalização">
-                    <div class="led"><span class="tira" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span>Pronto para trabalhar</div>
-                    <div class="led"><span class="tira corre" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span>Em missão, andando</div>
-                    <div class="led"><span class="tira pisca" style="--c:var(--ciano)"><i></i><i></i><i></i><i></i><i></i></span>Esperando confirmação</div>
-                    <div class="led"><span class="tira respira" style="--c:var(--laranja)"><i></i><i></i><i></i><i></i><i></i></span>Obstáculo à frente</div>
-                    <div class="led"><span class="tira corre" style="--c:var(--roxo)"><i></i><i></i><i></i><i></i><i></i></span>Indo para o berço</div>
-                    <div class="led"><span class="tira pisca" style="--c:var(--vermelho)"><i></i><i></i><i></i><i></i><i></i></span>Emergência acionada</div>
-                </div>
-            </div>
-            <figure class="janela" style="margin:0" aria-label="Exemplo do painel de supervisão">
-                <div class="janela-barra"><i></i><i></i><i></i><span>Eciton · supervisão de frota</span></div>
-                <div class="janela-corpo">
-                    <div class="janela-lado"><b>FROTA</b><span class="ativo">Visão geral</span><span>Missões</span><span>Rotina e berços</span><span>Planta</span><span>Diagnóstico</span></div>
-                    <div class="janela-principal">
-                        <h4>3 Atta · Fábrica 1</h4>
-                        <div class="mini-cartoes">
-                            <div class="mini-cartao" style="--c:var(--azul-claro)"><div class="l1"><b>Atta 01</b><span class="pil">em missão</span></div><small>Kit K-204 → Montagem 2</small><div class="barra"><i style="width:64%"></i></div></div>
-                            <div class="mini-cartao" style="--c:var(--laranja)"><div class="l1"><b>Atta 02</b><span class="pil">aguardando</span></div><small>Passagem no cruzamento</small><div class="barra"><i style="width:30%"></i></div></div>
-                            <div class="mini-cartao" style="--c:var(--roxo)"><div class="l1"><b>Atta 03</b><span class="pil">no berço</span></div><small>Turno encerrado</small><div class="barra"><i style="width:0%"></i></div></div>
-                        </div>
-                        <div class="mapa-mini">
-                            <svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-hidden="true">
-                                <path d="M20 90H280M80 90V30M220 90V30M150 20V110" fill="none" stroke="#1E7BFF" stroke-width="3" opacity=".8"/>
-                                <rect x="130" y="70" width="40" height="40" rx="6" fill="rgba(30,123,255,.15)" stroke="#63AEFF" stroke-dasharray="4 3"/>
-                                <circle cx="190" cy="90" r="6" fill="#63AEFF"/><circle cx="150" cy="44" r="6" fill="#FF8A3D"/><circle cx="20" cy="90" r="6" fill="#A57BFF"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </figure>
-        </div>
-    </section>
-
     <section class="secao faixa" id="seguranca">
         <div class="caixa">
             <div class="cabeca">
@@ -440,6 +402,19 @@
                 <div class="item-seg">
                     <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="8" y="15" width="18" height="13" rx="2" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M12 15v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#63AEFF" stroke-width="2"/></svg>
                     <h3>Conexão criptografada</h3><p>A comunicação entre AGVs, painel e nuvem é protegida, como num banco online.</p>
+                </div>
+            </div>
+            <div class="luzes-seg">
+                <div class="luzes-texto">
+                    <span class="rot">As luzes avisam antes</span>
+                    <h3>Quem está perto sabe o que o Atta vai fazer.</h3>
+                    <p>A fita de luz do Atta conta o que ele está fazendo para as pessoas em volta. Os avisos de segurança seguem a convenção das máquinas (vermelho é perigo, âmbar e laranja pedem atenção) e são travados: nenhuma configuração muda. As cores de operação, a empresa escolhe no Eciton.</p>
+                </div>
+                <div class="luzes-cena" aria-label="Avisos de segurança da fita de luz">
+                    <div class="led"><span class="tira estrobo" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span><b>Vai partir</b><small>afaste-se: ele sai em instantes</small></div>
+                    <div class="led"><span class="tira respira-rapida" style="--c:var(--laranja)"><i></i><i></i><i></i><i></i><i></i></span><b>Obstáculo à frente</b><small>parado, segue sozinho quando liberar</small></div>
+                    <div class="led"><span class="tira pisca" style="--c:#FFB000"><i></i><i></i><i></i><i></i><i></i></span><b>Faixa de pedestre</b><small>para antes e atravessa devagar</small></div>
+                    <div class="led"><span class="tira estrobo" style="--c:var(--vermelho)"><i></i><i></i><i></i><i></i><i></i></span><b>Emergência</b><small>só volta com alguém liberando no local</small></div>
                 </div>
             </div>
         </div>
@@ -467,6 +442,8 @@
         <nav class="rodape-links" aria-label="Rodapé">
             <a href="atta.html">Atta</a>
             <a href="eciton.html">Eciton</a>
+            <a href="estudo.html">Estudo de frota</a>
+            <a href="eciton-io.html">Eciton I/O</a>
             <a href="index.html#sob-medida">Projetos sob medida</a>
             <a href="sobre.html">Sobre</a>
             <a href="contato.html">Contato</a>
@@ -478,7 +455,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611082353" defer></script>
+<script src="assets/site.js?v=202611100250" defer></script>
 
 </body>
 </html>
