@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611102223">
+<link rel="stylesheet" href="assets/estilo.css?v=202611112100">
 </head>
 <body data-pagina="eciton">
 
@@ -33,7 +33,7 @@
             <div class="menu-grupo">
                 <button type="button" class="menu-abre" aria-expanded="false" aria-controls="subSolucoes">Soluções<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                 <div class="submenu" id="subSolucoes">
-                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
+                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV</span></a>
                     <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
                     <a href="estudo.html" data-pag="estudo"><b>Estudo de frota</b><span>Quantos Atta a operação precisa</span></a>
                     <a href="eciton-io.html" data-pag="eciton-io"><b>Eciton I/O</b><span>Portas, semáforos e alarme</span></a>
@@ -86,6 +86,8 @@
                 <a class="destaque" href="#programacao"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l3 2M9 3h6"/></svg></span><b>Pedidos programados <i class="novo">novo</i></b><span>Pelo consumo, a cada X minutos ou em horários fixos. O material chega antes de acabar.</span></a>
                 <a class="destaque" href="#planta"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span><b>Planta 3D <i class="novo">novo</i></b><span>O desenho do AutoCAD por baixo, as máquinas em 3D e a frota andando: o gêmeo digital da fábrica.</span></a>
                 <a class="destaque" href="#indicadores"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Indicadores <i class="novo">novo</i></b><span>Entregas, disponibilidade, onde a frota para e quanto tempo de gente ficou livre. Vira o relatório do piloto.</span></a>
+                <a class="destaque" href="#trafego"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></span><b>Controle de Tráfego <i class="novo">novo</i></b><span>Um por vez no cruzamento; trecho fechado, o Atta refaz a rota no próximo ponto.</span></a>
+                <a class="destaque" href="#baterias"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10v4M7 10v4M11 10v4"/></svg></span><b>Baterias <i class="novo">novo</i></b><span>A carga de cada Atta, a recarga de oportunidade, a fila dos carregadores e o horário de ponta.</span></a>
                 <a class="destaque" href="#simulacao"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M10 9l4 2-4 2z"/></svg></span><b>Simulação na sua planta</b><span>Atta virtuais com o mesmo programa dos de verdade, para saber quantos você precisa antes de comprar.</span></a>
                 
             </div>
@@ -257,6 +259,79 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="trafego" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">Controle de Tráfego</span>
+                <h2>Um por vez no cruzamento. E quando o caminho fecha, o Atta acha outro.</h2>
+                <p class="texto">Cada Atta reserva a zona de cruzamento antes de entrar e solta depois de passar: dois nunca disputam o mesmo lugar. Se o líder fecha um trecho para limpeza ou manutenção, o Eciton refaz a rota de quem está andando, e o Atta troca no próximo ponto. Um obstáculo na frente para o veículo na hora; um Atta sem bateria no corredor fecha os trechos dele sozinho até sair.</p>
+            </div>
+            <div class="ct-cena">
+                <div class="ct-palco">
+                    <svg id="ctSvg" viewBox="0 0 640 340" role="img" aria-label="Controle de Tráfego em quatro momentos: cruzamento, trecho fechado, obstáculo e Atta sem bateria">
+                        <g class="ct-corredores">
+                            <rect x="60" y="60" width="520" height="220" rx="14"/>
+                            <path d="M320 60V280"/><path d="M60 170H580"/>
+                        </g>
+                        <g id="ctFechados"></g>
+                        <path id="ctRota" class="ct-rota" d=""/>
+                        <rect id="ctZona" class="ct-zona" x="298" y="148" width="44" height="44" rx="6"/>
+                        <g id="ctCaixa" class="ct-caixa" opacity="0"><rect x="-12" y="-12" width="24" height="24" rx="3"/><path d="M-12 -12L12 12M12 -12L-12 12"/></g>
+                        <g id="ctA" class="ct-atta"><circle class="halo" r="20"/><rect x="-13" y="-8" width="26" height="16" rx="4"/><path class="frente" d="M13 -5L18 0L13 5"/><text y="4">A</text></g>
+                        <g id="ctB" class="ct-atta b"><circle class="halo" r="20"/><rect x="-13" y="-8" width="26" height="16" rx="4"/><path class="frente" d="M13 -5L18 0L13 5"/><text y="4">B</text></g>
+                        <g id="ctBat" class="ct-bat" opacity="0"><rect x="-17" y="-30" width="34" height="16" rx="4"/><text y="-18">2%</text></g>
+                    </svg>
+                    <p class="ct-legenda" id="ctLegenda" aria-live="polite"></p>
+                </div>
+                <div class="capitulos ct-caps" id="ctCaps" role="group" aria-label="Momentos do Controle de Tráfego">
+                    <button type="button" data-cap="0"><span>Cruzamento</span><i></i></button>
+                    <button type="button" data-cap="1"><span>Trecho fechado</span><i></i></button>
+                    <button type="button" data-cap="2"><span>Obstáculo</span><i></i></button>
+                    <button type="button" data-cap="3"><span>Sem bateria</span><i></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="baterias">
+        <div class="caixa bt-grade">
+            <div>
+                <span class="olho">Baterias</span>
+                <h2 style="margin-top:14px">A carga de cada Atta à vista, e a recarga na hora certa.</h2>
+                <p class="texto" style="margin-top:16px">Um cartão por Atta com a carga e o que ele está fazendo. O Eciton manda carregar quando a bateria baixa, aproveita o intervalo e o tempo parado (recarga de oportunidade), organiza a fila dos carregadores e respeita o horário de ponta da energia. Ficou crítica? Alerta por e-mail.</p>
+                <ul class="lista-ok">
+                    <li>Regras por modelo: carga alvo, quando ir carregar e o mínimo para aceitar missão</li>
+                    <li>Horário de ponta no calendário, com liberação de emergência</li>
+                    <li>A fila dos carregadores, com quem está carregando e quem espera</li>
+                    <li>O gráfico do dia, da semana e do mês, e os alertas por e-mail</li>
+                </ul>
+                <p class="mira-nota">O Eciton já está pronto para a medição de bateria do Atta de produção; no protótipo, a carga é estimada pelo uso.</p>
+            </div>
+            <figure class="bt-anim" id="batAnim" aria-label="Frota › Baterias: três Atta descarregando, um vai carregar, outro espera na fila, e no horário de ponta a recarga espera">
+                <div class="janela-barra"><i></i><i></i><i></i><span>Eciton · Frota › Baterias</span><b class="painel-hora" id="batHora">10:00</b></div>
+                <div class="bt-corpo">
+                    <div class="bt-cartoes" id="batCartoes"></div>
+                    <div class="bt-meio">
+                        <div class="bt-caixa"><span>Carregador · berço B1</span><b id="batCarregador">livre</b></div>
+                        <div class="bt-caixa"><span>Fila</span><b id="batFila">ninguém</b></div>
+                    </div>
+                    <div class="bt-linha" aria-hidden="true">
+                        <div class="bt-ponta" style="left:75%;width:18.75%"><span>ponta</span></div>
+                        <i id="batCursor"></i>
+                        <div class="bt-horas"><span>06h</span><span>10h</span><span>14h</span><span>18h</span><span>22h</span></div>
+                    </div>
+                    <p class="bt-alerta" id="batAlerta" aria-live="polite"></p>
+                </div>
+                <div class="capitulos bt-caps" id="batCaps" role="group" aria-label="Momentos das baterias">
+                    <button type="button" data-cap="0"><span>Cada Atta no cartão</span><i></i></button>
+                    <button type="button" data-cap="1"><span>Recarga e fila</span><i></i></button>
+                    <button type="button" data-cap="2"><span>Horário de ponta</span><i></i></button>
+                </div>
+                <figcaption>Exemplo ilustrativo, com a carga estimada.</figcaption>
+            </figure>
         </div>
     </section>
 
@@ -501,10 +576,11 @@
                     <li><b>Calendário da fábrica</b><span>turnos, almoço no berço e paradas planejadas</span></li>
                     <li><b>Pausar e modo devagar</b><span>a frota inteira, num toque</span></li>
                     <li><b>Quem atende cada botão</b><span>o modelo certo para a carga, preferidos primeiro</span></li>
-                    <li><b>Tráfego</b><span>um por vez nos cruzamentos</span></li>
+                    <li><b>Controle de Tráfego</b><span>um por vez nos cruzamentos; trecho fechado, rota refeita</span></li>
                     <li><b>Mapa ao vivo e controle manual</b><span>ver e manobrar pelo navegador</span></li>
                 </ul></div>
                 <div class="tudo-grupo"><h3>Manter</h3><ul>
+                    <li><b>Baterias</b><span>carga de cada Atta, recarga, fila e horário de ponta</span></li>
                     <li><b>Manutenção</b><span>tira da operação e registra o porquê</span></li>
                     <li><b>Diagnóstico e autoteste</b><span>confere o veículo item por item</span></li>
                     <li><b>Sensores ao vivo</b><span>o que o Atta está lendo agora</span></li>
@@ -538,6 +614,8 @@
             <div class="perguntas">
                 <h3 class="perguntas-grupo">No dia a dia</h3>
                 <details><summary>E se a internet cair?</summary><p>Cada Atta guarda na memória a missão que está fazendo e a fila dele, e continua a viagem. Antes de entrar num cruzamento ou num corredor que divide com outro veículo, ele precisa combinar com a frota: sem conexão, para antes da zona e espera, nunca entra às cegas. Pedidos novos dos tablets aguardam a conexão. Quando a rede volta, tudo segue sozinho.</p></details>
+                <details><summary>O que acontece se um corredor for interditado?</summary><p>O líder fecha o trecho no Controle de Tráfego, sem mexer na planta. O Atta que está andando recebe a rota nova e troca no próximo ponto, nunca no meio de um trecho; as próximas missões já saem desviando. Sem outro caminho, o Atta segue a rota dele e o Eciton avisa (reabra o trecho ou cancele a missão). Um Atta parado sem bateria no corredor fecha os trechos dele sozinho até sair.</p></details>
+                <details><summary>Como o Eciton cuida da bateria?</summary><p>Cada modelo tem as regras dele: a carga alvo, quando ir carregar e o mínimo para aceitar missão. O Eciton manda o Atta ao carregador quando a bateria baixa, aproveita o intervalo e o tempo parado, organiza a fila quando dois precisam do mesmo carregador e evita carregar no horário de ponta (com liberação de emergência). Abaixo do crítico, alerta por e-mail.</p></details>
                 <details><summary>Preciso mudar o chão da fábrica?</summary><p>No Atta E-O, basta uma fita contrastante colada no piso e etiquetas RFID nos pontos de parada. Dá para mudar a rota trocando a fita. A versão magnética (-M, sob encomenda) usa fita magnética, mais resistente a sujeira e ao tráfego de empilhadeira.</p></details>
                 <details><summary>É seguro andar perto das pessoas?</summary><p>O Atta anda mais devagar nas zonas marcadas na planta, para sozinho quando os sensores de distância veem pessoa, carrinho ou outro veículo na frente, e só segue com o caminho livre. O botão de emergência no veículo para tudo, e ele só volta a andar depois que alguém rearma no local.</p></details>
                 <details><summary>O Atta passa por porta automática?</summary><p>Passa, com o módulo Eciton I/O ligado ao contato da porta (o mesmo do radar ou do botão) e a um sensor de porta aberta. O Atta pede passagem, a porta abre e ele só segue quando o sensor confirma. Se o módulo ficar sem energia ou sem rede, a passagem fica fechada até ele voltar. A segurança das pessoas na porta continua com os sensores da própria porta. Elevador ainda não: depende de integração com o fabricante do elevador.</p></details>
@@ -616,7 +694,8 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611102223" defer></script>
-<script src="assets/eciton.js?v=202611102223" defer></script>
+<script src="assets/site.js?v=202611112100" defer></script>
+<script src="assets/eciton.js?v=202611112100" defer></script>
+<script src="assets/trafego-baterias.js?v=202611112100" defer></script>
 </body>
 </html>

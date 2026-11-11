@@ -950,17 +950,18 @@
     if (document.getElementById("config")) {
     const form = document.getElementById("config");
     const MODULOS = {
-        garra:    { letra: "G", nome: "garra", limite: 250,  preco: 220000, st: ["proj", "Sob encomenda"], porque: "A garra é feita para a sua carga: o Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
-        carrinho: { letra: "E", nome: "elevação", limite: 1000, preco: 280000, st: ["disp", "Pronto para piloto"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto. É o módulo do nosso protótipo." },
-        esteira:  { letra: "R", nome: "rolos", limite: 1000, preco: 300000, st: ["proj", "Sob encomenda"], porque: "A carga passa da esteira da estação para os rolos do Atta, e dele para a próxima esteira." },
-        comboio:  { letra: "T", nome: "rebocador", limite: 3000, preco: 350000, st: ["dev", "Em desenvolvimento"], porque: "" }
+        garra:    { letra: "G", nome: "garra", limite: 250,  preco: 170000, st: ["proj", "Sob encomenda"], porque: "A garra é feita para a sua carga: o Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
+        carrinho: { letra: "E", nome: "elevação", limite: 1000, preco: 180000, st: ["disp", "Pronto para piloto"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto. É o módulo do nosso protótipo." },
+        esteira:  { letra: "R", nome: "rolos", limite: 1000, preco: 190000, st: ["proj", "Sob encomenda"], porque: "A carga passa da esteira da estação para os rolos do Atta, e dele para a próxima esteira." },
+        comboio:  { letra: "T", nome: "rebocador", limite: 3000, preco: 210000, st: ["dev", "Em desenvolvimento"], porque: "" }
     };
     const num = (id, min) => Math.max(min, Number(String(document.getElementById(id).value).replace(",", ".")) || 0);
     const fmt = (v, casas = 1) => v.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
     const moeda = v => (v >= 1e6 ? `R$ ${fmt(v / 1e6, 2)} mi` : v >= 1e4 ? `R$ ${fmt(v / 1e3, 0)} mil` : `R$ ${fmt(v, 0)}`);
     const VEL = { sim: 0.8, nao: 1.2 }, ACEL = 0.4, TRAFEGO = 1.15, OCUPACAO = 0.75;
     const HORAS_TURNO = 8, MEDIA_DO_PICO = 0.7, VEL_PESSOA = 0.9, TRANSPORTA = 0.75, COBRE = 0.8;
-    const IMPLANTACAO = 0.2, ASSINATURA = 1800, MANUTENCAO = 0.10;
+    // referência de AGV guiado por linha nacional; assinatura do Eciton por Atta mais um fixo pela fábrica; manutenção ~5% do hardware por ano
+    const IMPLANTACAO = 0.2, ASSINATURA = 650, FIXO = 500, MANUTENCAO = 0.05;
     // false: esconde a linha do retorno (fica o custo de hoje e as pessoas liberadas)
     const MOSTRAR_RETORNO = true;
     if (!MOSTRAR_RETORNO) document.querySelector(".cf-retorno")?.remove();
@@ -988,12 +989,14 @@
         const horasTurno = porTurno * (2 * dist / VEL_PESSOA + 2 * ponta * 60) / 3600;
         const horasMes = horasTurno * turnos * dias;
         const equivalentes = horasTurno / (HORAS_TURNO * TRANSPORTA);
-        const libera = Math.max(0, Math.round(Math.min(gente || equivalentes, equivalentes * 2) * COBRE));
+        // por posto: quem faz este transporte sai inteiro quando a frota assume (nunca mais do que as pessoas informadas)
+        const porHoras = Math.round(equivalentes * COBRE);
+        const libera = Math.max(0, gente ? Math.min(gente, Math.max(porHoras, Math.ceil(equivalentes * COBRE - 0.15))) : porHoras);
         // o retorno (com o preço de referência de ±15%)
         const hw = frota * m.preco, investimento = hw * (1 + IMPLANTACAO);
-        const custoMes = frota * ASSINATURA + hw * MANUTENCAO / 12;
+        const custoMes = FIXO + frota * ASSINATURA + hw * MANUTENCAO / 12;
         const ganhoMes = libera * turnos * custoPessoa;
-        const meses = fator => { const liq = ganhoMes - (frota * ASSINATURA + hw * fator * MANUTENCAO / 12); return liq > 0 ? investimento * fator / liq + 1.5 : Infinity; };   // +1,5: piloto e meia frota
+        const meses = fator => { const liq = ganhoMes - (FIXO + frota * ASSINATURA + hw * fator * MANUTENCAO / 12); return liq > 0 ? investimento * fator / liq + 1.5 : Infinity; };   // +1,5: piloto e meia frota
         const [pbA, pbB] = [meses(0.85), meses(1.15)];
 
         document.getElementById("cfModelo").textContent = rebocador ? "Atta T · rebocador" : `Atta ${m.letra}-O`;
@@ -1008,7 +1011,7 @@
         if (rebocador) aviso = (peso > MODULOS.esteira.limite ? `Com ${peso.toLocaleString("pt-BR")} kg por viagem, ` : "") +
             "o rebocador ainda está em desenvolvimento. Com comboio, as curvas, as paradas no corredor e o tamanho do trem pedem um estudo próprio da sua planta. Conte o seu caso e a gente estuda junto.";
         else if (!libera) aviso = "Com estes números, o transporte ainda não ocupa uma pessoa inteira por turno: o ganho vem da linha que não para, da rastreabilidade e da segurança. O estudo completo mede esses ganhos também.";
-        else if (MOSTRAR_RETORNO && (!Number.isFinite(pbA) || pbA > 60)) aviso = "Com estes números, só as pessoas liberadas não pagam a frota em 5 anos. O estudo completo procura o que faz fechar: pré-abastecer antes da troca de turno, juntar fluxos, a mensalidade, os ganhos de linha sem parar e de segurança.";
+        else if (MOSTRAR_RETORNO && (!Number.isFinite(pbA) || pbA > 60)) aviso = "Com estes números, só as pessoas liberadas não pagam a frota em 5 anos. O estudo completo procura onde o projeto se paga: começar pelos fluxos que mais valem, pré-abastecer antes da troca de turno, juntar fluxos num milk run, usar menos modelos de Atta, mais turnos, e os ganhos de linha sem parar.";
         caixaAviso.hidden = !aviso;
         caixaAviso.textContent = aviso;
         const icones = document.getElementById("cfIcones");

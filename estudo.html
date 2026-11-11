@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Estudo de frota · quantos Atta você precisa · E4M</title>
-<meta name="description" content="Estudo de frota da E4M: você responde um questionário pelo link, a E4M simula o turno inteiro na sua planta e o relatório diz quantos Atta, quais ações valem mais, os próximos 3 anos e em quanto tempo o investimento volta, com a origem de cada número.">
+<meta name="description" content="Estudo de frota da E4M: você responde um questionário pelo link, a E4M simula o turno inteiro na sua planta e o relatório diz quantos Atta, onde o projeto se paga e em quanto tempo o investimento volta, com a origem de cada número.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="E4M · Engineering for Motion">
 <meta property="og:title" content="Estudo de frota · quantos Atta você precisa · E4M">
-<meta property="og:description" content="Estudo de frota da E4M: você responde um questionário pelo link, a E4M simula o turno inteiro na sua planta e o relatório diz quantos Atta, quais ações valem mais, os próximos 3 anos e em quanto tempo o investimento volta, com a origem de cada número.">
+<meta property="og:description" content="Estudo de frota da E4M: você responde um questionário pelo link, a E4M simula o turno inteiro na sua planta e o relatório diz quantos Atta, onde o projeto se paga e em quanto tempo o investimento volta, com a origem de cada número.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611102223">
+<link rel="stylesheet" href="assets/estilo.css?v=202611112100">
 </head>
 <body data-pagina="estudo">
 
@@ -33,7 +33,7 @@
             <div class="menu-grupo">
                 <button type="button" class="menu-abre" aria-expanded="false" aria-controls="subSolucoes">Soluções<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
                 <div class="submenu" id="subSolucoes">
-                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV e AMR</span></a>
+                    <a href="atta.html" data-pag="atta"><b>Atta</b><span>Veículos autônomos · AGV</span></a>
                     <a href="eciton.html" data-pag="eciton"><b>Eciton</b><span>Supervisão de frota</span></a>
                     <a href="estudo.html" data-pag="estudo"><b>Estudo de frota</b><span>Quantos Atta a operação precisa</span></a>
                     <a href="eciton-io.html" data-pag="eciton-io"><b>Eciton I/O</b><span>Portas, semáforos e alarme</span></a>
@@ -55,106 +55,85 @@
         <div class="caixa">
             <div class="hero-texto">
                 <span class="olho">Estudo de frota</span>
-                <h1>Quantos Atta, o que muda e em quanto tempo volta. <span class="prata">Antes da compra.</span></h1>
-                <p class="texto">Você responde um questionário pelo link, no seu tempo, e marca os pontos na planta. A E4M simula o turno inteiro na sua fábrica: cada pedido, cada viagem, cada cruzamento, o almoço e o pico da troca de turno. O estudo acha a menor frota que entrega no prazo, testa as ações que mudam o resultado, prevê os próximos 3 anos e faz a conta do dinheiro, sempre dizendo de onde veio cada número.</p>
+                <h1>Quantos Atta e onde o projeto se paga. <span class="prata">Antes da compra.</span></h1>
+                <p class="texto">Você responde um questionário pelo link e marca os pontos na planta. A E4M simula o turno inteiro na sua fábrica, testa os cenários que mudam o resultado e entrega um relatório para a diretoria, com a origem de cada número.</p>
                 <div class="acoes">
                     <a class="botao cheio" href="contato.html?interesse=atta&amp;origem=estudo">Quero o estudo completo</a>
                     <a class="botao" href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener">Ver um relatório de exemplo (PDF)</a>
                 </div>
             </div>
-            <figure class="estudo-busca" aria-label="O estudo testa frotas de 4 a 9 Atta até cumprir a meta de 95% das entregas no prazo">
-                <div class="janela-barra"><i></i><i></i><i></i><span>Estudo de frota · achar a frota</span><b class="painel-hora" id="ebStatus">simulando…</b></div>
-                <div class="eb-corpo">
-                    <div class="eb-grafico" id="ebGrafico">
-                        <div class="eb-meta" style="--y:95%"><span>meta 95% no prazo</span></div>
+            <figure class="estudo-anim" id="estudoAnim" data-etapa="0" aria-label="Do questionário ao relatório: você responde, a planta de estudo sai sozinha, a simulação roda o turno e o relatório mostra a frota e o payback">
+                <div class="janela-barra"><i></i><i></i><i></i><span>Estudo de frota · autopeças de exemplo</span><b class="painel-hora" id="eaStatus">questionário</b></div>
+                <div class="ea-palco">
+                    <div class="ea-etapa" data-e="0" aria-hidden="false">
+                        <ul class="ea-form">
+                            <li><span>Turnos por dia</span><b>3</b></li>
+                            <li><span>Pontos na planta</span><b>9</b></li>
+                            <li><span>Supermercado → Linhas 1, 2, 3</span><b>milk run, a cada 20 min</b></li>
+                            <li><span>Almoxarifado → Linha 1</span><b>troca de carrinho, 2 por hora</b></li>
+                            <li><span>Pessoas no transporte</span><b>4 a 5 por turno</b></li>
+                            <li><span>Custo de uma pessoa</span><b class="nao-sei">não sei → Novo CAGED + encargos</b></li>
+                        </ul>
                     </div>
-                    <div class="eb-eixo" id="ebEixo"></div>
-                    <div class="eb-resultado" id="ebResultado"><span class="rot">Frota recomendada</span><b>3 Atta G-O + 3 Atta E-O + 2 Atta R-O + 1 Atta T-O</b><small>95% no prazo · 9 min do pedido à entrega · cada Atta ocupado 53% do tempo</small></div>
+                    <div class="ea-etapa ea-planta-caixa" data-e="1" aria-hidden="true">
+                        <svg class="ea-planta" viewBox="0 0 320 180" aria-hidden="true">
+                            <rect class="ea-anel" x="40" y="40" width="240" height="100" rx="10"/>
+                            <g class="ea-ramais"><path d="M40 90H20"/><path d="M90 40V22"/><path d="M160 40V22"/><path d="M230 40V22"/><path d="M90 140v18"/><path d="M160 140v18"/><path d="M230 140v18"/><path d="M280 90h20"/></g>
+                            <g class="ea-pontos"><circle cx="20" cy="90" r="5"/><circle cx="90" cy="20" r="5"/><circle cx="160" cy="20" r="5"/><circle cx="230" cy="20" r="5"/><circle cx="90" cy="160" r="5"/><circle cx="160" cy="160" r="5"/><circle cx="230" cy="160" r="5"/><circle cx="300" cy="90" r="5"/><rect x="34" y="128" width="9" height="9" rx="2" class="ea-berco"/></g>
+                            <g class="ea-rotulos"><text x="20" y="108">Super</text><text x="160" y="12">Linhas 1–3</text><text x="160" y="176">Linhas 4–6</text><text x="296" y="108">Exp.</text></g>
+                        </svg>
+                        <p class="ea-legenda">Dos pontos e dos fluxos sai a planta de estudo: o corredor, os ramais e os berços.</p>
+                    </div>
+                    <div class="ea-etapa ea-planta-caixa" data-e="2" aria-hidden="true">
+                        <svg class="ea-planta" viewBox="0 0 320 180" aria-hidden="true">
+                            <rect class="ea-anel fixo" x="40" y="40" width="240" height="100" rx="10"/>
+                            <g class="ea-ramais fixo"><path d="M40 90H20"/><path d="M90 40V22"/><path d="M160 40V22"/><path d="M230 40V22"/><path d="M90 140v18"/><path d="M160 140v18"/><path d="M230 140v18"/><path d="M280 90h20"/></g>
+                            <g id="eaAttas"></g>
+                            <rect x="140" y="30" width="40" height="20" rx="4" class="ea-zona"/>
+                        </svg>
+                        <div class="ea-contadores"><span>turno <b id="eaHora">06:00</b></span><span>dia <b id="eaDia">1</b> de 8</span><span>no prazo <b id="eaPrazo">--</b></span></div>
+                    </div>
+                    <div class="ea-etapa" data-e="3" aria-hidden="true">
+                        <div class="ea-rel">
+                            <div class="ea-rel-topo"><span>Frota recomendada</span><b>2 Atta T + 2 Atta E</b><small>418 entregas por dia · 99% a 100% no prazo</small></div>
+                            <div class="ea-rel-pb"><span>Payback provável</span><b>22 meses</b><small>otimista: 12 meses · se desligar em vez de realocar: 14</small></div>
+                            <div class="ea-rel-curva" aria-hidden="true"><i style="--h:18%"></i><i style="--h:32%"></i><i style="--h:48%"></i><i style="--h:66%"></i><i style="--h:84%"></i><i style="--h:100%"></i><span>caixa acumulado em 5 anos</span></div>
+                        </div>
+                    </div>
                 </div>
-                <figcaption>Exemplo: a metalúrgica de exemplo do Eciton, 543 pedidos por dia em 2 turnos.</figcaption>
+                <div class="capitulos ea-passos" id="eaPassos" role="group" aria-label="Etapas do estudo">
+                    <button type="button" data-e="0"><span>1 · Você responde</span><i></i></button>
+                    <button type="button" data-e="1"><span>2 · A planta sai</span><i></i></button>
+                    <button type="button" data-e="2"><span>3 · Simula o turno</span><i></i></button>
+                    <button type="button" data-e="3"><span>4 · O relatório</span><i></i></button>
+                </div>
+                <figcaption>Exemplo: a autopeças de exemplo do Eciton, empresa e números fictícios.</figcaption>
             </figure>
         </div>
     </section>
 
-    <section class="secao faixa" id="o-que-e" style="padding-top:24px">
+    <section class="secao faixa" id="como-chegamos" style="padding-top:24px">
         <div class="caixa">
             <div class="cabeca">
-                <span class="olho">Por que estudar antes</span>
-                <h2>Conta de cabeça erra para os dois lados.</h2>
-                <p class="texto">Dividir as viagens pela capacidade de um veículo dá um número, mas ignora o que acontece de verdade: todo mundo pede material ao mesmo tempo na troca de turno, dois veículos querem o mesmo cruzamento, a estação de kits atende quatro linhas. Frota pequena demais atrasa a produção. Frota grande demais fica parada no berço. O estudo mostra o tamanho certo, com a sua planta.</p>
+                <span class="olho">Como chegamos lá</span>
+                <h2>Perguntas certas, a sua planta e uma simulação do turno inteiro.</h2>
             </div>
             <div class="estudo-tres">
                 <article>
-                    <span class="rot">O que entra</span>
-                    <h3>A sua operação, como ela é</h3>
-                    <ul><li>Um questionário pelo link, sem conta: o DXF ou uma imagem da planta, os pontos marcados nela e o que vai de onde para onde</li><li>Turnos, almoço, quanto custa o transporte hoje, as paradas de linha e os acidentes</li><li>Não sabe um número? Marque "não sei": o estudo usa uma referência e diz isso no relatório</li><li>Se quiser mais precisão: o diário de viagens no celular ou a planilha do seu sistema</li></ul>
+                    <span class="rot">O que você responde</span>
+                    <h3>A operação, como ela é</h3>
+                    <ul><li>Uns 20 minutos, pelo link, sem conta: a planta (DXF ou imagem) e os pontos marcados nela</li><li>O que vai de onde para onde e como chega hoje: quando a linha pede, troca de carrinho ou milk run</li><li>Turnos, pessoas, custos, paradas de linha e acidentes</li><li>Não sabe um número? "Não sei": o estudo usa uma referência e avisa no relatório</li></ul>
                 </article>
                 <article>
                     <span class="rot">O que a simulação faz</span>
-                    <h3>O turno inteiro, vários dias seguidos</h3>
-                    <ul><li>Cada viagem pela rota, na velocidade de cada modelo, e os cruzamentos como os Atta fazem: um por vez</li><li>Picos na entrada do turno e na volta do almoço, vários dias com variação</li><li>Cada ação testada sozinha: pré-abastecer antes da troca de turno, prioridade, um segundo acesso no gargalo, outro layout</li><li>A demanda dos próximos 3 anos, ano a ano</li></ul>
+                    <h3>O turno inteiro, vários dias</h3>
+                    <ul><li>Cada viagem pela rota, os cruzamentos um por vez, o pico da troca de turno e da volta do almoço</li><li>O pré-abastecimento: o Atta sai antes do turno e deixa na linha o que ela vai pedir</li><li>Os cenários da planta: menos modelos de Atta, um milk run, o que fica com as pessoas</li><li>A demanda dos próximos 3 anos</li></ul>
                 </article>
                 <article>
-                    <span class="rot">O que você recebe</span>
-                    <h3>A frota certa e o porquê dela</h3>
-                    <ul><li>A menor frota que cumpre o prazo, com folga para imprevisto</li><li>O plano de ações em ordem de valor e quando cada uma passa a ser necessária</li><li>Payback, VPL e TIR em 5 anos, comprando ou pagando por mês, no cenário conservador e no otimista</li><li>Km andados, ergonomia, segurança, espaço e energia, e o que medir para refinar</li></ul>
+                    <span class="rot">O que o relatório traz</span>
+                    <h3>A frota e onde ela se paga</h3>
+                    <ul><li>A menor frota que entrega no prazo, com folga para imprevisto</li><li>Onde o projeto se paga: a fase 1 que volta primeiro e o resto depois</li><li>Payback provável em destaque, com o mínimo e o otimista ao lado</li><li>A origem de cada número e o que medir para refinar</li></ul>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="secao faixa" id="como" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
-        <div class="caixa">
-            <div class="cabeca">
-                <span class="olho">Como funciona</span>
-                <h2>Do questionário ao relatório, sem precisar de nada instalado.</h2>
-            </div>
-            <ol class="passos-ec">
-                <li><b>Você responde pelo link</b><span>O questionário do estudo, sem conta e salvo sozinho: a planta (DXF ou imagem), os pontos marcados nela, os fluxos, os turnos e o custo de hoje. O que não souber, marque "não sei".</span></li>
-                <li><b>A planta de estudo sai sozinha</b><span>Dos pontos e dos fluxos sai uma planta simplificada: o corredor, os ramais até as estações e os berços, desviando das paredes do DXF. A E4M revisa no mesmo editor do Eciton.</span></li>
-                <li><b>Simula a frota e as ações</b><span>A menor frota que cumpre o prazo; depois cada ação, sozinha, com a demanda de hoje e a do ano 3; e quanto a frota aguenta antes de precisar de mais um Atta.</span></li>
-                <li><b>Faz a conta do dinheiro</b><span>Investimento, custo por mês e o que a frota economiza, em três cenários. O payback principal é o conservador: só os ganhos confirmados.</span></li>
-                <li><b>O relatório pelo link</b><span>Você abre no navegador e baixa em PDF, para levar à diretoria. Fechou: a sua empresa começa no Eciton com a planta e as missões do estudo.</span></li>
-            </ol>
-        </div>
-    </section>
-
-    <section class="secao faixa" id="exemplo">
-        <div class="caixa">
-            <div class="cabeca">
-                <span class="olho">Um estudo de verdade, numa planta de exemplo</span>
-                <h2>A metalúrgica de exemplo: 543 pedidos por dia, 12 fluxos, 2 turnos.</h2>
-                <p class="texto">Quatro submontagens recebem kits do supermercado, três prensas e três CNC mandam peças para a solda e a inspeção, e um rebocador faz o milk-run da montagem. Almoço e jantar com a frota no berço. Meta: 95% das entregas no prazo e nenhum Atta ocupado mais de 75% do tempo.</p>
-            </div>
-            <div class="estudo-exemplo">
-                <div class="ex-caminho">
-                    <h3>O caminho até a frota</h3>
-                    <div class="tabela-ex" role="table" aria-label="Frotas testadas">
-                        <div role="row" class="cab"><span role="columnheader">Atta</span><span role="columnheader">No prazo</span><span role="columnheader">Pedido à entrega</span><span role="columnheader">Sobram no fim do dia</span></div>
-                        <div role="row"><span>4</span><span><i class="barra-ex" style="--v:13%"></i>13%</span><span>113 min</span><span>117</span></div>
-                        <div role="row"><span>5</span><span><i class="barra-ex" style="--v:45%"></i>45%</span><span>52 min</span><span>31</span></div>
-                        <div role="row"><span>6</span><span><i class="barra-ex" style="--v:70%"></i>70%</span><span>17 min</span><span>8</span></div>
-                        <div role="row"><span>7</span><span><i class="barra-ex" style="--v:78%"></i>78%</span><span>16 min</span><span>6</span></div>
-                        <div role="row"><span>8</span><span><i class="barra-ex" style="--v:91%"></i>91%</span><span>10 min</span><span>1</span></div>
-                        <div role="row" class="ok"><span>9 ✓</span><span><i class="barra-ex" style="--v:95%"></i>95%</span><span>9 min</span><span>0</span></div>
-                    </div>
-                    <p class="nota-ex">Com 8 Atta, a conta parecia fechar: 91% no prazo. Num dia ruim, porém, só 81% sairiam a tempo e um pedido ficaria para o turno seguinte. O nono Atta (um Atta E-O a mais, para prensas e solda) leva o dia ruim a 88% e o dia típico a 95%.</p>
-                </div>
-                <div class="ex-lado">
-                    <div class="ex-cartao destaque">
-                        <span class="rot">A descoberta que vale o estudo</span>
-                        <h3>Para crescer 25%, a resposta é o layout, não a compra.</h3>
-                        <p>Com mais produção, o estudo tentou pôr mais Atta, e as entregas no prazo não subiam: o cruzamento central (zona ZR01) já segura 194 minutos de espera por dia. Comprar veículos não resolveria. Um segundo corredor ou uma rota de mão única, sim. Isso se descobre na simulação, não depois da instalação.</p>
-                    </div>
-                    <div class="ex-cartao">
-                        <span class="rot">Previsão</span>
-                        <ul class="ex-previsao">
-                            <li><b>1 Atta em manutenção</b><span>88% no prazo: a operação pede um Atta G-O reserva (10 no total)</span></li>
-                            <li><b>+25% de produção</b><span>81% no prazo: o tráfego trava antes da frota</span></li>
-                            <li><b>+50% de produção</b><span>38% no prazo: precisa de outro layout</span></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -162,45 +141,38 @@
     <section class="secao faixa" id="relatorio" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa agv-intro">
             <div>
-                <span class="olho">O relatório</span>
+                <span class="olho">Prévia do relatório</span>
                 <h2 style="margin-top:14px">Um documento para decidir, não um número solto.</h2>
-                <p class="texto" style="margin-top:16px">Começa pela sua operação hoje: quanto custa mover material, quantos km as pessoas andam, quanto a linha para por falta de material. Depois a frota recomendada, o plano de ações em ordem de valor, os próximos 3 anos, o dinheiro, o que mais mexe no payback, segurança, ergonomia, espaço e energia, o plano de implantação, o que medir para refinar e as premissas.</p>
+                <p class="texto" style="margin-top:16px">Começa pela sua operação hoje: quanto custa mover material, quantos km as pessoas andam e quanto a linha para. Depois a frota, quantas pessoas cada Atta assume, os cenários da planta, onde o projeto se paga e o dinheiro, comprando ou pagando por mês.</p>
                 <ul class="lista-ok">
                     <li>Cada número com a origem: dado do cliente, simulação, estimado, referência pública ou premissa de mercado</li>
-                    <li>Ganhos confirmados separados dos potenciais; o payback principal é o conservador</li>
-                    <li>Comprar ou pagar por mês, comparado com não fazer nada e com só comprar mais Atta</li>
-                    <li>A confiança de cada parte do estudo e o que medir para deixá-lo mais preciso</li>
+                    <li>O payback provável em destaque; o conservador como piso e o otimista ao lado</li>
+                    <li>As pessoas liberadas como você decidir: desligar, realocar ou evitar contratação</li>
+                    <li>A confiança de cada parte e o que medir para deixar o estudo mais preciso</li>
                 </ul>
                 <a class="botao cheio" href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" style="margin-top:26px">Abrir o relatório de exemplo (PDF)</a>
             </div>
             <div class="rel-paginas" aria-label="Páginas do relatório de exemplo">
-                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p1"><img src="assets/estudo-pag1.webp" alt="Página 1: resumo e resultado da frota recomendada" width="620" height="876" loading="lazy"></a>
-                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p2"><img src="assets/estudo-pag3.webp" alt="Página 3: o caminho até a frota e a previsão" width="620" height="876" loading="lazy"></a>
-                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p3"><img src="assets/estudo-pag7.webp" alt="Página 7: investimento, retorno e método" width="620" height="876" loading="lazy"></a>
+                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p1"><img src="assets/estudo24-pag1.webp" alt="Página 1: a operação hoje, o resumo e a frota recomendada" width="620" height="876" loading="lazy"></a>
+                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p2"><img src="assets/estudo24-pag2.webp" alt="Página: Atta × pessoa, quantas pessoas cada Atta assume" width="620" height="876" loading="lazy"></a>
+                <a href="assets/estudo-de-frota-exemplo.pdf" target="_blank" rel="noopener" class="rel-pag p3"><img src="assets/estudo24-pag3.webp" alt="Página: o dinheiro, os cenários da planta e onde o projeto se paga" width="620" height="876" loading="lazy"></a>
             </div>
         </div>
     </section>
 
-    <section class="secao faixa" id="quando">
+    <section class="secao faixa" id="como">
         <div class="caixa">
             <div class="cabeca">
-                <span class="olho">Quando fazer</span>
-                <h2>Toda vez que a operação vai mudar.</h2>
+                <span class="olho">Como funciona</span>
+                <h2>Do questionário ao relatório, sem nada instalado.</h2>
             </div>
-            <div class="estudo-quando">
-                <div><b>Antes de comprar</b><span>O tamanho da frota e o modelo de cada fluxo, com a sua planta, antes de assinar.</span></div>
-                <div><b>Antes de mudar o layout</b><span>Mudou a linha de lugar, abriu um corredor, trocou o supermercado de posição: veja o efeito no tráfego antes da obra.</span></div>
-                <div><b>Quando a produção cresce</b><span>Um turno a mais, um produto novo, 30% de volume: quantos Atta a mais, e se o layout aguenta.</span></div>
-                <div><b>Para justificar o investimento</b><span>O relatório leva a diretoria do "quanto custa" ao "quanto precisa e por quê".</span></div>
-            </div>
-            <div class="estudo-depois">
-                <div>
-                    <span class="olho">Depois do estudo, a prova</span>
-                    <h3>A frota escolhida roda no Atta virtual, com o programa de verdade.</h3>
-                    <p>O estudo é uma simulação rápida, feita para comparar muitas frotas em segundos. A frota escolhida vai então para o Atta virtual do Eciton, que roda o mesmo programa dos veículos reais na sua planta: as mesmas decisões, os mesmos cruzamentos. Só depois vem o piloto numa rota real.</p>
-                </div>
-                <a class="botao" href="eciton.html#simulacao">Ver o Atta virtual</a>
-            </div>
+            <ol class="passos-ec">
+                <li><b>Você responde pelo link</b><span>No seu tempo, salvo sozinho. O que não souber, "não sei".</span></li>
+                <li><b>A planta de estudo sai sozinha</b><span>O corredor, os ramais e os berços, a partir dos seus pontos. A E4M revisa no editor do Eciton.</span></li>
+                <li><b>Simula a frota e os cenários</b><span>A menor frota que cumpre o prazo, as ações, os cenários da planta e os 3 anos.</span></li>
+                <li><b>Faz a conta do dinheiro</b><span>Investimento, custo por mês e o que a frota economiza, em três cenários.</span></li>
+                <li><b>O relatório pelo link</b><span>No navegador e em PDF, para a diretoria. Fechou: a sua empresa começa no Eciton com a planta do estudo.</span></li>
+            </ol>
         </div>
     </section>
 
@@ -211,15 +183,13 @@
                 <h2 style="margin-top:14px">O que perguntam sobre o estudo.</h2>
             </div>
             <div class="perguntas">
-                <details><summary>Preciso já ter o Eciton?</summary><p>Não. O estudo é feito pela E4M antes da compra: você responde o questionário pelo link e recebe o relatório também por link, com prazo de validade. Fechou o negócio, a sua empresa começa no Eciton já com a planta, as missões e os postos do estudo. Depois, quando a produção ou o layout mudarem, a E4M refaz o estudo na planta de verdade.</p></details>
-                <details><summary>O que vocês precisam de mim?</summary><p>Uns 20 minutos no questionário: o DXF da planta (o DWG do AutoCAD se salva como DXF em um clique) ou uma imagem com a largura do galpão, os pontos marcados nela, o que vai de onde para onde e quanto, os turnos e o que você souber de custo. Para mais precisão, três a cinco dias de diário de viagens no celular ou a planilha de movimentações do seu sistema.</p></details>
-                <details><summary>E se eu não souber um número?</summary><p>Marque "não sei" ou dê uma faixa. O estudo preenche nesta ordem: a conta a partir de outra resposta, a referência pública (o custo de uma pessoa, por exemplo, vem do salário médio de admissão do Novo CAGED com os encargos) e, por último, uma premissa de mercado conservadora. Cada número sai no relatório com a origem, e o que mais mexe no resultado aparece em "para refinar o estudo".</p></details>
-                <details><summary>Qual a diferença para o "Monte o seu cenário" do site?</summary><p>O <a href="atta.html#cenario">Monte o seu cenário</a> faz a conta rápida de um fluxo: distância, carga, viagens por hora e o custo de hoje. O estudo junta todos os fluxos na mesma planta, com os cruzamentos, os picos, o calendário e qual modelo atende cada carga. É ele que mostra que o gargalo é um cruzamento, ou que o dia ruim pede um veículo a mais.</p></details>
-                <details><summary>O resultado é exato?</summary><p>É uma simulação rápida e honesta sobre os seus limites. Não entram bateria e recarga, falhas, pessoas no caminho nem o tempo de voltar ao berço. Por isso a meta deixa folga (nenhum Atta ocupado mais de 75% do tempo) e o resultado vem em faixa, do dia ruim ao dia bom. A frota escolhida é conferida no Atta virtual, com o programa real, antes do piloto.</p></details>
-                <details><summary>O que é "no prazo"?</summary><p>Cada fluxo tem um prazo, do pedido à entrega: por exemplo, 15 minutos para o kit da submontagem. O estudo conta quantas entregas chegaram dentro do prazo, em cada dia simulado. A meta padrão é 95%, e você pode mudar.</p></details>
-                <details><summary>Dá para comparar modelos diferentes?</summary><p>Dá. Cada fluxo diz que modelo serve (garra para kits, elevação para carrinhos, roletes para esteira, rebocador para milk-run), e o estudo põe um Atta de cada vez no modelo que mais falta. Também dá para testar todas as combinações de uma faixa.</p></details>
-                <details><summary>A Mira escreve o relatório?</summary><p>Com a Mira Pro, a assistente do Eciton completa os fluxos que faltam no questionário (marcados como estimados) e escreve o resumo para a diretoria, só com os números do estudo e o cenário conservador primeiro. A Mira descreve e explica, não inventa número.</p></details>
-                <details><summary>Como vocês chegam no dinheiro?</summary><p>Investimento (os Atta, a implantação), custo por mês (a assinatura do Eciton, a manutenção, a energia) e o que a frota economiza: as pessoas que saem do transporte, as empilhadeiras, as horas extras. Isso é o confirmado, e é o payback principal. Paradas de linha, entregas erradas, avarias, acidentes e estoque na linha dependem de uma premissa de melhoria: ficam como ganho potencial, no cenário otimista.</p></details>
+                <details><summary>Preciso já ter o Eciton?</summary><p>Não. O estudo é feito pela E4M antes da compra: você responde o questionário pelo link e recebe o relatório também por link, com prazo de validade. Fechou o negócio, a sua empresa começa no Eciton já com a planta, as missões e os postos do estudo.</p></details>
+                <details><summary>O que vocês precisam de mim?</summary><p>Uns 20 minutos no questionário: o DXF da planta (o DWG do AutoCAD se salva como DXF em um clique) ou uma imagem com a largura do galpão, os pontos marcados nela, o que vai de onde para onde e como (quando a linha pede, troca de carrinho ou milk run), os turnos e o que você souber de custo. Para mais precisão, três a cinco dias de diário de viagens no celular ou a planilha de movimentações do seu sistema.</p></details>
+                <details><summary>E se eu não souber um número?</summary><p>Marque "não sei" ou dê uma faixa. O estudo preenche nesta ordem: a conta a partir de outra resposta, a referência pública (o custo de uma pessoa, por exemplo, vem do salário médio de admissão do Novo CAGED com os encargos) e, por último, uma premissa de mercado. Cada número sai no relatório com a origem.</p></details>
+                <details><summary>Como vocês chegam no dinheiro?</summary><p>Investimento (os Atta, a implantação), custo por mês (a assinatura do Eciton, a manutenção, a energia) e o que a frota economiza: as pessoas que saem do transporte (quem faz só isso sai inteiro), as empilhadeiras e rebocadores, as horas extras e, no cenário provável, as perdas que você informou, com a melhoria mínima. O payback provável fica em destaque; o conservador mostra o mínimo, só com os ganhos confirmados.</p></details>
+                <details><summary>E se o projeto inteiro não se pagar rápido?</summary><p>O relatório mostra onde ele se paga: os fluxos em ordem de valor e a frota de cada parte. Muitas vezes, começar por uma fase 1 menor volta bem antes, e o resto entra depois. Os cenários da planta mostram também o que muda com menos modelos de Atta ou um milk run.</p></details>
+                <details><summary>O resultado é exato?</summary><p>É uma simulação rápida e honesta sobre os seus limites. A bateria entra por uma conta à parte (energia, recargas e carregadores); falhas e pessoas no caminho não entram. Por isso a meta deixa folga e o resultado vem em faixa, do dia ruim ao dia bom. A frota escolhida é conferida no Atta virtual, com o programa real, antes do piloto.</p></details>
+                <details><summary>A Mira escreve o relatório?</summary><p>Com a Mira Pro, a assistente do Eciton completa os fluxos que faltam no questionário (marcados como estimados) e escreve a análise para a diretoria: por que o payback deu o que deu, qual cenário vale mais e o que confirmar na visita. Só com os números do estudo: a Mira explica, não inventa número.</p></details>
             </div>
         </div>
     </section>
@@ -259,7 +229,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611102223" defer></script>
-<script src="assets/estudo.js?v=202611102223" defer></script>
+<script src="assets/site.js?v=202611112100" defer></script>
+<script src="assets/estudo.js?v=202611112100" defer></script>
 </body>
 </html>
