@@ -232,7 +232,7 @@
             let l1, l2, cor, passo, chipTxt;
             if (t < .9) { l1 = "porta 1 · zona PL01"; l2 = "ocupada pelo Eciton I/O"; cor = COR.vermelho; passo = -1; chipTxt = "porta 1 · fechada"; }
             else if (t < 1.4) { l1 = "Atta V1 pede"; l2 = "a zona PL01"; cor = COR.ciano; passo = 0; chipTxt = "porta 1 · pedida por V1"; }
-            else if (t < 3.5) { l1 = "Eciton I/O · relé 1 ligado"; l2 = "abrindo… o Atta espera"; cor = COR.laranja; passo = 1; chipTxt = "porta 1 · abrindo"; }
+            else if (t < 3.5) { l1 = "Eciton I/O · saída 1 ligada"; l2 = "abrindo… o Atta espera"; cor = COR.laranja; passo = 1; chipTxt = "porta 1 · abrindo"; }
             else if (t < 4.4) { l1 = "sensor “aberta” ✓"; l2 = "zona liberada para V1"; cor = COR.verde; passo = 2; chipTxt = "porta 1 · aberta"; }
             else if (t < 9) { l1 = "V1 dentro da zona PL01"; l2 = "passando pela porta"; cor = COR.azulC; passo = 3; chipTxt = "porta 1 · aberta"; }
             else { l1 = "V1 passou"; l2 = "a porta fecha em 5 s"; cor = COR.texto2; passo = 3; chipTxt = "porta 1 · fecha em 5 s"; }

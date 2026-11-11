@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Atta · veículos autônomos E4M</title>
-<meta name="description" content="Atta, o veículo autônomo da E4M: segue a linha, anda de lado, gira no lugar e leva carrinhos, kits, peças e caixas pela fábrica. Atta E-O pronto para piloto, garras sob encomenda e configurador rápido da frota.">
+<meta name="description" content="Atta, o veículo autônomo da E4M: segue a linha, anda de lado, gira no lugar e leva carrinhos, kits, peças e caixas pela fábrica. Atta E-O pronto para piloto, garras sob encomenda e o Monte o seu cenário: a frota, o custo de hoje e o retorno estimado.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="E4M · Engineering for Motion">
 <meta property="og:title" content="Atta · veículos autônomos E4M">
-<meta property="og:description" content="Atta, o veículo autônomo da E4M: segue a linha, anda de lado, gira no lugar e leva carrinhos, kits, peças e caixas pela fábrica. Atta E-O pronto para piloto, garras sob encomenda e configurador rápido da frota.">
+<meta property="og:description" content="Atta, o veículo autônomo da E4M: segue a linha, anda de lado, gira no lugar e leva carrinhos, kits, peças e caixas pela fábrica. Atta E-O pronto para piloto, garras sob encomenda e o Monte o seu cenário: a frota, o custo de hoje e o retorno estimado.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
+<link rel="stylesheet" href="assets/estilo.css?v=202611102223">
 </head>
 <body data-pagina="atta">
 
@@ -219,48 +219,58 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="configurador" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="cenario" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
-                <span class="olho">Configurador rápido</span>
-                <h2>Quantos Atta a sua operação pede?</h2>
-                <p class="texto">Seis perguntas e uma estimativa na hora: o modelo, o tempo de cada viagem e o tamanho da frota. A simulação na sua planta confirma o número.</p>
+                <span class="olho">Monte o seu cenário</span>
+                <h2>Quantos Atta, quanto custa hoje e em quanto tempo volta.</h2>
+                <p class="texto">A sua operação em dez perguntas: o modelo, o tamanho da frota, o tempo de gente que o transporte toma hoje e uma estimativa do retorno. O estudo de frota na sua planta confirma cada número.</p>
             </div>
             <form class="config" id="config" novalidate>
                 <div class="config-perguntas">
+                    <h3 class="config-larga cf-etapa"><span>1</span>A operação</h3>
                     <fieldset class="campo escolha config-larga">
-                        <legend>1 · Como a carga sai e chega?</legend>
+                        <legend>Como a carga sai e chega?</legend>
                         <label><input type="radio" name="manuseio" value="carrinho" checked><span>Num carrinho com rodas que já existe</span></label>
                         <label><input type="radio" name="manuseio" value="garra"><span>Caixa ou kit que o Atta pega e solta sozinho</span></label>
                         <label><input type="radio" name="manuseio" value="esteira"><span>De uma esteira ou transportador</span></label>
                         <label><input type="radio" name="manuseio" value="comboio"><span>Vários carrinhos de uma vez, numa rota</span></label>
                     </fieldset>
-                    <label class="campo" for="cfPeso">2 · Peso de cada viagem (kg)<input id="cfPeso" type="number" min="1" step="1" value="40" inputmode="numeric"></label>
-                    <label class="campo" for="cfDist">3 · Distância da coleta até a entrega (m)<input id="cfDist" type="number" min="1" step="1" value="60" inputmode="numeric"></label>
-                    <label class="campo" for="cfViagens">4 · Viagens por hora no pico<input id="cfViagens" type="number" min="1" step="1" value="30" inputmode="numeric"></label>
-                    <label class="campo" for="cfPonta">5 · Minutos parado em cada ponta<input id="cfPonta" type="number" min="0" step="0.5" value="1.5" inputmode="decimal"></label>
+                    <label class="campo" for="cfPeso">Peso de cada viagem (kg)<input id="cfPeso" type="number" min="1" step="1" value="40" inputmode="numeric"></label>
+                    <label class="campo" for="cfDist">Distância da coleta até a entrega (m)<input id="cfDist" type="number" min="1" step="1" value="60" inputmode="numeric"></label>
+                    <label class="campo" for="cfViagens">Viagens por hora no pico<input id="cfViagens" type="number" min="1" step="1" value="30" inputmode="numeric"></label>
+                    <label class="campo" for="cfPonta">Minutos parado em cada ponta<input id="cfPonta" type="number" min="0" step="0.5" value="1.5" inputmode="decimal"></label>
+                    <label class="campo" for="cfTurnos">Turnos por dia<input id="cfTurnos" type="number" min="1" max="3" step="1" value="2" inputmode="numeric"></label>
+                    <label class="campo" for="cfDias">Dias trabalhados por mês<input id="cfDias" type="number" min="1" max="31" step="1" value="21" inputmode="numeric"></label>
                     <fieldset class="campo escolha config-larga">
-                        <legend>6 · O corredor é dividido com pessoas?</legend>
+                        <legend>O corredor é dividido com pessoas?</legend>
                         <label><input type="radio" name="pessoas" value="sim" checked><span>Sim, com pessoas e empilhadeiras</span></label>
                         <label><input type="radio" name="pessoas" value="nao"><span>Não, é um corredor só da frota</span></label>
                     </fieldset>
+                    <h3 class="config-larga cf-etapa"><span>2</span>O custo de hoje</h3>
+                    <label class="campo" for="cfGente">Pessoas por turno levando material<input id="cfGente" type="number" min="0" step="1" value="3" inputmode="numeric"></label>
+                    <label class="campo" for="cfCusto">Custo de cada pessoa por mês, com encargos (R$)<input id="cfCusto" type="number" min="0" step="10" value="4870" inputmode="numeric"></label>
+                    <p class="nota config-larga">Não sabe o custo? Deixe o valor de referência: o salário médio de admissão do Novo CAGED com 1,9 de encargos e benefícios.</p>
                 </div>
                 <div class="config-resultado" aria-live="polite">
-                    <span class="rot">Recomendação · estimativa</span>
+                    <span class="rot">3 · O resultado · estimativa</span>
                     <div class="cf-topo"><b class="cf-modelo" id="cfModelo">Atta E-O</b><span class="st disp" id="cfSelo">Pronto para piloto</span></div>
                     <p class="cf-porque" id="cfPorque"></p>
                     <div class="cf-numeros" id="cfNumeros">
                         <div><span>Tempo por viagem</span><b id="cfCiclo">5,9 min</b><small>ida, volta, paradas e cruzamentos</small></div>
                         <div><span>Atta na frota</span><b id="cfFrota">4</b><small>cada um ocupado até 75% no pico</small></div>
+                        <div><span>O transporte toma hoje</span><b id="cfHoras">--</b><small id="cfHorasSub">horas de gente por mês</small></div>
+                        <div><span>A frota libera</span><b id="cfLibera">--</b><small id="cfLiberaSub">pessoa(s) por turno para produzir</small></div>
+                        <div class="cf-retorno"><span>Retorno estimado</span><b id="cfRetorno">--</b><small id="cfRetornoSub">só com as pessoas liberadas, preço de referência de mercado</small></div>
                     </div>
                     <div class="cf-frota" id="cfIcones" aria-hidden="true"></div>
                     <p class="cf-aviso" id="cfAviso" hidden></p>
-                    <a class="botao cheio" id="cfContato" href="contato.html?interesse=atta">Quero a simulação com esses números</a>
+                    <a class="botao cheio" id="cfContato" href="contato.html?interesse=atta&amp;origem=estudo">Quero o estudo completo</a>
                 </div>
             </form>
             <details class="cf-fontes">
                 <summary>De onde vêm os números</summary>
-                <p>A estimativa usa valores típicos de mercado, tirados de fichas técnicas de fabricantes de AGVs e AMRs. Não é a ficha de um Atta: o Atta do piloto é dimensionado para atingir esses valores na sua operação, e a simulação na sua planta dá o número certo.</p>
+                <p>A estimativa usa valores típicos de mercado, tirados de fichas técnicas de fabricantes de AGVs e AMRs. Não é a ficha de um Atta: o Atta do piloto é dimensionado para atingir esses valores na sua operação, e o estudo de frota na sua planta dá o número certo.</p>
                 <div class="cf-tabela">
                     <table class="cf-ref">
                         <thead><tr><th>Módulo</th><th>Velocidade típica</th><th>Carga típica</th></tr></thead>
@@ -272,7 +282,8 @@
                         </tbody>
                     </table>
                 </div>
-                <p>Na conta: velocidade média de 0,8 m/s em corredor com pessoas e de 1,2 m/s em corredor só da frota, aceleração de 0,4 m/s², mais 15% no trajeto para cruzamentos e curvas, e frota dimensionada para cada Atta ficar ocupado até 75% do tempo no pico.</p>
+                <p>Na conta da frota: velocidade média de 0,8 m/s em corredor com pessoas e de 1,2 m/s em corredor só da frota, aceleração de 0,4 m/s², mais 15% no trajeto para cruzamentos e curvas, e frota dimensionada para cada Atta ficar ocupado até 75% do tempo no pico.</p>
+                <p>Na conta de hoje: a média do turno é 70% do pico; a pessoa anda a 0,9 m/s com a carga e para nas duas pontas; cada pessoa transporta 75% do turno. A frota assume 80% desse transporte (o resto são exceções). O retorno compara as pessoas liberadas com o investimento (preço de referência de mercado de AGV/AMR de transporte e de produção, mais a implantação) e com o custo por mês (assinatura do Eciton e manutenção). Não entram os ganhos que dependem de premissa (linha sem parar, menos erro, menos acidente, menos estoque na linha): o estudo completo mede esses também.</p>
                 <p class="cf-links">Fichas consultadas:
                     <a href="https://www.hartfiel.com/wp-content/uploads/2024/04/MiR250-Specs.pdf" target="_blank" rel="noopener">MiR250</a>,
                     <a href="https://www.hartfiel.com/wp-content/uploads/2024/04/MiR1350-Specs.pdf" target="_blank" rel="noopener">MiR1350</a>,
@@ -291,7 +302,7 @@
             <div class="cabeca">
                 <span class="olho">Ganhos</span>
                 <h2>Menos gente empurrando carrinho. Mais gente produzindo.</h2>
-                <p class="texto">Números de casos e estudos públicos, os ganhos que não aparecem na folha de pagamento e uma conta rápida para a sua realidade.</p>
+                <p class="texto">Números de casos e estudos públicos e os ganhos que não aparecem na folha de pagamento. A conta para a sua realidade está em <a href="#cenario" class="link-claro">Monte o seu cenário</a>.</p>
             </div>
             <div class="casos">
                 <article class="caso">
@@ -308,24 +319,6 @@
                     <p>Nos exemplos de cálculo da MHI, associação de movimentação de materiais dos EUA, um sistema de AGVs se paga entre 13 meses e 2 anos, comparado com operadores e empilhadeiras.</p>
                     <span class="fonte">Fonte: <a href="https://www.mhi.org/blog/125880/how-to-calculate-the-return-on-investment-of-an-automatic-guided-vehicle-installation" target="_blank" rel="noopener">MHI</a> (exemplos ilustrativos)</span>
                 </article>
-            </div>
-
-            <div class="calc" id="calc">
-                <div class="calc-campos">
-                    <h3>Quanto tempo o transporte toma hoje?</h3>
-                    <label class="campo" for="cViagens">Viagens por turno<input id="cViagens" type="number" min="0" step="1" value="40" inputmode="numeric"></label>
-                    <label class="campo" for="cMinutos">Minutos por viagem (ida e volta)<input id="cMinutos" type="number" min="0" step="1" value="12" inputmode="numeric"></label>
-                    <label class="campo" for="cTurnos">Turnos por dia<input id="cTurnos" type="number" min="1" max="3" step="1" value="2" inputmode="numeric"></label>
-                    <label class="campo" for="cDias">Dias trabalhados por mês<input id="cDias" type="number" min="1" max="31" step="1" value="22" inputmode="numeric"></label>
-                    <label class="campo" for="cCusto">Custo da hora do operador (R$)<input id="cCusto" type="number" min="0" step="1" value="35" inputmode="decimal"></label>
-                    <p class="nota">Valores de exemplo. Troque pelos da sua fábrica: a conta mostra o tempo de pessoas gasto só em levar material, que o AGV pode assumir.</p>
-                </div>
-                <div class="calc-resultado" aria-live="polite">
-                    <div><span>Horas por mês em transporte</span><b id="rHoras">352 h</b></div>
-                    <div><span>Custo dessas horas por mês</span><b id="rCusto">R$ 12.320</b></div>
-                    <div><span>Em um ano</span><b id="rAno">R$ 147.840</b></div>
-                    <a class="botao cheio" id="calcContato" href="contato.html?interesse=atta">Quero essa conta para a minha fábrica</a>
-                </div>
             </div>
 
             <div class="bloco">
@@ -402,20 +395,11 @@
                 <div class="item-seg">
                     <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="8" y="15" width="18" height="13" rx="2" fill="none" stroke="#63AEFF" stroke-width="2"/><path d="M12 15v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#63AEFF" stroke-width="2"/></svg>
                     <h3>Conexão criptografada</h3><p>A comunicação entre AGVs, painel e nuvem é protegida, como num banco online.</p>
+                    <div class="item-seg">
+                    <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="5" y="13" width="24" height="8" rx="4" fill="none" stroke="#63AEFF" stroke-width="2"/><circle cx="11" cy="17" r="1.8" fill="#FF4D5E"/><circle cx="17" cy="17" r="1.8" fill="#FFB000"/><circle cx="23" cy="17" r="1.8" fill="#2BD46A"/></svg>
+                    <h3>Luzes que avisam antes</h3><p>A fita de luz conta para quem está perto o que o Atta vai fazer. Os avisos de segurança seguem a convenção das máquinas e são travados: nenhuma configuração muda.</p>
                 </div>
             </div>
-            <div class="luzes-seg">
-                <div class="luzes-texto">
-                    <span class="rot">As luzes avisam antes</span>
-                    <h3>Quem está perto sabe o que o Atta vai fazer.</h3>
-                    <p>A fita de luz do Atta conta o que ele está fazendo para as pessoas em volta. Os avisos de segurança seguem a convenção das máquinas (vermelho é perigo, âmbar e laranja pedem atenção) e são travados: nenhuma configuração muda. As cores de operação, a empresa escolhe no Eciton.</p>
-                </div>
-                <div class="luzes-cena" aria-label="Avisos de segurança da fita de luz">
-                    <div class="led"><span class="tira estrobo" style="--c:var(--verde)"><i></i><i></i><i></i><i></i><i></i></span><b>Vai partir</b><small>afaste-se: ele sai em instantes</small></div>
-                    <div class="led"><span class="tira respira-rapida" style="--c:var(--laranja)"><i></i><i></i><i></i><i></i><i></i></span><b>Obstáculo à frente</b><small>parado, segue sozinho quando liberar</small></div>
-                    <div class="led"><span class="tira pisca" style="--c:#FFB000"><i></i><i></i><i></i><i></i><i></i></span><b>Faixa de pedestre</b><small>para antes e atravessa devagar</small></div>
-                    <div class="led"><span class="tira estrobo" style="--c:var(--vermelho)"><i></i><i></i><i></i><i></i><i></i></span><b>Emergência</b><small>só volta com alguém liberando no local</small></div>
-                </div>
             </div>
         </div>
     </section>
@@ -455,7 +439,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611100250" defer></script>
+<script src="assets/site.js?v=202611102223" defer></script>
 
 </body>
 </html>

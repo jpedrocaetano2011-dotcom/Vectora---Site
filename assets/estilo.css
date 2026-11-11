@@ -1238,3 +1238,41 @@ section[id] { scroll-margin-top: calc(var(--topo) + env(safe-area-inset-top, 0px
 .estudo-busca .janela-barra span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .estudo-busca .painel-hora { margin-left: auto; white-space: nowrap; font-family: var(--f-dado); font-size: .76rem; font-weight: 600; color: var(--azul-claro); }
 @media (max-width: 560px) { .estudo-busca .janela-barra span { display: none; } }
+
+/* 4.1: a Mira em três momentos (página do Eciton) */
+.md-abas { display: flex; flex-wrap: wrap; gap: 6px; }
+.md-abas button { border: 1px solid var(--linha); background: transparent; color: var(--texto-2); border-radius: 999px; padding: 5px 11px; font: inherit; font-size: .78rem; cursor: pointer; }
+.md-abas button[aria-selected="true"] { border-color: var(--azul-claro); color: #fff; background: rgba(30, 123, 255, .25); }
+.md-palco { min-height: 210px; display: grid; align-content: start; }
+.md-momento { display: none; gap: 10px; }
+.mira-anim[data-momento="1"] .md-momento[data-m="1"], .mira-anim[data-momento="2"] .md-momento[data-m="2"], .mira-anim[data-momento="3"] .md-momento[data-m="3"] { display: grid; }
+.md-momento > * { animation: md-entra .45s ease both; }
+.md-momento > *:nth-child(2) { animation-delay: 1.1s; }
+.md-momento[data-m="2"] .md-notou { animation: md-notou .6s ease both; }
+.md-botao { display: inline-block; margin-top: 8px; border: 1px solid var(--azul-claro); color: var(--azul-claro); border-radius: 8px; padding: 3px 10px; font-size: .8rem; font-weight: 600; }
+.md-confirma { display: flex; gap: 8px; }
+.md-confirma i { font-style: normal; border-radius: 8px; padding: 5px 12px; font-size: .82rem; font-weight: 600; border: 1px solid var(--linha); color: var(--texto-2); }
+.md-confirma i:first-child { background: var(--verde); color: #04110A; border-color: var(--verde); animation: md-aperta .4s ease 2.2s both; }
+.md-feito { justify-self: start; color: var(--verde); font-size: .86rem; font-family: var(--f-dado); animation-delay: 2.8s !important; }
+@keyframes md-entra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes md-notou { 0% { opacity: 0; transform: translateY(-10px) scale(.97); } 60% { opacity: 1; transform: none; box-shadow: 0 0 0 6px rgba(30, 123, 255, .25); } 100% { box-shadow: 0 0 0 0 rgba(30, 123, 255, 0); } }
+@keyframes md-aperta { 0% { transform: none; } 50% { transform: scale(.92); filter: brightness(1.2); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .md-momento > *, .md-confirma i:first-child { animation: none !important; } }
+
+/* 4.1: a chamada da Mira no início */
+.mira-chamada { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 26px; align-items: center; border: 1px solid rgba(99, 174, 255, .35); border-radius: 18px; padding: 24px; background: linear-gradient(135deg, rgba(30, 123, 255, .16), rgba(30, 123, 255, .02)); text-decoration: none; transition: border-color .25s, transform .25s; }
+.mira-chamada:hover { border-color: rgba(99, 174, 255, .8); transform: translateY(-3px); }
+.mira-chamada > div:first-child { display: flex; flex-direction: column; gap: 8px; }
+.mira-chamada h3 { font-size: 1.45rem; }
+.mira-chamada p { color: var(--texto-2); }
+.mira-chamada .ir { font-family: var(--f-display); font-weight: 700; font-size: .9rem; color: var(--azul-claro); }
+.mira-chamada .ir::after { content: " →"; }
+.mira-chamada-chat { display: grid; gap: 10px; background: #0F1621; border: 1px solid var(--linha); border-radius: 14px; padding: 14px; }
+@media (max-width: 860px) { .mira-chamada { grid-template-columns: 1fr; } }
+
+/* 4.1: Monte o seu cenário */
+.cf-etapa { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; margin-top: 4px; }
+.cf-etapa span { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--azul); color: #fff; font-size: .85rem; }
+.config-perguntas .nota { color: var(--texto-2); font-size: .85rem; }
+.cf-retorno { grid-column: 1 / -1; background: rgba(43, 212, 106, .08) !important; border-color: rgba(43, 212, 106, .45) !important; }
+.cf-retorno b { color: var(--verde); }

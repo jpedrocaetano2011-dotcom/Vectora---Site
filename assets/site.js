@@ -936,52 +936,41 @@
     })();
 
     /* ============================================================
-       CONTA DE GANHOS
-       ============================================================ */
-    if (document.getElementById("calc")) {
-    const n = id => Math.max(0, Number(document.getElementById(id).value) || 0);
-    const moeda = v => "R$ " + Math.round(v).toLocaleString("pt-BR");
-    const conta = () => {
-        const horas = n("cViagens") * n("cMinutos") * n("cTurnos") * n("cDias") / 60;
-        const custo = horas * n("cCusto");
-        document.getElementById("rHoras").textContent = Math.round(horas).toLocaleString("pt-BR") + " h";
-        document.getElementById("rCusto").textContent = moeda(custo);
-        document.getElementById("rAno").textContent = moeda(custo * 12);
-        // leva os números para o formulário de contato
-        const link = document.getElementById("calcContato");
-        if (link) {
-            const q = new URLSearchParams({ interesse: "atta", origem: "calculadora",
-                viagens: n("cViagens"), minutos: n("cMinutos"), turnos: n("cTurnos"), dias: n("cDias"), custo: n("cCusto"),
-                horas: Math.round(horas), mes: Math.round(custo) });
-            link.href = "contato.html?" + q;
-        }
-    };
-    document.getElementById("calc").addEventListener("input", conta);
-    conta();
-    }
-
-    /* ============================================================
-       CONFIGURADOR RÁPIDO
+       MONTE O SEU CENÁRIO (4.1: o configurador e a conta de ganhos juntos)
        Estimativa com valores típicos de mercado (não é a ficha do Atta):
        0,8 m/s com pessoas, 1,2 m/s em corredor só da frota, 0,4 m/s²,
        +15% no trajeto (cruzamentos e curvas), frota a 75% no pico.
+       Hoje: média do turno = 70% do pico, pessoa a 0,9 m/s parando nas
+       duas pontas, 75% do turno transportando; a frota assume 80%.
+       Retorno: só as pessoas liberadas contra o investimento (preço de
+       referência de mercado + 20% de implantação) e o custo por mês
+       (assinatura e manutenção). Mesmas regras do estudo de frota
+       (cenário provável, sem os ganhos potenciais).
        ============================================================ */
     if (document.getElementById("config")) {
     const form = document.getElementById("config");
     const MODULOS = {
-        garra:    { letra: "G", nome: "garra", limite: 250,  st: ["proj", "Sob encomenda"], porque: "A garra é feita para a sua carga: o Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
-        carrinho: { letra: "E", nome: "elevação", limite: 1000, st: ["disp", "Pronto para piloto"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto. É o módulo do nosso protótipo." },
-        esteira:  { letra: "R", nome: "rolos", limite: 1000, st: ["proj", "Sob encomenda"], porque: "A carga passa da esteira da estação para os rolos do Atta, e dele para a próxima esteira." },
-        comboio:  { letra: "T", nome: "rebocador", limite: 3000, st: ["dev", "Em desenvolvimento"], porque: "" }
+        garra:    { letra: "G", nome: "garra", limite: 250,  preco: 220000, st: ["proj", "Sob encomenda"], porque: "A garra é feita para a sua carga: o Atta pega a caixa ou o kit na estação, prende no trajeto e solta no posto, sem ninguém pegar a carga." },
+        carrinho: { letra: "E", nome: "elevação", limite: 1000, preco: 280000, st: ["disp", "Pronto para piloto"], porque: "O Atta entra embaixo do carrinho que vocês já usam, levanta e leva junto. É o módulo do nosso protótipo." },
+        esteira:  { letra: "R", nome: "rolos", limite: 1000, preco: 300000, st: ["proj", "Sob encomenda"], porque: "A carga passa da esteira da estação para os rolos do Atta, e dele para a próxima esteira." },
+        comboio:  { letra: "T", nome: "rebocador", limite: 3000, preco: 350000, st: ["dev", "Em desenvolvimento"], porque: "" }
     };
     const num = (id, min) => Math.max(min, Number(String(document.getElementById(id).value).replace(",", ".")) || 0);
     const fmt = (v, casas = 1) => v.toLocaleString("pt-BR", { minimumFractionDigits: casas, maximumFractionDigits: casas });
+    const moeda = v => (v >= 1e6 ? `R$ ${fmt(v / 1e6, 2)} mi` : v >= 1e4 ? `R$ ${fmt(v / 1e3, 0)} mil` : `R$ ${fmt(v, 0)}`);
     const VEL = { sim: 0.8, nao: 1.2 }, ACEL = 0.4, TRAFEGO = 1.15, OCUPACAO = 0.75;
+    const HORAS_TURNO = 8, MEDIA_DO_PICO = 0.7, VEL_PESSOA = 0.9, TRANSPORTA = 0.75, COBRE = 0.8;
+    const IMPLANTACAO = 0.2, ASSINATURA = 1800, MANUTENCAO = 0.10;
+    // false: esconde a linha do retorno (fica o custo de hoje e as pessoas liberadas)
+    const MOSTRAR_RETORNO = true;
+    if (!MOSTRAR_RETORNO) document.querySelector(".cf-retorno")?.remove();
 
     function calcular() {
         let manuseio = form.querySelector('input[name="manuseio"]:checked')?.value || "garra";
         const pessoas = form.querySelector('input[name="pessoas"]:checked')?.value || "sim";
         const peso = num("cfPeso", 1), dist = num("cfDist", 1), viagens = num("cfViagens", 1), ponta = num("cfPonta", 0);
+        const turnos = Math.min(3, Math.max(1, Math.round(num("cfTurnos", 1)))), dias = Math.min(31, num("cfDias", 1));
+        const gente = num("cfGente", 0), custoPessoa = num("cfCusto", 0);
         let aviso = "";
         if (manuseio === "garra" && peso > MODULOS.garra.limite) {
             aviso = `Acima de ${MODULOS.garra.limite} kg acaba a referência de mercado para garra. Nesse peso, o caminho costuma ser levar a carga num carrinho, com o Atta E embaixo.`;
@@ -994,6 +983,18 @@
         const ciclo = trajeto + 2 * ponta * 60;                     // segundos
         const frota = Math.max(1, Math.ceil(viagens * ciclo / 3600 / OCUPACAO));
         const rebocador = manuseio === "comboio";
+        // hoje: o tempo de gente que esse transporte toma
+        const porTurno = viagens * HORAS_TURNO * MEDIA_DO_PICO;
+        const horasTurno = porTurno * (2 * dist / VEL_PESSOA + 2 * ponta * 60) / 3600;
+        const horasMes = horasTurno * turnos * dias;
+        const equivalentes = horasTurno / (HORAS_TURNO * TRANSPORTA);
+        const libera = Math.max(0, Math.round(Math.min(gente || equivalentes, equivalentes * 2) * COBRE));
+        // o retorno (com o preço de referência de ±15%)
+        const hw = frota * m.preco, investimento = hw * (1 + IMPLANTACAO);
+        const custoMes = frota * ASSINATURA + hw * MANUTENCAO / 12;
+        const ganhoMes = libera * turnos * custoPessoa;
+        const meses = fator => { const liq = ganhoMes - (frota * ASSINATURA + hw * fator * MANUTENCAO / 12); return liq > 0 ? investimento * fator / liq + 1.5 : Infinity; };   // +1,5: piloto e meia frota
+        const [pbA, pbB] = [meses(0.85), meses(1.15)];
 
         document.getElementById("cfModelo").textContent = rebocador ? "Atta T · rebocador" : `Atta ${m.letra}-O`;
         const selo = document.getElementById("cfSelo");
@@ -1006,6 +1007,8 @@
         const caixaAviso = document.getElementById("cfAviso");
         if (rebocador) aviso = (peso > MODULOS.esteira.limite ? `Com ${peso.toLocaleString("pt-BR")} kg por viagem, ` : "") +
             "o rebocador ainda está em desenvolvimento. Com comboio, as curvas, as paradas no corredor e o tamanho do trem pedem um estudo próprio da sua planta. Conte o seu caso e a gente estuda junto.";
+        else if (!libera) aviso = "Com estes números, o transporte ainda não ocupa uma pessoa inteira por turno: o ganho vem da linha que não para, da rastreabilidade e da segurança. O estudo completo mede esses ganhos também.";
+        else if (MOSTRAR_RETORNO && (!Number.isFinite(pbA) || pbA > 60)) aviso = "Com estes números, só as pessoas liberadas não pagam a frota em 5 anos. O estudo completo procura o que faz fechar: pré-abastecer antes da troca de turno, juntar fluxos, a mensalidade, os ganhos de linha sem parar e de segurança.";
         caixaAviso.hidden = !aviso;
         caixaAviso.textContent = aviso;
         const icones = document.getElementById("cfIcones");
@@ -1013,13 +1016,21 @@
         if (!rebocador) {
             document.getElementById("cfCiclo").textContent = fmt(ciclo / 60) + " min";
             document.getElementById("cfFrota").textContent = frota.toLocaleString("pt-BR");
+            document.getElementById("cfHoras").textContent = Math.round(horasMes).toLocaleString("pt-BR") + " h";
+            document.getElementById("cfHorasSub").textContent = gente ? `por mês; ${gente.toLocaleString("pt-BR")} pessoa(s) por turno custam ${moeda(gente * turnos * custoPessoa * 12)} por ano` : `por mês, cerca de ${moeda(horasMes * custoPessoa / 176 * 12)} por ano`;
+            document.getElementById("cfLibera").textContent = libera.toLocaleString("pt-BR");
+            document.getElementById("cfLiberaSub").textContent = `pessoa(s) por turno, ${moeda(ganhoMes * 12)} por ano`;
+            const ret = document.getElementById("cfRetorno");
+            if (ret) ret.textContent = !libera || !Number.isFinite(pbA) || pbA > 60 ? "acima de 5 anos" : pbB <= 60 ? `${Math.round(pbA)} a ${Math.round(pbB)} meses` : `a partir de ${Math.round(pbA)} meses`;
+            if (ret) document.getElementById("cfRetornoSub").textContent = `investimento de ${moeda(investimento * 0.85)} a ${moeda(investimento * 1.15)}, só com as pessoas liberadas`;
             const mostrar = Math.min(frota, 12);
             for (let i = 0; i < mostrar; i++) icones.appendChild(document.createElement("i"));
             if (frota > mostrar) { const mais = document.createElement("span"); mais.textContent = "+" + (frota - mostrar); icones.appendChild(mais); }
         }
-        // leva a conta para o formulário de contato
-        const q = new URLSearchParams({ interesse: "atta", origem: "configurador", modulo: m.letra, peso: Math.round(peso), dist: Math.round(dist),
-            viagens: Math.round(viagens), ponta: ponta, pessoas, ciclo: rebocador ? 0 : Math.round(ciclo), frota: rebocador ? 0 : frota });
+        // leva o cenário para o formulário de contato
+        const q = new URLSearchParams({ interesse: "atta", origem: "cenario", modulo: m.letra, peso: Math.round(peso), dist: Math.round(dist),
+            viagens: Math.round(viagens), ponta: ponta, pessoas, turnos, dias, gente, custo: Math.round(custoPessoa),
+            ciclo: rebocador ? 0 : Math.round(ciclo), frota: rebocador ? 0 : frota, horas: Math.round(horasMes), libera, retorno: Number.isFinite(pbA) && pbA <= 60 ? Math.round(pbA) + "-" + (pbB <= 60 ? Math.round(pbB) : "60+") : "" });
         document.getElementById("cfContato").href = "contato.html?" + q;
     }
     form.addEventListener("input", calcular);

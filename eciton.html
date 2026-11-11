@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
+<link rel="stylesheet" href="assets/estilo.css?v=202611102223">
 </head>
 <body data-pagina="eciton">
 
@@ -81,17 +81,58 @@
                 <h2>O que o Eciton faz pela sua operação.</h2>
             </div>
             <div class="destaques">
+                <a class="destaque" href="#mira"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2 5.5L19.5 10 14 12l-2 5.5L10 12 4.5 10 10 8.5z"/><circle cx="19" cy="19" r="1.6"/></svg></span><b>Mira, a assistente <i class="novo">novo</i></b><span>Pergunte sobre a tela ou sobre a frota agora. Na Mira Pro, ela explica o que parou e sugere a ação; você confirma.</span></a>
                 <a class="destaque" href="#despacho"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h10M4 12h7M4 18h10M17 9l3 3-3 3"/></svg></span><b>Despacho pelos postos</b><span>O posto aperta o botão; o Eciton escolhe o Atta certo para aquela carga e o caminho mais curto.</span></a>
                 <a class="destaque" href="#programacao"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l3 2M9 3h6"/></svg></span><b>Pedidos programados <i class="novo">novo</i></b><span>Pelo consumo, a cada X minutos ou em horários fixos. O material chega antes de acabar.</span></a>
                 <a class="destaque" href="#planta"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span><b>Planta 3D <i class="novo">novo</i></b><span>O desenho do AutoCAD por baixo, as máquinas em 3D e a frota andando: o gêmeo digital da fábrica.</span></a>
                 <a class="destaque" href="#indicadores"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><b>Indicadores <i class="novo">novo</i></b><span>Entregas, disponibilidade, onde a frota para e quanto tempo de gente ficou livre. Vira o relatório do piloto.</span></a>
                 <a class="destaque" href="#simulacao"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M10 9l4 2-4 2z"/></svg></span><b>Simulação na sua planta</b><span>Atta virtuais com o mesmo programa dos de verdade, para saber quantos você precisa antes de comprar.</span></a>
-                <a class="destaque" href="#mira"><span class="d-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2 5.5L19.5 10 14 12l-2 5.5L10 12 4.5 10 10 8.5z"/><circle cx="19" cy="19" r="1.6"/></svg></span><b>Mira, a assistente <i class="novo">novo</i></b><span>Pergunte sobre a tela ou sobre a frota agora. Na Mira Pro, ela explica o que parou e sugere a ação; você confirma.</span></a>
+                
             </div>
         </div>
     </section>
 
-    <section class="secao faixa" id="despacho" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="mira" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+        <div class="caixa mira-grade">
+            <div>
+                <span class="olho">Mira · assistente com IA</span>
+                <h2 style="margin-top:14px">Pergunte para a Mira. Ela vê a mesma tela que você.</h2>
+                <p class="texto">A Mira conhece o Eciton de ponta a ponta e enxerga o que está acontecendo agora na frota. Responde em português, curto e direto, para quem opera, mantém ou gerencia. Ela não mexe em nada sozinha.</p>
+                <div class="mira-planos">
+                    <div><b>Mira</b><span>vem no pacote</span><ul><li>Como fazer qualquer coisa no Eciton</li><li>O que a tela está mostrando agora</li><li>Sugestões de pergunta em cada tela</li></ul></div>
+                    <div class="pro"><b>Mira Pro</b><span>adicional</span><ul><li>Diagnóstico com o histórico do dia</li><li>Resumo do turno e análise dos indicadores</li><li>"A Mira notou": o aviso aparece sozinho</li><li>Sugere a ação; quem confirma é você</li></ul></div>
+                </div>
+                <div class="mira-nome-porque"><b>Por que Mira?</b><p>De <em>mirar</em>: olhar com atenção e apontar onde está o problema, que é o trabalho dela no meio da frota. E Mira também é o nome de uma estrela, a "maravilhosa" da constelação da Baleia, que fica mais brilhante de tempos em tempos: discreta no dia a dia, aparece quando precisa. Ao lado do Eciton e do Atta, que são formigas, ela é quem olha a colônia de cima.</p></div>
+                <p class="mira-nota">Controle do veículo, parâmetros, emergência, planta e usuários ficam sempre com as pessoas. Toda ação sugerida pela Mira e confirmada fica registrada com o nome de quem confirmou.</p>
+            </div>
+            <figure class="mira-demo mira-anim" id="miraAnim" data-momento="1" aria-label="A Mira em três momentos: responde a pergunta, nota um problema sozinha e propõe uma ação que você confirma">
+                <div class="md-topo"><b>✦ Mira <em>Pro</em></b><span>Visão geral</span></div>
+                <div class="md-abas" role="tablist" aria-label="Momentos da Mira">
+                    <button type="button" role="tab" data-m="1" aria-selected="true">1 · Você pergunta</button>
+                    <button type="button" role="tab" data-m="2" aria-selected="false">2 · Ela nota sozinha</button>
+                    <button type="button" role="tab" data-m="3" aria-selected="false">3 · Propõe, você confirma</button>
+                </div>
+                <div class="md-palco">
+                    <div class="md-momento" data-m="1">
+                        <div class="md-msg eu">Quantos pedidos atrasaram hoje?</div>
+                        <div class="md-msg ela">3 de 212, todos do kit da Submontagem 3, entre 10:40 e 11:00. Nesse tempo o G1 ficou parado por obstáculo no corredor sul, ao lado da Prensa 2.</div>
+                    </div>
+                    <div class="md-momento" data-m="2">
+                        <div class="md-notou"><span>A Mira notou</span><p>G1 está parado (obstáculo) há 4 min em SUL26. É a 3ª vez hoje no mesmo ponto, sempre na troca de turno da prensa: provavelmente um carrinho deixado no corredor.</p><span class="md-botao">Explicar</span></div>
+                    </div>
+                    <div class="md-momento" data-m="3">
+                        <div class="md-msg ela">Enquanto o corredor não libera, o kit da Submontagem 3 vai atrasar. Sugiro passar o pedido na frente:
+                            <span class="md-acao">Mudar a prioridade do pedido 214: alta</span>
+                            <span class="md-confirma"><i>Confirmar</i><i>Agora não</i></span></div>
+                        <div class="md-feito">✓ Feito. Registrado com o nome de quem confirmou, 10:46.</div>
+                    </div>
+                </div>
+                <figcaption>Exemplo ilustrativo de conversa. A Mira não mexe em nada sozinha.</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="despacho">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Despacho e fila</span>
@@ -150,7 +191,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="programacao">
+    <section class="secao faixa" id="programacao" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Pedidos programados</span>
@@ -179,7 +220,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="turnos" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="turnos">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Turnos e horários</span>
@@ -219,13 +260,12 @@
         </div>
     </section>
 
-
-    <section class="secao faixa" id="planta">
+    <section class="secao faixa" id="planta" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">A sua planta</span>
                 <h2>Do desenho do AutoCAD ao gêmeo digital.</h2>
-                <p class="texto">Você importa o DXF que a fábrica já tem (ou uma imagem do layout), alinha por dois pontos e desenha as rotas por cima. Com um clique a planta fica em 3D, com as suas máquinas e a frota andando. O mesmo mapa é a tela de acompanhamento e a base da simulação.</p>
+                <p class="texto">Você importa o DXF que a fábrica já tem (ou uma imagem do layout), alinha por dois pontos e desenha as rotas por cima. Com um clique a planta fica em 3D, com as suas máquinas e a frota andando. O mesmo mapa é a tela de acompanhamento, a base da simulação e o mapa de calor da operação.</p>
             </div>
             <div class="planta-grade">
                 <div class="planta-tela">
@@ -242,25 +282,9 @@
                     <li><b>Marca cruzamentos e postos</b><span>Onde passa um por vez, onde cada um para e as faixas de pedestre.</span></li>
                     <li><b>Vira 3D</b><span>Cada máquina com o seu modelo; o GLB do fabricante, se tiver.</span></li>
                     <li><b>Põe a frota para rodar</b><span>Virtual, na simulação, ou de verdade, ao vivo.</span></li>
+                    <li><b>Mostra os mapas de calor</b><span>Onde os Atta esperam no tráfego, onde o Wi-Fi é fraco, onde param por obstáculo, onde a fita está gasta e quanto cada posto espera. Antes que vire parada de linha.</span></li>
                 </ol>
             </div>
-        </div>
-    </section>
-
-    <section class="secao faixa" id="eciton-io" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
-        <div class="caixa chamada-produto">
-            <div>
-                <span class="olho">Eciton I/O · portas, semáforos e alarme</span>
-                <h2 style="margin-top:14px">A porta abre para o Atta. Sem ninguém apertar botão.</h2>
-                <p class="texto" style="margin-top:14px">Um controlador pequeno na parede liga a frota ao que já existe no prédio: as portas automáticas que você já tem, o semáforo do cruzamento com a empilhadeira e o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.</p>
-            </div>
-            <ul class="chamada-itens">
-                <li><b>Portas automáticas</b><span>abre quando o Atta chega e só libera com a porta aberta de verdade</span></li>
-                <li><b>Semáforo no cruzamento</b><span>vermelho para a empilhadeira enquanto um Atta passa</span></li>
-                <li><b>Alarme de incêndio</b><span>a frota sai do caminho e as portas fecham</span></li>
-                <li><b>Elevadores</b><span>em projeto, com o fabricante do elevador</span></li>
-            </ul>
-            <a class="botao cheio" href="eciton-io.html">Conhecer o Eciton I/O</a>
         </div>
     </section>
 
@@ -282,28 +306,9 @@
                         <div class="destaque"><b>4 Atta</b><span>cada um ocupado até 75% do tempo, para aguentar o pico</span></div>
                     </div>
                     <div class="quantos-frota" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-                    <p class="quantos-nota">Velocidade média de 0,8 m/s, referência de mercado para áreas com pessoas. Faça a sua conta no <a href="atta.html#configurador">configurador rápido</a>; a simulação na sua planta dá o número certo.</p>
+                    <p class="quantos-nota">Velocidade média de 0,8 m/s, referência de mercado para áreas com pessoas. Faça a sua conta em <a href="atta.html#cenario">Monte o seu cenário</a>; a simulação na sua planta dá o número certo.</p>
                 </div>
                 <div class="acoes" style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap"><a class="botao cheio" href="estudo.html">Conhecer o Estudo de frota</a><a class="botao" href="contato.html?interesse=eciton">Pedir uma simulação</a></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="secao faixa" id="chao" style="border-top:1px solid var(--linha)">
-        <div class="caixa">
-            <div class="cabeca">
-                <span class="olho">Feito para o chão de fábrica</span>
-                <h2>Menos tempo instalando, menos dúvida operando.</h2>
-            </div>
-            <div class="chao-quatro">
-                <article><svg viewBox="0 0 120 50" aria-hidden="true"><g><rect x="8" y="18" width="104" height="14" rx="3" fill="#000"/><g fill="#2BD46A"><rect x="12" y="21" width="12" height="8" rx="2"/><rect x="28" y="21" width="12" height="8" rx="2"/><rect x="44" y="21" width="12" height="8" rx="2"/></g><g fill="#63AEFF"><rect x="64" y="21" width="12" height="8" rx="2"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></rect><rect x="80" y="21" width="12" height="8" rx="2"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></rect><rect x="96" y="21" width="12" height="8" rx="2"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></rect></g></g></svg>
-                    <h3>Sinalização com as cores da empresa</h3><p>A legenda de cada luz do Atta, com o que fazer e quem resolve, e um cartaz para imprimir. O administrador escolhe as cores de operação para a planta inteira; os avisos de segurança ficam travados.</p></article>
-                <article><svg viewBox="0 0 120 50" aria-hidden="true"><rect x="6" y="6" width="108" height="38" rx="4" fill="#0A0F17" stroke="#1B2533"/><g><rect x="16" y="14" width="10" height="10" fill="#2BD46A" opacity=".5"/><rect x="26" y="14" width="10" height="10" fill="#84CC16" opacity=".5"/><rect x="36" y="14" width="10" height="10" fill="#F59E0B" opacity=".55"/><rect x="46" y="14" width="10" height="10" fill="#EA580C" opacity=".6"/><rect x="56" y="24" width="10" height="10" fill="#DC2626" opacity=".65"/><rect x="66" y="24" width="10" height="10" fill="#EA580C" opacity=".5"/><rect x="76" y="24" width="10" height="10" fill="#F59E0B" opacity=".45"/><rect x="86" y="24" width="10" height="10" fill="#2BD46A" opacity=".45"/></g></svg>
-                    <h3>Mapas de calor da planta</h3><p>Onde o Wi-Fi está fraco, onde os Atta esperam no tráfego, onde param por obstáculo, onde a fita está gasta e quanto cada posto espera pela entrega. Antes que vire parada de linha.</p></article>
-                <article><svg viewBox="0 0 120 50" aria-hidden="true"><path d="M10 34 H110" stroke="#1E7BFF" stroke-width="3"/><g fill="#2BD46A"><rect x="18" y="30" width="8" height="8" rx="1"/><rect x="44" y="30" width="8" height="8" rx="1"/></g><g fill="#2A3646"><rect x="70" y="30" width="8" height="8" rx="1"><animate attributeName="fill" values="#2A3646;#2A3646;#2BD46A;#2BD46A" keyTimes="0;.5;.55;1" dur="3s" repeatCount="indefinite"/></rect><rect x="96" y="30" width="8" height="8" rx="1"/></g><rect x="0" y="16" width="22" height="14" rx="3" fill="#0B0F15" stroke="#63AEFF"><animate attributeName="x" values="10;62;62" keyTimes="0;.5;1" dur="3s" repeatCount="indefinite"/></rect><text x="70" y="14" font-family="JetBrains Mono, monospace" font-size="8" fill="#8E9BAE">R07 ✓</text></svg>
-                    <h3>Instalação rápida das tags</h3><p>A corrida das tags: o Atta (ou um leitor USB) passa pela fita e cada etiqueta RFID vai para o seu ponto na planta, na sequência certa. O Eciton avisa tag repetida ou fora do lugar.</p></article>
-                <article><svg viewBox="0 0 120 50" aria-hidden="true"><rect x="6" y="12" width="108" height="26" rx="13" fill="rgba(255,176,0,.12)" stroke="#FFB000"/><text x="60" y="29" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="7" fill="#FFB000">frota pausada · visita</text></svg>
-                    <h3>Pausar e modo devagar</h3><p>Visita, auditoria, DDS ou obra: um toque pausa a frota inteira (cada Atta para no próximo ponto) ou baixa a velocidade por um tempo. Uma faixa no topo de todas as telas avisa quem está olhando.</p></article>
             </div>
         </div>
     </section>
@@ -339,31 +344,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="mira">
-        <div class="caixa mira-grade">
-            <div>
-                <span class="olho">Mira · assistente com IA</span>
-                <h2 style="margin-top:14px">Pergunte para a Mira. Ela vê a mesma tela que você.</h2>
-                <p class="texto">A Mira conhece o Eciton de ponta a ponta e enxerga o que está acontecendo agora na frota. Responde em português, curto e direto, para quem opera, mantém ou gerencia. Ela não mexe em nada sozinha.</p>
-                <div class="mira-planos">
-                    <div><b>Mira</b><span>vem no pacote</span><ul><li>Como fazer qualquer coisa no Eciton</li><li>O que a tela está mostrando agora</li><li>Sugestões de pergunta em cada tela</li></ul></div>
-                    <div class="pro"><b>Mira Pro</b><span>adicional</span><ul><li>Diagnóstico com o histórico do dia</li><li>Resumo do turno e análise dos indicadores</li><li>"A Mira notou": o aviso aparece sozinho</li><li>Sugere a ação; quem confirma é você</li></ul></div>
-                </div>
-                <div class="mira-nome-porque"><b>Por que Mira?</b><p>De <em>mirar</em>: olhar com atenção e apontar onde está o problema, que é o trabalho dela no meio da frota. E Mira também é o nome de uma estrela, a "maravilhosa" da constelação da Baleia, que fica mais brilhante de tempos em tempos: discreta no dia a dia, aparece quando precisa. Ao lado do Eciton e do Atta, que são formigas, ela é quem olha a colônia de cima.</p></div>
-                <p class="mira-nota">Controle do veículo, parâmetros, emergência, planta e usuários ficam sempre com as pessoas. Toda ação sugerida pela Mira e confirmada fica registrada com o nome de quem confirmou.</p>
-            </div>
-            <figure class="mira-demo" aria-label="Exemplo de conversa com a Mira Pro sobre um Atta parado">
-                <div class="md-topo"><b>✦ Mira <em>Pro</em></b><span>Visão geral</span></div>
-                <div class="md-notou"><span>A Mira notou</span><p>G1 está parado (obstáculo) há 4 min em SUL26.</p></div>
-                <div class="md-msg eu">Por que o G1 parou?</div>
-                <div class="md-msg ela">O G1 está com obstáculo à frente desde 10:42, no corredor sul, ao lado da Prensa 2. Hoje isso aconteceu 3 vezes no mesmo ponto, sempre na troca de turno da prensa: provavelmente um carrinho deixado no corredor. Enquanto isso, o kit da Submontagem 3 está atrasando.
-                    <span class="md-acao">Mudar a prioridade do pedido 214: alta</span><small>Você confirma; nada acontece sozinho.</small></div>
-                <figcaption>Exemplo ilustrativo de conversa.</figcaption>
-            </figure>
-        </div>
-    </section>
-
-    <section class="secao faixa" id="dia-a-dia" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="dia-a-dia">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">No dia a dia</span>
@@ -506,7 +487,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="tudo">
+    <section class="secao faixa" id="tudo" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Tudo o que vem no Eciton</span>
@@ -548,7 +529,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="perguntas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
+    <section class="secao faixa" id="perguntas">
         <div class="caixa perguntas-grade">
             <div>
                 <span class="olho">Perguntas</span>
@@ -559,7 +540,7 @@
                 <details><summary>E se a internet cair?</summary><p>Cada Atta guarda na memória a missão que está fazendo e a fila dele, e continua a viagem. Antes de entrar num cruzamento ou num corredor que divide com outro veículo, ele precisa combinar com a frota: sem conexão, para antes da zona e espera, nunca entra às cegas. Pedidos novos dos tablets aguardam a conexão. Quando a rede volta, tudo segue sozinho.</p></details>
                 <details><summary>Preciso mudar o chão da fábrica?</summary><p>No Atta E-O, basta uma fita contrastante colada no piso e etiquetas RFID nos pontos de parada. Dá para mudar a rota trocando a fita. A versão magnética (-M, sob encomenda) usa fita magnética, mais resistente a sujeira e ao tráfego de empilhadeira.</p></details>
                 <details><summary>É seguro andar perto das pessoas?</summary><p>O Atta anda mais devagar nas zonas marcadas na planta, para sozinho quando os sensores de distância veem pessoa, carrinho ou outro veículo na frente, e só segue com o caminho livre. O botão de emergência no veículo para tudo, e ele só volta a andar depois que alguém rearma no local.</p></details>
-                <details><summary>O Atta passa por porta automática?</summary><p>Passa, com o Eciton I/O: um controlador na parede ligado ao contato da porta (o mesmo do radar ou do botão) e a um sensor de porta aberta. O Atta pede passagem, a porta abre e ele só segue quando o sensor confirma. Se o controlador ficar sem energia ou sem rede, a passagem fica fechada até ele voltar. A segurança das pessoas na porta continua com os sensores da própria porta. Elevador ainda não: depende de integração com o fabricante do elevador.</p></details>
+                <details><summary>O Atta passa por porta automática?</summary><p>Passa, com o módulo Eciton I/O ligado ao contato da porta (o mesmo do radar ou do botão) e a um sensor de porta aberta. O Atta pede passagem, a porta abre e ele só segue quando o sensor confirma. Se o módulo ficar sem energia ou sem rede, a passagem fica fechada até ele voltar. A segurança das pessoas na porta continua com os sensores da própria porta. Elevador ainda não: depende de integração com o fabricante do elevador.</p></details>
                 <details><summary>O Eciton controla veículos de outras marcas?</summary><p>Hoje não: o Eciton foi feito junto com o Atta e fala a língua dele. Integração com outros veículos está nos nossos planos.</p></details>
                 <details><summary>Onde ficam os dados da minha fábrica?</summary><p>Na nuvem, com cada empresa separada das outras pelo próprio banco de dados. Cada pessoa entra com a própria conta e só faz o que o papel dela permite.</p></details>
                 <details><summary>E quando um veículo precisa de manutenção?</summary><p>Um toque tira o Atta da operação: ele sai do despacho, não aceita missão e a luz fica branca. O Eciton guarda cópias da configuração de cada veículo, para restaurar numa placa nova, e mostra a documentação do modelo para a equipe de manutenção.</p></details>
@@ -580,7 +561,7 @@
         </div>
     </section>
 
-    <section class="secao faixa" id="telas">
+    <section class="secao faixa" id="telas" style="background:var(--fundo-2);border-block:1px solid var(--linha)">
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">As telas de verdade</span>
@@ -635,7 +616,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611100250" defer></script>
-<script src="assets/eciton.js?v=202611100250" defer></script>
+<script src="assets/site.js?v=202611102223" defer></script>
+<script src="assets/eciton.js?v=202611102223" defer></script>
 </body>
 </html>

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Eciton I/O · portas, semáforos e alarme para a frota · E4M</title>
-<meta name="description" content="Eciton I/O, o controlador da E4M que faz o Atta conversar com a fábrica: abre as portas automáticas que você já tem, comanda o semáforo do cruzamento com empilhadeira e para a frota com o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.">
+<meta name="description" content="Eciton I/O, o módulo da E4M que faz o Atta conversar com a fábrica: abre as portas automáticas que você já tem, comanda o semáforo do cruzamento com empilhadeira e para a frota com o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="E4M · Engineering for Motion">
 <meta property="og:title" content="Eciton I/O · portas, semáforos e alarme para a frota · E4M">
-<meta property="og:description" content="Eciton I/O, o controlador da E4M que faz o Atta conversar com a fábrica: abre as portas automáticas que você já tem, comanda o semáforo do cruzamento com empilhadeira e para a frota com o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.">
+<meta property="og:description" content="Eciton I/O, o módulo da E4M que faz o Atta conversar com a fábrica: abre as portas automáticas que você já tem, comanda o semáforo do cruzamento com empilhadeira e para a frota com o alarme de incêndio. Integração com elevadores em projeto, para hospitais e hotéis.">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:image" content="https://vectora-sandy.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/estilo.css?v=202611100250">
+<link rel="stylesheet" href="assets/estilo.css?v=202611102223">
 </head>
 <body data-pagina="eciton-io">
 
@@ -56,7 +56,7 @@
             <div class="hero-texto">
                 <span class="olho">Eciton I/O</span>
                 <h1>O Atta conversa com a fábrica. <span class="prata">Porta, semáforo e alarme.</span></h1>
-                <p class="texto">O Eciton I/O é um controlador pequeno, na parede, que liga a frota ao que já existe no prédio. Ele abre a porta automática quando o Atta chega, acende o semáforo do cruzamento com a empilhadeira e, com o alarme de incêndio, faz a frota inteira parar de entrar em portas e cruzamentos. Ninguém precisa apertar botão.</p>
+                <p class="texto">O Eciton I/O é um módulo pequeno que liga a frota ao que já existe no prédio. Ele abre a porta automática quando o Atta chega, acende o semáforo do cruzamento com a empilhadeira e, com o alarme de incêndio, faz a frota inteira parar de entrar em portas e cruzamentos. Ninguém precisa apertar botão.</p>
                 <div class="acoes">
                     <a class="botao cheio" href="contato.html?interesse=eciton&amp;origem=eciton-io">Falar sobre a minha planta</a>
                     <a class="botao" href="#o-que-liga">O que ele liga</a>
@@ -65,7 +65,7 @@
             <div class="io-hero">
                 <div class="planta-tela io-tela">
                     <div class="planta-chip" id="ioChip">porta 1 · fechada</div>
-                    <svg id="ioSvg" viewBox="0 0 600 340" role="img" aria-label="Um Atta, visto por trás, chega na porta automática; o controlador na parede recebe o pedido, a porta abre, o sensor confirma e o Atta passa"></svg>
+                    <svg id="ioSvg" viewBox="0 0 600 340" role="img" aria-label="Um Atta, visto por trás, chega na porta automática; o módulo Eciton I/O recebe o pedido, a porta abre, o sensor confirma e o Atta passa"></svg>
                 </div>
                 <ol class="passos-ec io-passos" id="ioPassos">
                     <li><b>O Atta pede</b><span>a porta, como pede um cruzamento</span></li>
@@ -82,7 +82,7 @@
             <div class="cabeca">
                 <span class="olho">O que ele liga</span>
                 <h2>O que já está no prédio passa a fazer parte da frota.</h2>
-                <p class="texto">Cada Eciton I/O tem 4 saídas (relés) e 4 entradas e fala com os Atta pela mesma rede e pelo mesmo canal criptografado da frota. Um controlador atende uma porta, um cruzamento ou o alarme, e todos são configurados pelo Eciton, na tela Dispositivos.</p>
+                <p class="texto">Cada módulo fala com os Atta pela mesma rede e pelo mesmo canal criptografado da frota. Um módulo atende uma porta, um cruzamento ou o alarme, e todos são configurados pelo Eciton, na tela Dispositivos.</p>
             </div>
             <div class="io-quatro">
                 <a class="io-card" href="#portas">
@@ -112,14 +112,14 @@
                 <h2 style="margin-top:14px">Funciona com a porta que você já tem.</h2>
                 <p class="texto" style="margin-top:16px">Quase toda porta automática tem uma entrada para o botão ou o radar que a abre. O Eciton I/O liga nela, como se fosse mais um botão, e num sensor de porta aberta. Não é preciso trocar a porta nem mexer no comando dela.</p>
                 <ul class="lista-ok">
-                    <li><b>Na dúvida, ninguém passa.</b> Enquanto a porta está fechada, o controlador segura a passagem como se houvesse outro veículo dentro. Sem energia ou sem rede, ela continua segura.</li>
+                    <li><b>Na dúvida, ninguém passa.</b> Enquanto a porta está fechada, o módulo segura a passagem como se houvesse outro veículo dentro. Sem energia ou sem rede, ela continua segura.</li>
                     <li><b>Só passa com a porta aberta de verdade.</b> O caminho só é liberado quando o sensor confirma. Se a porta não abrir a tempo, o Atta espera e o Eciton avisa.</li>
                     <li><b>A segurança das pessoas continua com a porta.</b> Os sensores e o fechamento da própria porta seguem valendo como antes.</li>
                     <li><b>Fecha sozinha.</b> Alguns segundos depois que o último Atta passou, a porta fecha.</li>
                 </ul>
             </div>
             <figure class="io-ligacao" aria-label="Como o Eciton I/O liga na porta">
-                <svg viewBox="0 0 460 300" role="img" aria-label="O Atta pede pela rede; o Eciton I/O liga o relé na entrada de comando da porta e lê o sensor de porta aberta">
+                <svg viewBox="0 0 460 300" role="img" aria-label="O Atta pede pela rede; o módulo Eciton I/O liga a saída na entrada de comando da porta e lê o sensor de porta aberta">
                     <g font-family="JetBrains Mono, monospace" font-size="10">
                         <rect x="18" y="118" width="92" height="64" rx="10" fill="#0B0F15" stroke="#2A3646"/>
                         <rect x="34" y="132" width="60" height="22" rx="3" fill="#FF8A3D"/>
@@ -127,8 +127,8 @@
                         <text x="64" y="198" text-anchor="middle" fill="#8E9BAE">Atta</text>
                         <rect x="180" y="104" width="106" height="92" rx="10" fill="#0F1621" stroke="#63AEFF"/>
                         <text x="233" y="128" text-anchor="middle" fill="#E9EEF5" font-weight="700">Eciton I/O</text>
-                        <text x="233" y="146" text-anchor="middle" fill="#8E9BAE">4 relés</text>
-                        <text x="233" y="162" text-anchor="middle" fill="#8E9BAE">4 entradas</text>
+                        <text x="233" y="146" text-anchor="middle" fill="#8E9BAE">saída</text>
+                        <text x="233" y="162" text-anchor="middle" fill="#8E9BAE">e entrada</text>
                         <circle cx="270" cy="182" r="4" fill="#2BD46A"><animate attributeName="fill" values="#FF4D5E;#FF8A3D;#2BD46A;#2BD46A;#FF4D5E" keyTimes="0;.25;.5;.85;1" dur="6s" repeatCount="indefinite"/></circle>
                         <path d="M110 140 C 140 120, 150 120, 180 130" fill="none" stroke="#2CE0FF" stroke-width="2" stroke-dasharray="5 4"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.2s" repeatCount="indefinite"/></path>
                         <text x="146" y="110" text-anchor="middle" fill="#2CE0FF">Wi-Fi · MQTT</text>
@@ -138,13 +138,13 @@
                         <rect x="398" y="46" width="38" height="208" fill="rgba(99,174,255,.14)" stroke="#63AEFF"><animate attributeName="x" values="398;426;426;398" keyTimes="0;.35;.8;1" dur="6s" repeatCount="indefinite"/><animate attributeName="width" values="38;10;10;38" keyTimes="0;.35;.8;1" dur="6s" repeatCount="indefinite"/></rect>
                         <text x="396" y="30" text-anchor="middle" fill="#8E9BAE">porta existente</text>
                         <path d="M286 130 H 330 V 80 H 350" fill="none" stroke="#FF8A3D" stroke-width="2"/>
-                        <text x="342" y="72" text-anchor="end" fill="#FF8A3D">relé → "abrir"</text>
+                        <text x="342" y="72" text-anchor="end" fill="#FF8A3D">saída → "abrir"</text>
                         <path d="M350 220 H 330 V 172 H 286" fill="none" stroke="#2BD46A" stroke-width="2"/>
                         <text x="342" y="238" text-anchor="end" fill="#2BD46A">sensor "aberta"</text>
-                        <text x="233" y="214" text-anchor="middle" fill="#8E9BAE">na parede, ao lado da porta</text>
+                        <text x="233" y="214" text-anchor="middle" fill="#8E9BAE">ao lado da porta</text>
                     </g>
                 </svg>
-                <figcaption>Um relé na entrada de comando da porta (a mesma do botão ou do radar) e uma entrada no sensor de porta aberta. Um sensor de porta fechada é opcional.</figcaption>
+                <figcaption>Uma saída na entrada de comando da porta (a mesma do botão ou do radar) e uma entrada no sensor de porta aberta. Um sensor de porta fechada é opcional.</figcaption>
             </figure>
         </div>
     </section>
@@ -260,14 +260,14 @@
         <div class="caixa">
             <div class="cabeca">
                 <span class="olho">Por dentro</span>
-                <h2>Pequeno na parede, parte da frota no sistema.</h2>
+                <h2>Um módulo pequeno, parte da frota no sistema.</h2>
             </div>
             <div class="seguranca">
-                <div class="item-seg"><h3>4 saídas e 4 entradas</h3><p>Relés para abrir porta, acender semáforo ou sinalizar; entradas para sensor de porta, botão de cruzamento e alarme de incêndio.</p></div>
+                <div class="item-seg"><h3>4 saídas e 4 entradas</h3><p>Saídas a relé para abrir porta, acender semáforo ou sinalizar; entradas para sensor de porta, botão de cruzamento e alarme de incêndio.</p></div>
                 <div class="item-seg"><h3>A mesma rede da frota</h3><p>Fala com os Atta pelo mesmo canal criptografado (MQTT com TLS). Cada empresa só enxerga os próprios dispositivos.</p></div>
-                <div class="item-seg"><h3>Configurado pelo Eciton</h3><p>Na tela Dispositivos: o que cada saída e cada entrada faz, o estado ao vivo e o histórico. Na planta, a porta fica ligada ao controlador dela.</p></div>
+                <div class="item-seg"><h3>Configurado pelo Eciton</h3><p>Na tela Dispositivos: o que cada saída e cada entrada faz, o estado ao vivo e o histórico. Na planta, a porta fica ligada ao módulo dela.</p></div>
                 <div class="item-seg"><h3>Falha para o lado seguro</h3><p>Sem energia, sem rede ou com o sensor em dúvida, a passagem fica fechada. Ninguém entra às cegas.</p></div>
-                <div class="item-seg"><h3>Testado antes de instalar</h3><p>O controlador e a porta rodam no Atta virtual, com a frota, na planta da sua fábrica.</p></div>
+                <div class="item-seg"><h3>Testado antes de instalar</h3><p>O módulo e a porta rodam no Atta virtual, com a frota, na planta da sua fábrica.</p></div>
                 <div class="item-seg"><h3>Atualizado pelo Wi-Fi</h3><p>Como os Atta, recebe as versões novas a partir do Eciton.</p></div>
             </div>
         </div>
@@ -282,8 +282,8 @@
             <div class="perguntas">
                 <details><summary>Funciona com qualquer porta automática?</summary><p>Com as que aceitam um comando externo para abrir, como um botão ou um radar: a grande maioria das portas automáticas industriais e comerciais. Na visita técnica a gente confere a entrada de comando e onde fica o sensor de porta aberta.</p></details>
                 <details><summary>E se a porta não abrir?</summary><p>O Atta não passa: ele espera antes da porta, e o Eciton avisa quanto tempo ele está esperando e por quê. Nada entra sem o sensor confirmar que a porta abriu.</p></details>
-                <details><summary>Preciso de um controlador por porta?</summary><p>Uma porta por controlador é o mais simples. Um semáforo de cruzamento com botão e o alarme de incêndio podem dividir o mesmo controlador, conforme a distância entre eles.</p></details>
-                <details><summary>O Eciton I/O substitui a segurança da porta?</summary><p>Não. Os sensores e o fechamento seguro da própria porta continuam valendo, para pessoas e para os Atta. O controlador só pede para abrir e confere se abriu.</p></details>
+                <details><summary>Preciso de um módulo por porta?</summary><p>Uma porta por módulo é o mais simples. Um semáforo de cruzamento com botão e o alarme de incêndio podem dividir o mesmo módulo, conforme a distância entre eles.</p></details>
+                <details><summary>O Eciton I/O substitui a segurança da porta?</summary><p>Não. Os sensores e o fechamento seguro da própria porta continuam valendo, para pessoas e para os Atta. O módulo só pede para abrir e confere se abriu.</p></details>
                 <details><summary>Quando o elevador fica pronto?</summary><p>A integração com elevador está em projeto e depende do fabricante do elevador, porque cada um tem a sua interface. Ela entra caso a caso, como projeto. Se você tem um prédio com elevador, fale com a gente: é assim que o primeiro sai.</p></details>
                 <details><summary>Serve sem o Atta?</summary><p>O Eciton I/O foi feito para a frota: ele traduz o que os Atta pedem (passagem, cruzamento) para portas e semáforos. Sem veículos, ele não tem a quem servir.</p></details>
             </div>
@@ -325,7 +325,7 @@
 
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
-<script src="assets/site.js?v=202611100250" defer></script>
-<script src="assets/eciton-io.js?v=202611100250" defer></script>
+<script src="assets/site.js?v=202611102223" defer></script>
+<script src="assets/eciton-io.js?v=202611102223" defer></script>
 </body>
 </html>

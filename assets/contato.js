@@ -27,13 +27,33 @@
         origem = resumo;
     }
     // vindo das páginas do Estudo de frota e do Eciton I/O
-    const PEDIDOS = { estudo: "Quero um estudo de frota (quantos Atta a operação precisa).", "eciton-io": "Quero falar sobre o Eciton I/O (portas, semáforos, alarme de incêndio).", elevador: "Tenho um projeto com elevador (Eciton I/O)." };
+    const PEDIDOS = { estudo: "Quero um estudo de frota: quantos Atta, o que muda na operação e em quanto tempo o investimento volta.", "eciton-io": "Quero falar sobre o Eciton I/O (portas, semáforos, alarme de incêndio).", elevador: "Tenho um projeto com elevador (Eciton I/O)." };
     if (PEDIDOS[origem]) {
         const caixa = document.getElementById("calcRecebida");
         caixa.hidden = false;
         caixa.innerHTML = `<span class="rot">Vai junto com a mensagem</span><p></p>`;
         caixa.querySelector("p").textContent = PEDIDOS[origem];
         origem = PEDIDOS[origem];
+    }
+    // 4.1: "Monte o seu cenário" (página do Atta)
+    if (origem === "cenario") {
+        const n = k => Math.max(0, Number(q.get(k)) || 0);
+        const NOMES = { G: "garra", E: "elevação", R: "rolos", T: "rebocador" };
+        const mod = NOMES[q.get("modulo")] ? q.get("modulo") : "E";
+        const base = `Meu cenário: ${n("peso").toLocaleString("pt-BR")} kg por viagem, ${n("dist")} m da coleta até a entrega, ${n("viagens")} viagens por hora no pico, ` +
+            `${n("ponta").toLocaleString("pt-BR")} min em cada ponta, corredor ${q.get("pessoas") === "nao" ? "só da frota" : "com pessoas"}, ${n("turnos")} turno(s), ${n("dias")} dias por mês, ` +
+            `${n("gente")} pessoa(s) por turno levando material a R$ ${n("custo").toLocaleString("pt-BR")} por mês.`;
+        const resumo = mod === "T"
+            ? `${base} Indicação: rebocador (Atta T, em desenvolvimento), para estudar o caso.`
+            : `${base} Estimativa: Atta ${mod}-O (${NOMES[mod]}), ${(n("ciclo") / 60).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} min por viagem, ${n("frota")} Atta, ${n("horas").toLocaleString("pt-BR")} h de transporte por mês hoje, ${n("libera")} pessoa(s) liberada(s) por turno${q.get("retorno") ? `, retorno estimado de ${q.get("retorno")} meses` : ""}. Quero o estudo completo.`;
+        const caixa = document.getElementById("calcRecebida");
+        caixa.hidden = false;
+        caixa.innerHTML = `<span class="rot">Vai junto com a mensagem</span><p></p>`;
+        caixa.querySelector("p").textContent = resumo;
+        // no banco a origem tem até 300 letras: a versão curta
+        const curto = `Cenário: ${mod}, ${n("peso")} kg, ${n("dist")} m, ${n("viagens")} viag/h pico, ${n("ponta")} min/ponta, ${q.get("pessoas") === "nao" ? "só frota" : "com pessoas"}, ${n("turnos")} turno(s), ${n("dias")} dias, ${n("gente")} pessoa(s)/turno a R$ ${n("custo")}.` +
+            (mod === "T" ? " Rebocador: estudar." : ` Estimativa: ${n("frota")} Atta ${mod}-O, ${n("horas")} h/mês hoje, libera ${n("libera")}/turno${q.get("retorno") ? `, retorno ${q.get("retorno")} meses` : ""}. Quer o estudo completo.`);
+        origem = curto.slice(0, 300);
     }
     if (origem === "configurador") {
         const n = k => Math.max(0, Number(q.get(k)) || 0);

@@ -1,4 +1,4 @@
-/* Página do Eciton: cinco animações em SVG/HTML, cada uma só roda
+/* Página do Eciton: as animações em SVG/HTML (4.1: a Mira em três momentos e o mapa de calor na planta), cada uma só roda
    quando está na tela. Com "reduzir movimento", mostra um quadro parado. */
 (() => {
     const NS = "http://www.w3.org/2000/svg";
@@ -410,6 +410,15 @@
             { r: trilha([[40, 190], [330, 190], [330, 120], [415, 120], [415, 106]]), v: veiculo(svg, COR.azulC, "01"), off: 0 },
             { r: trilha([[40, 190], [330, 190], [330, 280], [394, 280]]), v: veiculo(svg, COR.verde, "02"), off: .5 }
         ];
+        // 4.1: o mapa de calor da operação, por cima da planta (espera no tráfego, depois o Wi-Fi)
+        const calor = S("g", { opacity: 0 }, svg);
+        const celula = (x, y, c, a) => S("rect", { x: x - 9, y: y - 9, width: 18, height: 18, rx: 2, fill: c, opacity: a }, calor);
+        const camadaEspera = S("g", {}, calor), camadaWifi = S("g", {}, calor);
+        [[330, 190, "#FF4D5E", .75], [312, 190, "#FF8A3D", .6], [348, 190, "#FF8A3D", .55], [330, 172, "#FFB000", .5], [330, 208, "#FFB000", .45], [330, 120, "#FF8A3D", .55], [348, 120, "#FFB000", .45], [294, 190, "#FFB000", .35], [312, 120, "#FFB000", .35]]
+            .forEach(([x, y, c, a]) => camadaEspera.appendChild(celula(x, y, c, a)));
+        for (let x = 460; x <= 560; x += 18) for (let y = 236; y <= 300; y += 18) { const k = Math.min(1, Math.hypot(x - 560, y - 300) / 110); camadaWifi.appendChild(celula(x, y, k < .45 ? "#FF4D5E" : k < .75 ? "#FFB000" : "#2BD46A", .55 - k * .25)); }
+        calor.appendChild(camadaEspera); calor.appendChild(camadaWifi);
+        const legCalor = T("", { x: 572, y: 312, "text-anchor": "end", "font-family": MONO, "font-size": 10, fill: "#FFB000" }, calor);
         const chip = $("pChip");
         const passos = [...document.querySelectorAll("#pPassos li")];
         // 3.3: as mesmas formas do desenho levantam em 3D (CSS 3D, sem biblioteca)
@@ -449,7 +458,7 @@
             });
         };
         let t = 0;
-        const DUR = 26;
+        const DUR = 33;
         const desenhar = tt => {
             cad.setAttribute("opacity", (.25 + .75 * fase(tt, 0, 1.5)).toFixed(2));
             const e1 = fase(tt, 2, 2.4), e2 = fase(tt, 2.6, 3), e3 = fase(tt, 3, 3.8);
@@ -465,9 +474,17 @@
             const k3 = tt < 12 ? 0 : tt < 14 ? fase(tt, 12, 14) : tt < 24 ? 1 : 1 - fase(tt, 24, 25.6);
             if (palco3d) palco3d.style.transform = k3 > 0 ? `translateY(${(-7 * k3).toFixed(2)}%) rotateX(${(50 * k3).toFixed(2)}deg) rotateZ(${(-28 * k3).toFixed(2)}deg) scale(${(1 - .24 * k3).toFixed(3)})` : "";
             if (blocosEl) alturas(k3);
-            const anda = tt >= 13.4 && tt < 25.6;
+            const anda = tt >= 13.4 && tt < 32.4;
+            // 26–32: de volta ao 2D, o mapa de calor (espera no tráfego, depois o Wi-Fi)
+            const kc = tt < 26 ? 0 : Math.min(fase(tt, 26, 26.8), 1 - fase(tt, 31.6, 32.4));
+            calor.setAttribute("opacity", kc.toFixed(2));
+            const wifi = tt >= 29;
+            camadaEspera.setAttribute("opacity", wifi ? (1 - fase(tt, 29, 29.6)).toFixed(2) : 1);
+            camadaWifi.setAttribute("opacity", wifi ? fase(tt, 29, 29.6).toFixed(2) : 0);
+            const lc = wifi ? "MAPA DE CALOR · WI-FI FRACO" : "MAPA DE CALOR · ESPERA NO TRÁFEGO";
+            if (legCalor.textContent !== lc) legCalor.textContent = lc;
             voltas.forEach((o, i) => {
-                o.v.setAttribute("opacity", anda ? Math.min(fase(tt, 13.4, 14), 1 - fase(tt, 25, 25.6)) : 0);
+                o.v.setAttribute("opacity", anda ? Math.min(fase(tt, 13.4, 14), 1 - fase(tt, 31.8, 32.4)) : 0);
                 if (carros[i]) carros[i].b.style.visibility = anda && k3 > .05 ? "visible" : "hidden";
                 if (!anda) return;
                 const u = ((tt - 13.4) / 6 + o.off) % 1;
@@ -476,14 +493,14 @@
                 o.v.pos(x, y);
                 if (carros[i]) { carros[i].b.style.left = (x - 9) / 6 + "%"; carros[i].b.style.top = (y - 7) / 3.4 + "%"; }
             });
-            const pIdx = tt < 2 ? 0 : tt < 5 ? 1 : tt < 10 ? 2 : tt < 12 ? 3 : tt < 14 ? 4 : 5;
+            const pIdx = tt < 2 ? 0 : tt < 5 ? 1 : tt < 10 ? 2 : tt < 12 ? 3 : tt < 14 ? 4 : tt < 26 ? 5 : 6;
             passos.forEach((p, i) => p.classList.toggle("agora", i === pIdx));
-            const txt = ["galpao_A.dxf · 3 camadas", "alinhado por 2 pontos: 12,0 m", "desenhando as rotas", "cruzamentos e postos", "vista 3D", "frota rodando em 3D"][pIdx];
+            const txt = ["galpao_A.dxf · 3 camadas", "alinhado por 2 pontos: 12,0 m", "desenhando as rotas", "cruzamentos e postos", "vista 3D", "frota rodando em 3D", tt < 29 ? "mapa de calor: espera" : "mapa de calor: Wi-Fi"][pIdx];
             if (chip.textContent !== txt) chip.textContent = txt;
             chip.classList.toggle("ativo", pIdx > 0);
         };
-        desenhar(reduzir ? 18 : 0);
-        if (reduzir) addEventListener("resize", () => desenhar(18));
+        desenhar(reduzir ? 27.5 : 0);
+        if (reduzir) addEventListener("resize", () => desenhar(27.5));
         if (!reduzir) registrar(svg.closest(".planta-tela"), { passo: dt => { t = (t + dt) % DUR; desenhar(t); } });
     })();
 
@@ -892,6 +909,19 @@
         let t = 0;
         desenhar(reduzir ? 3.7 : 0);
         if (!reduzir) registrar(svg, { passo: dt => { t = (t + dt) % DUR; desenhar(t); } });
+    })();
+
+    /* ---------------------------------------------------------
+       4.1) A MIRA EM TRÊS MOMENTOS: você pergunta · ela nota sozinha ·
+       propõe a ação e você confirma (troca a cada 7 s; clicar para)
+       --------------------------------------------------------- */
+    (() => {
+        const f = $("miraAnim"); if (!f) return;
+        let m = 1, t = 0, pausa = 0;
+        const ir = k => { m = k; f.dataset.momento = String(k); f.querySelectorAll(".md-abas [data-m]").forEach(b => b.setAttribute("aria-selected", String(Number(b.dataset.m) === k))); };
+        f.querySelector(".md-abas").addEventListener("click", e => { const b = e.target.closest("[data-m]"); if (b) { ir(Number(b.dataset.m)); pausa = 25; t = 0; } });
+        ir(reduzir ? 3 : 1);
+        if (!reduzir) registrar(f, { passo: dt => { if (pausa > 0) { pausa -= dt; return; } t += dt; if (t > (m === 3 ? 8 : 6.5)) { t = 0; ir(m % 3 + 1); } } });
     })();
 
     /* laço único */
