@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/estilo.css?v=202611112100">
+<link rel="stylesheet" href="assets/atta-3d.css?v=202611151900">
 </head>
 <body data-pagina="atta">
 
@@ -85,6 +86,37 @@
                 <div class="guia"><b>-O</b><span>Linha óptica: uma fita colada no chão</span><span class="st disp">Pronto para piloto</span></div>
                 <div class="guia"><b>-M</b><span>Fita magnética: aguenta sujeira e empilhadeira</span><span class="st proj">Sob encomenda</span></div>
                 <div class="guia"><b>-L</b><span>LiDAR: navega sem nada no chão (AMR)</span><span class="st dev">Em desenvolvimento</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao faixa" id="ver-3d" style="padding-top:24px">
+        <div class="caixa">
+            <div class="cabeca">
+                <span class="olho">O Atta em 3D</span>
+                <h2>Gire o Atta. Levante a mesa. Engate o trem.</h2>
+                <p class="texto">O Atta E do piloto e o Atta T, o rebocador que estamos desenvolvendo, por fora e com as medidas do projeto. Os números no modelo contam o que cada parte faz.</p>
+            </div>
+            <div class="v3d" data-v3d>
+                <div class="v3d-abas" role="tablist" aria-label="Escolha o Atta">
+                    <button type="button" role="tab" aria-selected="true" data-m="e">Atta E <span class="st disp">Pronto para piloto</span></button>
+                    <button type="button" role="tab" aria-selected="false" data-m="t">Atta T <span class="st dev">Em desenvolvimento</span></button>
+                </div>
+                <div class="v3d-palco">
+                    <img class="v3d-poster" src="assets/atta-e.webp" alt="Atta E, piloto de 500 kg, com a mesa de elevação em cima" width="1200" height="750" loading="lazy" decoding="async">
+                    <canvas aria-label="Modelo 3D do Atta: arraste para girar"></canvas>
+                    <div class="v3d-pontos"></div>
+                    <span class="v3d-estado" aria-live="polite"><i></i><span>Em missão</span></span>
+                    <span class="v3d-info" aria-live="polite"></span>
+                    <span class="v3d-dica">Arraste para girar · Ctrl + rolagem para aproximar</span>
+                    <button type="button" class="botao cheio v3d-ver">Ver em 3D</button>
+                    <span class="v3d-carga">Carregando o modelo…</span>
+                </div>
+                <div class="v3d-lado">
+                    <div class="v3d-acoes"></div>
+                    <dl class="v3d-ficha"></dl>
+                    <p class="v3d-nota">Modelo do projeto do piloto. As peças compradas aparecem com o tamanho aproximado.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -440,6 +472,7 @@
 <a class="zap-flutuante" href="https://wa.me/5511969095610?text=Ol%C3%A1%2C%20Jo%C3%A3o%20Pedro%21%20Vi%20o%20site%20da%20E4M%20e%20quero%20conversar%20sobre%20automa%C3%A7%C3%A3o%20da%20movimenta%C3%A7%C3%A3o%20de%20materiais." target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5l1.3-3.9A8 8 0 1 1 8.6 19z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 9.5c.3 1.8 2.6 4.1 4.5 4.6l1.1-1.1 1.9.9c-.3 1.3-1.4 1.9-2.4 1.7-2.8-.6-5.2-3-5.8-5.8-.2-1 .4-2.1 1.7-2.4l.9 1.9z" fill="currentColor"/></svg><span>WhatsApp</span></a>
 
 <script src="assets/site.js?v=202611112100" defer></script>
+<script src="assets/atta-3d.js?v=202611151900" defer></script>
 
 </body>
 </html>
