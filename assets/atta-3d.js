@@ -14,12 +14,16 @@
     const reduzir = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const toque = matchMedia("(pointer: coarse)").matches || innerWidth < 720;
 
+    // As mesmas situações e efeitos do firmware do Atta e da Sinalização do Eciton (cores ajustadas para a tela).
+    // A cor diz a situação; o efeito diz o que ele está fazendo.
     const LUZES = [
-        ["#2BD46A", "corre", "Em missão"],
-        ["#FF8A3D", "respira", "Obstáculo à frente"],
-        ["#2CE0FF", "pisca", "Esperando o operador"],
-        ["#A57BFF", "respira", "No berço, carregando"],
-        ["#FF4D5E", "fixo", "Emergência"]
+        ["#2BD46A", "corre", "Em missão, andando", "Verde correndo"],
+        ["#2BD46A", "estrobo", "Vai partir", "Verde piscando rápido"],
+        ["#2CE0FF", "pisca", "Esperando o operador", "Ciano piscando"],
+        ["#FF8A3D", "respira-rapida", "Obstáculo à frente", "Laranja respirando rápido"],
+        ["#A57BFF", "respira", "Turno encerrado, no berço", "Roxo respirando"],
+        ["#FF2A2A", "estrobo", "Emergência", "Vermelho piscando rápido"],
+        ["#FFB000", "pisca", "Emergência solta: falta rearmar", "Âmbar piscando"]
     ];
 
     const MODELOS = {
@@ -27,7 +31,7 @@
             arquivo: "assets/atta-e.json", poster: "assets/atta-e.webp", alt: "Atta E, piloto de 500 kg, com a mesa de elevação em cima",
             alvo: [450, 300, 120], dist: 2150, dir: [0.78, -1, 0.62],
             ficha: [["Situação", "Pronto para piloto"], ["Carga", "500 kg no piloto"], ["Tamanho", "900 × 600 × 280 mm"], ["Guiamento", "Linha óptica (-O)"], ["Recarga", "Automática, no berço"]],
-            acoes: [["mesa", "Levantar a mesa", "Baixar a mesa"], ["luz", "Trocar a luz"]],
+            acoes: [["mesa", "Levantar a mesa", "Baixar a mesa"], ["luz"]],
             pontos: [
                 [[872, 28, 150], [1, -1, 0], "Dois scanners de segurança em cantos opostos: juntos, veem os 360° em volta do Atta."],
                 [[450, -8, 236], [0, -1, 0], "A faixa de luz em volta diz a quem está perto o que o Atta vai fazer."],
@@ -39,7 +43,7 @@
             arquivo: "assets/atta-t.json", poster: "assets/atta-t.webp", alt: "Atta T, rebocador, com um carrinho de milk run engatado",
             alvo: [-430, 300, 230], dist: 4300, dir: [0.62, -1, 0.6],
             ficha: [["Situação", "Em desenvolvimento"], ["Trabalho", "Puxa carrinhos em comboio"], ["Tamanho", "1.000 × 600 × 365 mm"], ["Engate", "Manual, com sensor do pino"], ["Pista e berço", "Os mesmos do Atta E"]],
-            acoes: [["trem", "Soltar o trem", "Engatar o trem"], ["luz", "Trocar a luz"]],
+            acoes: [["trem", "Soltar o trem", "Engatar o trem"], ["luz"]],
             pontos: [
                 [[-62, 300, 262], [-1, 0, 0.3], "Engate manual: o operador põe o pino em segundos e um sensor confirma antes de o Atta sair."],
                 [[972, 28, 150], [1, -1, 0], "Os mesmos scanners, sensor de linha e berço do Atta E: a pista serve para os dois."],
@@ -61,10 +65,14 @@
     function montarTextos() {
         const M = MODELOS[atual];
         fichaEl.innerHTML = M.ficha.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
-        acoesEl.innerHTML = M.acoes.map(([id, txt]) => `<button type="button" class="botao v3d-acao" data-acao="${id}" ${iniciado ? "" : "disabled"}>${txt}</button>`).join("");
+        acoesEl.innerHTML = M.acoes.map(([id, txt]) => id === "luz"
+            ? `<div class="v3d-luzes" role="group" aria-label="Luzes do Atta"><span class="v3d-luzes-tit">Luzes: a cor diz a situação, o efeito diz o que ele está fazendo</span>${LUZES.map((l, i) =>
+                `<button type="button" class="v3d-luz${i === luz ? " ativa" : ""}" data-luz="${i}" style="--c:${l[0]}" ${iniciado ? "" : "disabled"} aria-pressed="${i === luz}"><i class="${l[1]}"></i><b>${l[2]}</b><small>${l[3]}</small></button>`).join("")}</div>`
+            : `<button type="button" class="botao v3d-acao" data-acao="${id}" ${iniciado ? "" : "disabled"}>${txt}</button>`).join("");
+        acoesEl.querySelectorAll(".v3d-luz").forEach(b => b.addEventListener("click", () => { luz = +b.dataset.luz; aplicarLuz(); }));
         pontosEl.innerHTML = M.pontos.map((p, i) => `<button type="button" class="v3d-ponto" data-i="${i}" aria-label="Ponto ${i + 1}: ${p[2]}"><span>${i + 1}</span><em>${p[2]}</em></button>`).join("");
         poster.src = M.poster; poster.alt = M.alt;
-        acoesEl.querySelectorAll("button").forEach(b => b.addEventListener("click", () => acao(b)));
+        acoesEl.querySelectorAll(".v3d-acao").forEach(b => b.addEventListener("click", () => acao(b)));
         pontosEl.querySelectorAll(".v3d-ponto").forEach(b => b.addEventListener("click", (e) => {
             e.stopPropagation();
             const aberto = b.classList.contains("aberto");
@@ -212,7 +220,6 @@
     function acao(b) {
         const D = dados[atual]; if (!D) return;
         const id = b.dataset.acao, def = MODELOS[atual].acoes.find(a => a[0] === id);
-        if (id === "luz") { luz = (luz + 1) % LUZES.length; aplicarLuz(); return; }
         if (id === "mesa") { D.mesaAlvo = D.mesaAlvo ? 0 : 1; b.textContent = D.mesaAlvo ? def[2] : def[1]; }
         if (id === "trem") { D.tremAlvo = D.tremAlvo ? 0 : 1; b.textContent = D.tremAlvo ? def[1] : def[2]; }
         if (reduzir) { D.mesa = D.mesaAlvo; D.trem = D.tremAlvo; posicionar(); }
@@ -222,6 +229,7 @@
         const [cor, , txt] = LUZES[luz];
         estado.querySelector("span").textContent = txt;
         estado.style.setProperty("--c", cor);
+        acoesEl.querySelectorAll(".v3d-luz").forEach((b, i) => { b.classList.toggle("ativa", i === luz); b.setAttribute("aria-pressed", i === luz); });
         const D = dados[atual]; if (!D) return;
         const c = new T.Color(cor).convertSRGBToLinear();
         D.partes.luz.forEach(m => { m.material.color.copy(c); m.material.emissive.copy(c); });
@@ -251,7 +259,11 @@
             D.trem = ir(D.trem, D.tremAlvo, dt / 1.8);
             posicionar();
             const [, efeito] = LUZES[luz], s = t / 1000;
-            const k = efeito === "corre" ? .75 + .25 * Math.sin(s * 9) : efeito === "respira" ? .45 + .45 * (0.5 + 0.5 * Math.sin(s * 2.6)) : efeito === "pisca" ? (Math.floor(s * 2.4) % 2 ? .15 : 1) : .9;
+            const k = efeito === "corre" ? .75 + .25 * Math.sin(s * 9)
+                : efeito === "respira" ? .1 + .85 * (0.5 + 0.5 * Math.sin(s * 2.4))
+                : efeito === "respira-rapida" ? .1 + .85 * (0.5 + 0.5 * Math.sin(s * 7))
+                : efeito === "pisca" ? (Math.floor(s * 2) % 2 ? .08 : 1)
+                : efeito === "estrobo" ? (Math.floor(s * 8) % 2 ? .05 : 1.2) : .9;
             D.partes.luz.forEach(m => (m.material.emissiveIntensity = k));
         }
         ctl.update();
