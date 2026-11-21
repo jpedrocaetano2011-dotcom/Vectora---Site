@@ -1,0 +1,31 @@
+/* ============================================================
+   E4M · Site — camada de polimento (polish-site.css)
+   Aditivo. O reveal é ARMADO via JS (.e4m-reveal), então sem
+   JS tudo continua visível. Respeita prefers-reduced-motion.
+   ============================================================ */
+
+/* ---- reveal on scroll (armado por JS) ---- */
+.e4m-reveal{ opacity:0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .75s cubic-bezier(.2,.7,.3,1); will-change: opacity, transform; }
+.e4m-reveal.e4m-in{ opacity:1; transform:none; }
+
+/* ---- hover nos botões (elevação/brilho) ---- */
+.botao{ transition: transform .16s ease, box-shadow .2s ease, filter .2s ease; }
+.botao:hover{ transform: translateY(-2px); }
+.botao.cheio:hover, .botao.primario:hover{ box-shadow: 0 10px 26px rgba(30,99,199,.26); filter: brightness(1.04); }
+
+/* ---- palavra-chave realçada com vida ---- */
+.destaque{ background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px; background-position: 0 100%; background-repeat: no-repeat;
+  transition: background-size .5s ease .2s; }
+.e4m-in .destaque, .hero .destaque{ background-size: 100% 2px; }
+
+/* ---- count-up alinhado (via JS) ---- */
+.e4m-contando{ font-variant-numeric: tabular-nums; }
+
+/* ---- acessibilidade ---- */
+@media (prefers-reduced-motion: reduce){
+  .e4m-reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .destaque{ background-size: 100% 2px !important; transition:none !important; }
+  .botao{ transition:none !important; }
+}
